@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react'
 import './App.scss'
 
+
 interface ComponentProps {}
 
 interface ComponentState {}
@@ -20,7 +21,6 @@ class App extends Component<ComponentProps, ComponentState> {
         </div>
         <div className="bottom-section">
           <h2>Bottom Section</h2>
-          <p>This is a bigger section below.</p>
         </div>
       </>
     )
