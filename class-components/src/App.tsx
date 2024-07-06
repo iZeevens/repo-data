@@ -15,7 +15,8 @@ class App extends Component<ComponentProps, ComponentState> {
     return (
       <>
         <div className="top-section">
-          <h1>Top Section</h1>
+          <input className='search' type="text" placeholder='Search' />
+          <button className='btn'>Search</button>
         </div>
         <div className="bottom-section">
           <h2>Bottom Section</h2>
