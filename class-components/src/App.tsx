@@ -1,15 +1,32 @@
 import { Component, ReactNode } from 'react'
 import './App.scss'
 
-interface ComponentProps {}
+interface Comics {
+  title: string
+  publishedYearFrom?: number
+  publishedYearTo?: number
+  numberOfPagesFrom?: number
+  numberOfPagesTo?: number
+  stardateFrom?: number
+  stardateTo?: number
+  yearFrom?: number
+  yearTo?: number
+  photonovel?: boolean
+  adaptation?: boolean
+}
 
-interface ComponentState {}
+interface ComponentProps {}
+interface ComponentState {
+  search: string
+  elements: Array<Comics>
+}
+
 
 class App extends Component<ComponentProps, ComponentState> {
   constructor(props: ComponentProps) {
     super(props)
     this.state = {
-      search: 'Alex',
+      search: 'A',
       elements: [],
     }
   }
@@ -18,19 +35,17 @@ class App extends Component<ComponentProps, ComponentState> {
     const formData = new URLSearchParams()
     formData.append('name', 'Alex')
 
-    const response = await fetch(
-      'https://stapi.co/api/v1/rest/character/search',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          accept: 'application/json',
-        },
-        body: formData.toString(),
-      }
-    )
+    const response = await fetch('https://stapi.co/api/v1/rest/comics/search', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        accept: 'application/json',
+      },
+      body: formData.toString(),
+    })
     const data = await response.json()
     this.setState(() => ({ elements: data }))
+    console.log(data)
   }
 
   render(): ReactNode {
@@ -42,9 +57,7 @@ class App extends Component<ComponentProps, ComponentState> {
             Search
           </button>
         </form>
-        <div className="bottom-section">
-          <h2>Bottom Section</h2>
-        </div>
+        <div className="bottom-section">{/* {this.state.elements} */}</div>
       </>
     )
   }
