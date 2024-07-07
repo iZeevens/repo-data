@@ -68,7 +68,7 @@ class App extends Component<ComponentProps, ComponentState> {
     }
     const searchValue = target.search.value
 
-    if (!/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/gm.test(searchValue)) {
+    if (!/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(searchValue)) {
       this.setState({ error: 'No extra spaces' })
       return
     }
