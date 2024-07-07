@@ -16,6 +16,7 @@ interface ComponentState {
   search: string
   elements: Array<Comics>
   isLoading: boolean
+  error: null | string
 }
 
 class App extends Component<ComponentProps, ComponentState> {
@@ -25,6 +26,7 @@ class App extends Component<ComponentProps, ComponentState> {
       search: '',
       elements: [],
       isLoading: true,
+      error: null,
     }
   }
 
@@ -33,7 +35,7 @@ class App extends Component<ComponentProps, ComponentState> {
   }
 
   fetchData = async () => {
-    this.setState(() => ({ isLoading: true }))
+    this.setState({ isLoading: true, error: null })
     try {
       const formData = new URLSearchParams()
       formData.append('title', this.state.search)
@@ -52,11 +54,11 @@ class App extends Component<ComponentProps, ComponentState> {
 
       const data = await response.json()
       console.log(data)
-      this.setState(() => ({ elements: data.comics }))
+      this.setState({ elements: data.comics })
     } catch (error) {
       console.error('Error fetching data:', error)
     } finally {
-      this.setState(() => ({ isLoading: false }))
+      this.setState({ isLoading: false })
     }
   }
 
@@ -66,11 +68,17 @@ class App extends Component<ComponentProps, ComponentState> {
       search: { value: string }
     }
     const searchValue = target.search.value
+
+    if (!/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/gm.test(searchValue)) {
+      this.setState({ error: 'No extra spaces' })
+      return
+    }
+
     this.setState({ search: searchValue }, this.fetchData)
   }
 
   render(): ReactNode {
-    const { isLoading, elements } = this.state
+    const { isLoading, elements, error } = this.state
     return (
       <>
         <form className="top-section" onSubmit={this.searchHandler}>
@@ -84,6 +92,9 @@ class App extends Component<ComponentProps, ComponentState> {
             Search
           </button>
         </form>
+        {error ? (
+            <span className="error">{error}</span>
+          ) : ''}
         <div className="bottom-section">
           {isLoading ? (
             <div>Loading...</div>

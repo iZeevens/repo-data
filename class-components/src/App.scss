@@ -33,6 +33,7 @@ body {
 
 .top-section {
   display: flex;
+  justify-content: flex-start;
   gap: 10px;
 
   .search {
@@ -54,6 +55,11 @@ body {
   gap: 5px;
   justify-content: center;
   margin-top: 20px;
+
+  .error {
+    font-size: 16px;
+    color: red
+  }
 
   .card-comics {
     display: flex;
