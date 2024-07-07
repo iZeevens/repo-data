@@ -66,7 +66,7 @@ class App extends Component<ComponentProps, ComponentState> {
     const target = e.target as typeof e.target & {
       search: { value: string }
     }
-    const searchValue = target.search.value
+    const searchValue = target.search.v
 
     if (!/^([a-zA-Z0-9]+\s)*[a-zA-Z0-9]+$/gm.test(searchValue)) {
       this.setState({ error: 'No extra spaces' })
