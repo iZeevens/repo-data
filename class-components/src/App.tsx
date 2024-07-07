@@ -23,7 +23,7 @@ class App extends Component<ComponentProps, ComponentState> {
   constructor(props: ComponentProps) {
     super(props)
     this.state = {
-      search: '',
+      search: localStorage.getItem('search') ?? '',
       elements: [],
       isLoading: true,
       error: null,
@@ -74,6 +74,7 @@ class App extends Component<ComponentProps, ComponentState> {
       return
     }
 
+    localStorage.setItem('search', searchValue)
     this.setState({ search: searchValue }, this.fetchData)
   }
 
@@ -87,6 +88,7 @@ class App extends Component<ComponentProps, ComponentState> {
             type="text"
             placeholder="Search"
             name="search"
+            defaultValue={this.state.search}
           />
           <button className="btn" type="submit">
             Search
