@@ -53,7 +53,6 @@ class App extends Component<ComponentProps, ComponentState> {
       )
 
       const data = await response.json()
-      console.log(data)
       this.setState({ elements: data.comics })
     } catch (error) {
       console.error('Error fetching data:', error)
