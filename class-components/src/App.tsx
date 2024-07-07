@@ -29,7 +29,7 @@ class App extends Component<ComponentProps, ComponentState> {
   }
 
   componentDidMount = () => {
-    this.fetchData();
+    this.fetchData()
   }
 
   fetchData = async () => {
@@ -62,8 +62,11 @@ class App extends Component<ComponentProps, ComponentState> {
 
   searchHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(e.target)
-    // this.setState(() => ({search: e.target}))
+    const target = e.target as typeof e.target & {
+      search: { value: string }
+    }
+    const searchValue = target.search.value
+    this.setState({ search: searchValue }, this.fetchData)
   }
 
   render(): ReactNode {
