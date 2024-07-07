@@ -92,9 +92,7 @@ class App extends Component<ComponentProps, ComponentState> {
             Search
           </button>
         </form>
-        {error ? (
-            <span className="error">{error}</span>
-          ) : ''}
+        {error ? <span className="error">{error}</span> : ''}
         <div className="bottom-section">
           {isLoading ? (
             <div>Loading...</div>
