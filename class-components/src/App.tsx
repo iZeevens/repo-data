@@ -1,4 +1,4 @@
-import { Component, ReactNode } from 'react'
+import { Component, FormEvent, ReactNode } from 'react'
 import './App.scss'
 
 interface Comics {
@@ -22,16 +22,21 @@ class App extends Component<ComponentProps, ComponentState> {
   constructor(props: ComponentProps) {
     super(props)
     this.state = {
-      search: 'A',
+      search: '',
       elements: [],
       isLoading: true,
     }
   }
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.fetchData();
+  }
+
+  fetchData = async () => {
+    this.setState(() => ({ isLoading: true }))
     try {
       const formData = new URLSearchParams()
-      formData.append('name', 'Alex')
+      formData.append('title', this.state.search)
 
       const response = await fetch(
         'https://stapi.co/api/v1/rest/comics/search',
@@ -44,7 +49,9 @@ class App extends Component<ComponentProps, ComponentState> {
           body: formData.toString(),
         }
       )
+
       const data = await response.json()
+      console.log(data)
       this.setState(() => ({ elements: data.comics }))
     } catch (error) {
       console.error('Error fetching data:', error)
@@ -53,12 +60,23 @@ class App extends Component<ComponentProps, ComponentState> {
     }
   }
 
+  searchHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log(e.target)
+    // this.setState(() => ({search: e.target}))
+  }
+
   render(): ReactNode {
     const { isLoading, elements } = this.state
     return (
       <>
-        <form className="top-section">
-          <input className="search" type="text" placeholder="Search" />
+        <form className="top-section" onSubmit={this.searchHandler}>
+          <input
+            className="search"
+            type="text"
+            placeholder="Search"
+            name="search"
+          />
           <button className="btn" type="submit">
             Search
           </button>
