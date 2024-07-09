@@ -81,9 +81,9 @@ class App extends Component<ComponentProps, ComponentState> {
 
   throwError = () => {
     this.setState(() => {
-      throw new Error('Error detected');
-    });
-  }  
+      throw new Error('Error detected')
+    })
+  }
 
   render(): ReactNode {
     const { isLoading, elements, error } = this.state
