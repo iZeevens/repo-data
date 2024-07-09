@@ -1,4 +1,4 @@
 cd class-components
 
-npm run format
+npm run format:fix
 npm run lint
