@@ -79,22 +79,33 @@ class App extends Component<ComponentProps, ComponentState> {
     this.setState({ search: searchValue }, this.fetchData)
   }
 
+  throwError = () => {
+    this.setState(() => {
+      throw new Error('Error detected');
+    });
+  }  
+
   render(): ReactNode {
     const { isLoading, elements, error } = this.state
     return (
       <>
-        <form className="top-section" onSubmit={this.searchHandler}>
-          <input
-            className="search"
-            type="text"
-            placeholder="Search"
-            name="search"
-            defaultValue={this.state.search}
-          />
-          <button className="btn" type="submit">
-            Search
+        <div className="top-section-wrapper">
+          <button className="btn btn-error" onClick={this.throwError}>
+            Throw Error
           </button>
-        </form>
+          <form className="top-section" onSubmit={this.searchHandler}>
+            <input
+              className="search"
+              type="text"
+              placeholder="Search"
+              name="search"
+              defaultValue={this.state.search}
+            />
+            <button className="btn" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
         {error ? <span className="error">{error}</span> : ''}
         <div className="bottom-section">
           {isLoading ? (
