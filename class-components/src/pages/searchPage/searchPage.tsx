@@ -1,6 +1,21 @@
 // import { fetchData } from "../../services/apiService";
-// import { searchHandler } from "../../components/search/search";
+import { Search } from "../../components/search/search";
 
-function SearchPage() {}
+function SearchPage() {
+  const throwError = () => {
+    throw new Error('Error detected')
+  }
+
+  return (
+    <>
+      <div className="top-section-wrapper">
+        <button className="btn btn-error" onClick={throwError}>
+          Throw Error
+        </button>
+        <Search />
+      </div>
+    </>
+  )
+}
 
 export default SearchPage
