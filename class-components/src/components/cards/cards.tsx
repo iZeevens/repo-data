@@ -5,11 +5,13 @@ import Pagination from '../pagination/pagination'
 
 function Cards({ isLoading, elements }: CardsProps) {
   const [page, setPage] = useState(0)
-  
-  // const elementsPerPage = Math.ceil(elements.length / 5)
 
-  // const lastIndexElems = elementsPerPage * page
-  // const firstIndexElems = lastIndexElems - elementsPerPage
+  const elementsPerPage = Math.ceil(elements.length / 5)
+
+  const lastIndexElems = elementsPerPage * (page + 1)
+  const firstIndexElems = lastIndexElems - elementsPerPage
+
+  const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
 
   return (
     <>
@@ -17,7 +19,7 @@ function Cards({ isLoading, elements }: CardsProps) {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          elements.map((item, index) => {
+          elementsPagination.map((item, index) => {
             return (
               <div className="card-comics" key={index}>
                 <span className="comics-title">{item.title}</span>

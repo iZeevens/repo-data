@@ -5,7 +5,7 @@ function Pagination({ elements, page, setPage }: PaginationType) {
   const elementsPerPage = Math.ceil(elements.length / 5)
 
   const handlePagination = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const target = e.target as HTMLSpanElement;
+    const target = e.target as HTMLSpanElement
 
     if (target.textContent) setPage(Number(target.textContent) - 1)
   }
