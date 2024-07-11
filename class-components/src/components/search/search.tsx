@@ -17,13 +17,13 @@ function Search({ setDate, setIsLoading }: SearchProps) {
     setSearchDate(searchValue)
 
     if (
-      !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(searchValue) && searchValue.length > 0
+      !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(searchValue) &&
+      searchValue.length > 0
     ) {
       setError('No extra spaces')
       return
     }
 
-    localStorage.setItem('search', searchValue)
     setIsLoading(true)
 
     try {

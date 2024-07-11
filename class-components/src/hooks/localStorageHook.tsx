@@ -19,7 +19,7 @@ function useLocalStorage(key: string, initValue: string) {
     } catch (error) {
       console.error('Error writing to localStorage:', error)
     }
-  })
+  }, [key, state])
 
   return [state, setState] as const
 }
