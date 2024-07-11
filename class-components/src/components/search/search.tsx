@@ -8,6 +8,23 @@ function Search({ setDate, setIsLoading }: SearchProps) {
   const [searchDate, setSearchDate] = useLocalStorage('search', '')
   const [error, setError] = useState<string | null>('')
 
+  const handleSearch = async (value: string) => {
+    setIsLoading(true)
+
+    try {
+      const data = await fetchData(value)
+      setDate(data)
+    } catch {
+      setError(error)
+    }
+
+    setIsLoading(false)
+  }
+
+  const validateSearch = (value: string) => {
+    return !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(value)
+  }
+
   const searchHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as typeof e.target & {
@@ -16,24 +33,12 @@ function Search({ setDate, setIsLoading }: SearchProps) {
     const searchValue = target.search.value
     setSearchDate(searchValue)
 
-    if (
-      !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(searchValue) &&
-      searchValue.length > 0
-    ) {
+    if (!validateSearch && searchValue.length > 0) {
       setError('No extra spaces')
       return
     }
 
-    setIsLoading(true)
-
-    try {
-      const data = await fetchData(searchValue)
-      setDate(data)
-      console.log(data)
-    } catch {
-      setError(error)
-    }
-    setIsLoading(false)
+    await handleSearch(searchValue)
   }
 
   return (
