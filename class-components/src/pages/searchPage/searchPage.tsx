@@ -19,7 +19,11 @@ function SearchPage() {
           Throw Error
         </button>
         <Search setDate={setData} setIsLoading={setIsLoading} />
-        {data ? <Cards isLoading={isLoading} elements={data} /> : (<span>Error</span>)}
+        {data ? (
+          <Cards isLoading={isLoading} elements={data} />
+        ) : (
+          <span>Error</span>
+        )}
       </div>
     </>
   )
