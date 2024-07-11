@@ -1,5 +1,8 @@
 import { Component, ErrorInfo } from 'react'
-import { BounderyProps, BounderyState } from '../../interfaces/errorBoundery/errorBounderyTypes'
+import {
+  BounderyProps,
+  BounderyState,
+} from '../../interfaces/errorBoundery/errorBounderyTypes'
 
 class ErrorBoundary extends Component<BounderyProps, BounderyState> {
   constructor(props: BounderyProps) {
