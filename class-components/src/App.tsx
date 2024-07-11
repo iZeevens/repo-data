@@ -1,5 +1,5 @@
 import { Component, FormEvent, ReactNode } from 'react'
-import './App.scss'
+import './styles/index.scss'
 
 interface Comics {
   title: string
