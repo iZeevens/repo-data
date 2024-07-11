@@ -1,5 +1,6 @@
 import './cards.scss'
 import { CardsProps } from '../../interfaces/cards/cardsTypes'
+import Pagination from '../pagination/pagination'
 
 function Cards({ isLoading, elements }: CardsProps) {
   return (
@@ -26,6 +27,7 @@ function Cards({ isLoading, elements }: CardsProps) {
           })
         )}
       </div>
+      <Pagination elements={elements} />
     </>
   )
 }
