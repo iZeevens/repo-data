@@ -5,7 +5,7 @@ import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
 import useLocalStorage from '../../hooks/localStorageHook'
 
 function Search({ setDate, setIsLoading }: SearchProps) {
-  const [searchDate, setSearchDate] = useLocalStorage('search', '')
+  const [searchData, setSearchData] = useLocalStorage('search', '')
   const [error, setError] = useState<string | null>('')
 
   const handleSearch = async (value: string) => {
@@ -31,7 +31,7 @@ function Search({ setDate, setIsLoading }: SearchProps) {
       search: { value: string }
     }
     const searchValue = target.search.value
-    setSearchDate(searchValue)
+    setSearchData(searchValue)
 
     if (!validateSearch && searchValue.length > 0) {
       setError('No extra spaces')
@@ -49,7 +49,7 @@ function Search({ setDate, setIsLoading }: SearchProps) {
           type="text"
           placeholder="Search"
           name="search"
-          defaultValue={searchDate}
+          defaultValue={searchData}
         />
         <button className="btn" type="submit">
           Search
