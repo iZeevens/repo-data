@@ -1,5 +1,5 @@
 // import { Component, FormEvent, ReactNode } from 'react'
-import { Search } from './components/search/search'
+import SearchPage from './pages/searchPage/searchPage'
 import './styles/index.scss'
 
 // Главный компонент внутри которого будут распологаться остальные компоненты
@@ -141,7 +141,7 @@ import './styles/index.scss'
 // }
 
 function App() {
-  return <Search />
+  return <SearchPage />
 }
 
 export default App

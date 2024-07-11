@@ -1,12 +1,17 @@
 import { useState, FormEvent } from 'react'
 import { fetchData } from '../../services/apiService'
-// import { StateSearchType } from '../../interfaces/searchTypes/searchTypes'
+import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
-function Search() {
+interface SearchProps {
+  setDate: (data: Comics[]) => void
+  setIsLoading: (loading: boolean) => void
+}
+
+function Search({ setDate, setIsLoading }: SearchProps) {
   const [searchDate, setSearchDate] = useState('')
   const [error, setError] = useState('')
 
-  const searchHandler = (e: FormEvent<HTMLFormElement>) => {
+  const searchHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as typeof e.target & {
       search: { value: string }
@@ -22,7 +27,16 @@ function Search() {
 
     localStorage.setItem('search', searchValue)
     setSearchDate(searchValue)
-    fetchData(searchValue)
+    setIsLoading(true)
+
+    try {
+      const data = await fetchData(searchValue)
+      setDate(data)
+      console.log(data)
+    } catch {
+      setError(error)
+    }
+    setIsLoading(false)
   }
 
   return (
@@ -44,4 +58,4 @@ function Search() {
   )
 }
 
-export { Search }
+export default Search

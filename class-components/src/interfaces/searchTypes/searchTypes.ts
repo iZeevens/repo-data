@@ -1,5 +1,11 @@
-// type StateSearchType = React.Dispatch<
-//   React.SetStateAction<{ search: string } | { error: string }>
-// >
+interface Comics {
+  title: string
+  publishedYear?: number
+  publishedMonth?: number
+  publishedDay?: number
+  numberOfPages?: number
+  photonovel?: boolean
+  adaptation?: boolean
+}
 
-// export type { StateSearchType }
+export type { Comics }
