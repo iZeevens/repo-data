@@ -1,6 +1,7 @@
 import { Component, FormEvent, ReactNode } from 'react'
 import './styles/index.scss'
 
+// Главный компонент внутри которого будут распологаться остальные компоненты
 interface Comics {
   title: string
   publishedYear?: number
