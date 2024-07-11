@@ -1,7 +1,5 @@
 // import { fetchData } from "../../services/apiService";
 
-function SearchPage() {
-
-}
+function SearchPage() {}
 
 export default SearchPage
