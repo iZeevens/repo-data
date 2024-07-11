@@ -1,20 +1,13 @@
-import { Component, ErrorInfo, ReactNode } from 'react'
+import { Component, ErrorInfo } from 'react'
+import { BounderyProps, BounderyState } from '../../interfaces/errorBoundery/errorBounderyTypes'
 
-interface ComponentProps {
-  children: ReactNode
-}
-interface ComponentState {
-  hasError: boolean
-  error: Error | null
-}
-
-class ErrorBoundary extends Component<ComponentProps, ComponentState> {
-  constructor(props: ComponentProps) {
+class ErrorBoundary extends Component<BounderyProps, BounderyState> {
+  constructor(props: BounderyProps) {
     super(props)
     this.state = { hasError: false, error: null }
   }
 
-  static getDerivedStateFromError(error: Error): ComponentState {
+  static getDerivedStateFromError(error: Error): BounderyState {
     return { hasError: true, error }
   }
 

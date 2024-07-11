@@ -7,7 +7,10 @@ function ErrorBoundaryBtn() {
 
   return (
     <>
-      <button className="btn btn-error" onClick={() => setError(error => !error)}>
+      <button
+        className="btn btn-error"
+        onClick={() => setError((error) => !error)}
+      >
         Throw Error
       </button>
     </>

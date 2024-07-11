@@ -1,5 +1,5 @@
 import './cards.scss'
-import { CardsProps } from '../../interfaces/cards/cards'
+import { CardsProps } from '../../interfaces/cards/cardsTypes'
 
 function Cards({ isLoading, elements }: CardsProps) {
   return (
