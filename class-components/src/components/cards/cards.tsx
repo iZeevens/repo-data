@@ -6,10 +6,8 @@ import Pagination from '../pagination/pagination'
 function Cards({ isLoading, elements }: CardsProps) {
   const [page, setPage] = useState(0)
 
-  const elementsPerPage = Math.ceil(elements.length / 5)
-
-  const lastIndexElems = elementsPerPage * (page + 1)
-  const firstIndexElems = lastIndexElems - elementsPerPage
+  const lastIndexElems = 5 * (page + 1)
+  const firstIndexElems = lastIndexElems - 5
 
   const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
 

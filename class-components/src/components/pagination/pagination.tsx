@@ -4,6 +4,8 @@ import { PaginationType } from '../../interfaces/paginationTypes/paginationTypes
 function Pagination({ elements, page, setPage }: PaginationType) {
   const elementsPerPage = Math.ceil(elements.length / 5)
 
+  console.log(elementsPerPage)
+
   const handlePagination = (e: React.MouseEvent<HTMLSpanElement>) => {
     const target = e.target as HTMLSpanElement
 
