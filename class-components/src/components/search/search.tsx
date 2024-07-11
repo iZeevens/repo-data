@@ -2,10 +2,11 @@ import './search.scss'
 import { useState, FormEvent } from 'react'
 import { fetchData } from '../../services/apiService'
 import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
+import useLocalStorage from '../../hooks/localStorageHook'
 
 function Search({ setDate, setIsLoading }: SearchProps) {
-  const [searchDate, setSearchDate] = useState('')
-  const [error, setError] = useState('')
+  const [searchDate, setSearchDate] = useLocalStorage('search', '')
+  const [error, setError] = useState<string | null>('')
 
   const searchHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -13,16 +14,16 @@ function Search({ setDate, setIsLoading }: SearchProps) {
       search: { value: string }
     }
     const searchValue = target.search.value
+    setSearchDate(searchValue)
 
     if (
-      !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(searchValue)
+      !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(searchValue) && searchValue.length > 0
     ) {
       setError('No extra spaces')
       return
     }
 
     localStorage.setItem('search', searchValue)
-    setSearchDate(searchValue)
     setIsLoading(true)
 
     try {
