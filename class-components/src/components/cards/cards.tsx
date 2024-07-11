@@ -1,8 +1,16 @@
 import './cards.scss'
-import { CardsProps } from '../../interfaces/cards/cardsTypes'
+import { useState } from 'react'
+import { CardsProps } from '../../interfaces/cardsTypes/cardsTypes'
 import Pagination from '../pagination/pagination'
 
 function Cards({ isLoading, elements }: CardsProps) {
+  const [page, setPage] = useState(0)
+  
+  // const elementsPerPage = Math.ceil(elements.length / 5)
+
+  // const lastIndexElems = elementsPerPage * page
+  // const firstIndexElems = lastIndexElems - elementsPerPage
+
   return (
     <>
       <div className="cards-continer">
@@ -27,7 +35,7 @@ function Cards({ isLoading, elements }: CardsProps) {
           })
         )}
       </div>
-      <Pagination elements={elements} />
+      <Pagination elements={elements} page={page} setPage={setPage} />
     </>
   )
 }

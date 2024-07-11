@@ -1,23 +1,22 @@
 import './pagination.scss'
-// import { useState } from 'react'
-import { Comics } from '../../interfaces/searchTypes/searchTypes'
+import { PaginationType } from '../../interfaces/paginationTypes/paginationTypes'
 
-function Pagination({ elements }: { elements: Comics[] }) {
-  // const [page, setPage] = useState(1)
-
+function Pagination({ elements, page, setPage }: PaginationType) {
   const elementsPerPage = Math.ceil(elements.length / 5)
 
-  const lastIndexElems = elementsPerPage * 1
-  const firstIndexElems = lastIndexElems - elementsPerPage
+  const handlePagination = (e: React.MouseEvent<HTMLSpanElement>) => {
+    const target = e.target as HTMLSpanElement;
 
-  console.log(firstIndexElems)
+    if (target.textContent) setPage(Number(target.textContent) - 1)
+  }
 
   return (
     <div className="pagination">
       {Array.from({ length: elementsPerPage }, (_, index) => (
         <span
           key={index}
-          className={`pagination-item ${index === 0 ? 'active-page' : ''}`}
+          className={`pagination-item ${index === page ? 'active-page' : ''}`}
+          onClick={handlePagination}
         >
           {index + 1}
         </span>
