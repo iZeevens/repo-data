@@ -8,4 +8,9 @@ interface Comics {
   adaptation?: boolean
 }
 
-export type { Comics }
+interface SearchProps {
+  setDate: (data: Comics[]) => void
+  setIsLoading: (loading: boolean) => void
+}
+
+export type { Comics, SearchProps }

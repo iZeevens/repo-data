@@ -17,7 +17,6 @@ const fetchData = async (searchTerm: string) => {
     }
 
     const data = await response.json()
-    console.log(data)
     return data.comics
   } catch (error) {
     console.error('Error fetching data:', error)

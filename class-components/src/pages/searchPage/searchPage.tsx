@@ -9,7 +9,7 @@ function SearchPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   const throwError = () => {
-    throw new Error('Error detected')
+    throw Error
   }
 
   return (
@@ -19,11 +19,7 @@ function SearchPage() {
           Throw Error
         </button>
         <Search setDate={setData} setIsLoading={setIsLoading} />
-        {data ? (
-          <Cards isLoading={isLoading} elements={data} />
-        ) : (
-          <span>Error</span>
-        )}
+        {data && <Cards isLoading={isLoading} elements={data} />}
       </div>
     </>
   )
