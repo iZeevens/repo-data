@@ -4,7 +4,7 @@ import { CardsProps } from '../../interfaces/cards/cardsTypes'
 function Cards({ isLoading, elements }: CardsProps) {
   return (
     <>
-      <div className="bottom-section">
+      <div className="cards-continer">
         {isLoading ? (
           <div>Loading...</div>
         ) : (

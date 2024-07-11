@@ -1,3 +1,4 @@
+import './search.scss'
 import { useState, FormEvent } from 'react'
 import { fetchData } from '../../services/apiService'
 import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
@@ -36,7 +37,7 @@ function Search({ setDate, setIsLoading }: SearchProps) {
 
   return (
     <>
-      <form className="top-section" onSubmit={searchHandler}>
+      <form className="search-continer" onSubmit={searchHandler}>
         <input
           className="search"
           type="text"

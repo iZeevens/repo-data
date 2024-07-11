@@ -11,7 +11,7 @@ function SearchPage() {
 
   return (
     <>
-      <div className="top-section-wrapper">
+      <div className="wrapper">
         <ErrorBoundaryBtn />
         <Search setDate={setData} setIsLoading={setIsLoading} />
         {data && <Cards isLoading={isLoading} elements={data} />}
