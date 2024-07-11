@@ -1,16 +1,27 @@
 import './pagination.scss'
+// import { useState } from 'react'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
 function Pagination({ elements }: { elements: Comics[] }) {
-  console.log(elements)
+  // const [page, setPage] = useState(1)
+
+  const elementsPerPage = Math.ceil(elements.length / 5)
+
+  const lastIndexElems = elementsPerPage * 1
+  const firstIndexElems = lastIndexElems - elementsPerPage
+
+  console.log(firstIndexElems)
 
   return (
     <div className="pagination">
-      <span className="pagination-index">1</span>
-      <span className="pagination-index">2</span>
-      <span className="pagination-index">3</span>
-      <span className="pagination-index">4</span>
-      <span className="pagination-index">5</span>
+      {Array.from({ length: elementsPerPage }, (_, index) => (
+        <span
+          key={index}
+          className={`pagination-item ${index === 0 ? 'active-page' : ''}`}
+        >
+          {index + 1}
+        </span>
+      ))}
     </div>
   )
 }
