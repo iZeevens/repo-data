@@ -26,12 +26,6 @@ function SearchPage() {
     <>
       <div className="wrapper">
         <Search setData={setData} setIsLoading={setIsLoading} />
-        {/* <Routes>
-          <Route
-            path="/?page=:page"
-            element={data && <Cards isLoading={isLoading} elements={data} />}
-          />
-        </Routes> */}
         {data && <Cards isLoading={isLoading} elements={data} />}
       </div>
     </>
