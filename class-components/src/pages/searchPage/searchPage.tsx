@@ -4,11 +4,12 @@ import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import { fetchData } from '../../services/apiService'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
-// import { Routes, Route } from 'react-router-dom'
+import useLocalStorage from '../../hooks/localStorageHook'
 
 function SearchPage() {
   const [data, setData] = useState<Comics[]>()
   const [isLoading, setIsLoading] = useState(true)
+  const [searchData] = useLocalStorage('search', '')
 
   useEffect(() => {
     const handleSearch = async (value: string) => {
@@ -19,13 +20,19 @@ function SearchPage() {
 
       setIsLoading(false)
     }
-    handleSearch('')
-  }, [])
+    handleSearch(searchData)
+  }, [searchData])
 
   return (
     <>
       <div className="wrapper">
         <Search setData={setData} setIsLoading={setIsLoading} />
+        {/* <Routes>
+          <Route
+            path="/?page=:page"
+            element={data && <Cards isLoading={isLoading} elements={data} />}
+          />
+        </Routes> */}
         {data && <Cards isLoading={isLoading} elements={data} />}
       </div>
     </>
