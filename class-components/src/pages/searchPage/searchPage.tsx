@@ -2,7 +2,6 @@ import './searchPage.scss'
 import { useState } from 'react'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
-import ErrorBoundaryBtn from '../../components/errorBounderyButton.tsx/errorBounderyButton'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import { Routes, Route } from 'react-router-dom'
 
@@ -13,7 +12,6 @@ function SearchPage() {
   return (
     <>
       <div className="wrapper">
-        <ErrorBoundaryBtn />
         <Search setDate={setData} setIsLoading={setIsLoading} />
         <Routes>
           <Route
