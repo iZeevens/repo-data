@@ -8,16 +8,9 @@ function useLocalStorage(key: string, initValue: string) {
       : initValue
   })
 
-  const setupLocalStorage = (key: string, state: string) =>
-    localStorage.setItem(key, JSON.stringify(state))
-
   useEffect(() => {
     try {
-      setupLocalStorage(key, state)
-
-      return () => {
-        setupLocalStorage(key, state)
-      }
+      localStorage.setItem(key, JSON.stringify(state))
     } catch (error) {
       console.error('Error writing to localStorage:', error)
     }
