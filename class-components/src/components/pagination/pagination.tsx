@@ -1,5 +1,6 @@
 import './pagination.scss'
 import { PaginationType } from '../../interfaces/paginationTypes/paginationTypes'
+import { Link } from 'react-router-dom'
 
 function Pagination({ elements, page, setPage }: PaginationType) {
   const elementsPerPage = Math.ceil(elements.length / 5)
@@ -14,14 +15,15 @@ function Pagination({ elements, page, setPage }: PaginationType) {
 
   return (
     <div className="pagination">
-      {Array.from({ length: elementsPerPage }, (_, index) => (
-        <span
-          key={index}
-          className={`pagination-item ${index === page ? 'active-page' : ''}`}
-          onClick={handlePagination}
-        >
-          {index + 1}
-        </span>
+      {Array.from({ length: elementsPerPage }, (_, indexPage) => (
+        <Link key={indexPage} className="page-link" to={`/${indexPage + 1}`}>
+          <span
+            className={`pagination-item ${indexPage === page ? 'active-page' : ''}`}
+            onClick={handlePagination}
+          >
+            {indexPage + 1}
+          </span>
+        </Link>
       ))}
     </div>
   )
