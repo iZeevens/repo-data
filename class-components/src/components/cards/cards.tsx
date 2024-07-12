@@ -11,7 +11,6 @@ function Cards({ isLoading, elements }: CardsProps) {
 
   const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
 
-  console.log(isLoading)
   return (
     <>
       <div className="cards-continer">

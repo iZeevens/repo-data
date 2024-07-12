@@ -1,24 +1,38 @@
 import './searchPage.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
+import { fetchData } from '../../services/apiService'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
-import { Routes, Route } from 'react-router-dom'
+// import { Routes, Route } from 'react-router-dom'
 
 function SearchPage() {
   const [data, setData] = useState<Comics[]>()
   const [isLoading, setIsLoading] = useState(true)
 
+  useEffect(() => {
+    const handleSearch = async (value: string) => {
+      setIsLoading(true)
+
+      const data = await fetchData(value)
+      setData(data)
+
+      setIsLoading(false)
+    }
+    handleSearch('')
+  }, [])
+
   return (
     <>
       <div className="wrapper">
-        <Search setDate={setData} setIsLoading={setIsLoading} />
-        <Routes>
+        <Search setData={setData} setIsLoading={setIsLoading} />
+        {/* <Routes>
           <Route
-            path="/:page"
+            path="/?page=:page"
             element={data && <Cards isLoading={isLoading} elements={data} />}
           />
-        </Routes>
+        </Routes> */}
+        {data && <Cards isLoading={isLoading} elements={data} />}
       </div>
     </>
   )

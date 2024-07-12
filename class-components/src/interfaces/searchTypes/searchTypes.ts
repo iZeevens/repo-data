@@ -9,7 +9,7 @@ interface Comics {
 }
 
 interface SearchProps {
-  setDate: (data: Comics[]) => void
+  setData: (data: Comics[]) => void
   setIsLoading: (loading: boolean) => void
 }
 

@@ -4,7 +4,7 @@ import { fetchData } from '../../services/apiService'
 import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
 import useLocalStorage from '../../hooks/localStorageHook'
 
-function Search({ setDate, setIsLoading }: SearchProps) {
+function Search({ setData, setIsLoading }: SearchProps) {
   const [searchData, setSearchData] = useLocalStorage('search', '')
   const [error, setError] = useState<string | null>('')
 
@@ -13,7 +13,7 @@ function Search({ setDate, setIsLoading }: SearchProps) {
 
     try {
       const data = await fetchData(value)
-      setDate(data)
+      setData(data)
     } catch {
       setError(error)
     }

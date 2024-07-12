@@ -14,7 +14,7 @@ function Pagination({ elements, page, setPage }: PaginationType) {
   return (
     <div className="pagination">
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
-        <Link key={indexPage} className="page-link" to={`/${indexPage + 1}`}>
+        <Link key={indexPage} className="page-link" to={`/?page=${indexPage + 1}`}>
           <span
             className={`pagination-item ${indexPage === page ? 'active-page' : ''}`}
             onClick={handlePagination}
