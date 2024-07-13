@@ -13,14 +13,13 @@ function Pagination({ elements, currentPage }: PaginationType) {
   return (
     <div className="pagination">
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
-
-          <span
-            className={`pagination-item ${indexPage === currentPage ? 'active-page' : ''}`}
-            onClick={() => handlePagination(indexPage)}
-          >
-            {indexPage + 1}
-          </span>
-
+        <span
+          key={indexPage}
+          className={`pagination-item ${indexPage === currentPage ? 'active-page' : ''}`}
+          onClick={() => handlePagination(indexPage)}
+        >
+          {indexPage + 1}
+        </span>
       ))}
     </div>
   )

@@ -28,17 +28,23 @@ function SearchPage() {
     handleSearch(searchData)
   }, [searchData])
 
+  let dataElemsPerPage = null
+  if (data) {
+    Math.ceil(dataElemsPerPage = data.length / 5)
+  }
   useEffect(() => {
-    if (page < 0) {
+    if (page < 0 || (dataElemsPerPage && page > dataElemsPerPage)) {
       navigate('/?page=1', { replace: true })
     }
-  }, [page, navigate])
+  }, [page, navigate, dataElemsPerPage])
 
   return (
     <>
       <div className="wrapper">
         <Search setData={setData} setIsLoading={setIsLoading} />
-        {data && <Cards isLoading={isLoading} elements={data} currentPage={page} />}
+        {data && (
+          <Cards isLoading={isLoading} elements={data} currentPage={page} />
+        )}
       </div>
     </>
   )
