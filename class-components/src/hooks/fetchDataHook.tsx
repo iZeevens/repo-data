@@ -12,7 +12,6 @@ function useFetchDataHook() {
     const handleSearch = async (value: string) => {
       setIsLoading(true)
       const args: [string, string?] = isUid ? ['', value] : [value]
-
       try {
         const result = await fetchData(...args)
         setData(result)
