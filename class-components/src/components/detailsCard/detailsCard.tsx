@@ -42,12 +42,13 @@ function DetailsCard() {
       {isLoading ? (
         <span>Loading...</span>
       ) : (
-        <>
+        <div className='details-main'>
+          
           <span>1234</span>
           <span>1234</span>
           <span>1234</span>
           <button onClick={() => handleClose()}>close</button>
-        </>
+        </div>
       )}
     </div>
   )
