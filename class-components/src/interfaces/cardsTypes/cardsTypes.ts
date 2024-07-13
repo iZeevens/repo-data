@@ -6,4 +6,13 @@ interface CardsProps {
   currentPage: number
 }
 
-export type { CardsProps }
+interface CardDetails {
+  stardateFrom?: number
+  stardateTo?: number
+  yearFrom?: number
+  yearTo?: number
+  photonovel?: boolean
+  adaptation?: boolean
+}
+
+export type { CardsProps, CardDetails }

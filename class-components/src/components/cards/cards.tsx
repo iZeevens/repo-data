@@ -29,13 +29,13 @@ function Cards({ isLoading, elements, currentPage }: CardsProps) {
               >
                 <span className="comics-title">{item.title}</span>
                 <div className="comics-continer">
-                  {item.publishedYear ? <span>{item.publishedYear}</span> : ''}
+                  {item.publishedYear ? <span>Published year: {item.publishedYear}</span> : ''}
                   {item.publishedMonth ? (
-                    <span>{item.publishedMonth}</span>
+                    <span>Published month: {item.publishedMonth}</span>
                   ) : (
                     ''
                   )}
-                  {item.publishedDay ? <span>{item.publishedDay}</span> : ''}
+                  {item.publishedDay ? <span>Published day: {item.publishedDay}</span> : ''}
                 </div>
               </div>
             )

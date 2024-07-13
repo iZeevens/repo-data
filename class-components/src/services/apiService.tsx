@@ -1,7 +1,11 @@
-const fetchData = async (searchTerm: string) => {
+const fetchData = async (searchTerm: string, searchUid?: string) => {
   try {
     const formData = new URLSearchParams()
-    formData.append('title', searchTerm)
+    if (searchTerm) {
+      formData.append('title', searchTerm)
+    } else if (searchUid) {
+      formData.append('uid', searchUid)
+    }
 
     const response = await fetch('https://stapi.co/api/v1/rest/comics/search', {
       method: 'POST',
