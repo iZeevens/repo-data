@@ -39,13 +39,13 @@ function SearchPage() {
   }, [page, navigate, dataElemsPerPage])
 
   return (
-    <div className="wrapper">
+    <>
       <Search setData={setData} setIsLoading={setIsLoading} />
       {data && (
         <Cards isLoading={isLoading} elements={data} currentPage={page} />
       )}
       <Outlet />
-    </div>
+    </>
   )
 }
 

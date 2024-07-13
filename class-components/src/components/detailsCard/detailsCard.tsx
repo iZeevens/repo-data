@@ -37,17 +37,16 @@ function DetailsCard() {
 
   if (!uid) return null
 
-
   return (
-    <div className='details-panel'>
+    <div className="details-panel">
       {isLoading ? (
         <span>Loading...</span>
       ) : (
         <>
-            <span>1234</span>
-            <span>1234</span>
-            <span>1234</span>
-            <button onClick={() => handleClose()}>close</button>
+          <span>1234</span>
+          <span>1234</span>
+          <span>1234</span>
+          <button onClick={() => handleClose()}>close</button>
           {error ? <span className="error">{error}</span> : ''}
         </>
       )}

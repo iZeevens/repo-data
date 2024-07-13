@@ -1,13 +1,16 @@
 .cards-continer {
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 1;
   gap: 5px;
   justify-content: center;
+  align-content: flex-start;
   margin-top: 20px;
 
   .card-comics {
     display: flex;
     flex-direction: column;
+    height: 100%;
     border: 1px solid black;
     border-radius: 5px;
     padding: 12px;
