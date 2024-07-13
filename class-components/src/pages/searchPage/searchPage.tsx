@@ -5,7 +5,7 @@ import Cards from '../../components/cards/cards'
 import { fetchData } from '../../services/apiService'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import useLocalStorage from '../../hooks/localStorageHook'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Outlet } from 'react-router-dom'
 
 function SearchPage() {
   const [data, setData] = useState<Comics[]>()
@@ -45,6 +45,7 @@ function SearchPage() {
         {data && (
           <Cards isLoading={isLoading} elements={data} currentPage={page} />
         )}
+        <Outlet />
       </div>
     </>
   )

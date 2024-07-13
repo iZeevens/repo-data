@@ -22,7 +22,11 @@ function Cards({ isLoading, elements, currentPage }: CardsProps) {
         ) : (
           elementsPagination.map((item, index) => {
             return (
-              <div className="card-comics" key={index} onClick={() => handleCardClick(item.uid!)}>
+              <div
+                className="card-comics"
+                key={index}
+                onClick={() => handleCardClick(item.uid!)}
+              >
                 <span className="comics-title">{item.title}</span>
                 <div className="comics-continer">
                   {item.publishedYear ? <span>{item.publishedYear}</span> : ''}
