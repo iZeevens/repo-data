@@ -1,6 +1,5 @@
 import './cards.scss'
 import { CardsProps } from '../../interfaces/cardsTypes/cardsTypes'
-import Pagination from '../pagination/pagination'
 import { useNavigate } from 'react-router-dom'
 
 function Cards({ isLoading, elements, currentPage }: CardsProps) {
@@ -11,7 +10,7 @@ function Cards({ isLoading, elements, currentPage }: CardsProps) {
   const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
-    navigate(`/?page=${currentPage + 1}&id=${id}`)
+    navigate(`/details?page=${currentPage + 1}/&id=${id}`)
   }
 
   return (
@@ -50,7 +49,6 @@ function Cards({ isLoading, elements, currentPage }: CardsProps) {
           })
         )}
       </div>
-      <Pagination elements={elements} currentPage={currentPage} />
     </>
   )
 }

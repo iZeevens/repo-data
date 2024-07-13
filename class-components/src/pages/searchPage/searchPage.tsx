@@ -2,6 +2,7 @@ import './searchPage.scss'
 import { useEffect, useState } from 'react'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
+import Pagination from '../../components/pagination/pagination'
 import { fetchData } from '../../services/apiService'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import useLocalStorage from '../../hooks/localStorageHook'
@@ -41,10 +42,13 @@ function SearchPage() {
   return (
     <>
       <Search setData={setData} setIsLoading={setIsLoading} />
-      {data && (
-        <Cards isLoading={isLoading} elements={data} currentPage={page} />
-      )}
-      <Outlet />
+      <div className="cards">
+        {data && (
+          <Cards isLoading={isLoading} elements={data} currentPage={page} />
+        )}
+        <Outlet />
+      </div>
+      {data && <Pagination elements={data} currentPage={page} />}
     </>
   )
 }

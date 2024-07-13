@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 function DetailsCard() {
   const [detail, setDetail] = useState<CardDetails | null>(null)
-  const [error, setError] = useState<string | null>('')
   const [isLoading, setIsLoading] = useState(true)
   const location = useLocation()
   const navigate = useNavigate()
@@ -17,19 +16,20 @@ function DetailsCard() {
       setIsLoading(true)
 
       try {
-        const data = await fetchData(value)
+        const data = await fetchData('', value)
         setDetail(data)
-      } catch {
-        setError(error)
+      } catch (error) {
+        console.error(error)
       }
 
       setIsLoading(false)
-      console.log(detail)
     }
     if (uid) {
       handleSearch(uid)
     }
-  }, [detail, error, uid])
+  }, [uid])
+
+  console.log(detail)
 
   const handleClose = () => {
     navigate(-1)
@@ -47,7 +47,6 @@ function DetailsCard() {
           <span>1234</span>
           <span>1234</span>
           <button onClick={() => handleClose()}>close</button>
-          {error ? <span className="error">{error}</span> : ''}
         </>
       )}
     </div>

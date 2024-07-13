@@ -1,3 +1,9 @@
+.cards {
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
 .cards-continer {
   display: flex;
   flex-wrap: wrap;

@@ -1,19 +1,21 @@
 const fetchData = async (searchTerm: string, searchUid?: string) => {
   try {
     const formData = new URLSearchParams()
+    let url = 'https://stapi.co/api/v1/rest/comics';
     if (searchTerm) {
       formData.append('title', searchTerm)
-    } else if (searchUid) {
-      formData.append('uid', searchUid)
+      url += '/search'
+    } else {
+      url += `?uid=${searchUid}`
     }
 
-    const response = await fetch('https://stapi.co/api/v1/rest/comics/search', {
-      method: 'POST',
+    const response = await fetch(url, {
+      method: searchTerm ? 'POST' : 'GET',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         accept: 'application/json',
       },
-      body: formData.toString(),
+      body: searchTerm ? formData.toString() : undefined,
     })
 
     if (!response.ok) {

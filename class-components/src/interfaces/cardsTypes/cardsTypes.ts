@@ -6,13 +6,23 @@ interface CardsProps {
   currentPage: number
 }
 
+interface Characters {
+  name: string
+  gender: 'M' | 'F'
+  yearOfBirth: number
+  yearOfDeath: number
+}
+
 interface CardDetails {
-  stardateFrom?: number
-  stardateTo?: number
-  yearFrom?: number
-  yearTo?: number
-  photonovel?: boolean
-  adaptation?: boolean
+  titile: string;
+  numberOfPages: number
+  stardateFrom: number
+  stardateTo: number
+  yearFrom: number
+  yearTo: number
+  characters: Characters[]
+  photonovel: boolean
+  adaptation: boolean
 }
 
 export type { CardsProps, CardDetails }
