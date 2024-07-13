@@ -10,6 +10,8 @@ function DetailsCard() {
   const location = useLocation()
   const navigate = useNavigate()
   const uid = new URLSearchParams(location.search).get('id') || '1'
+  const pageQuery = new URLSearchParams(location.search).get('page') || '1'
+  const page = parseInt(pageQuery, 10)
 
   useEffect(() => {
     const handleSearch = async (value: string) => {
@@ -30,7 +32,7 @@ function DetailsCard() {
   }, [uid])
 
   const handleClose = () => {
-    navigate(-1)
+    navigate(`/?page=${page}`)
   }
 
   if (!uid) return null
