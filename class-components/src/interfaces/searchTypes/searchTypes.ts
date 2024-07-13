@@ -6,6 +6,7 @@ interface Comics {
   numberOfPages?: number
   photonovel?: boolean
   adaptation?: boolean
+  uid?: string
 }
 
 interface SearchProps {

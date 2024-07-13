@@ -30,7 +30,7 @@ function SearchPage() {
 
   let dataElemsPerPage = null
   if (data) {
-    Math.ceil(dataElemsPerPage = data.length / 5)
+    Math.ceil((dataElemsPerPage = data.length / 5))
   }
   useEffect(() => {
     if (page < 0 || (dataElemsPerPage && page > dataElemsPerPage)) {
