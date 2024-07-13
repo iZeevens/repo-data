@@ -1,18 +1,30 @@
 .details-panel {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+  max-width: 220px;
   border: 1px solid black;
+  padding: 10px;
 
   .details-title {
+    box-sizing: border-box;
     padding: 10px;
     margin: 0;
+    width: 100%;
     border-bottom: 1px solid black;
   }
 
   .details-info {
     display: flex;
     flex-direction: column;
+
+    .details-info-about {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 5px;
+    }
   }
 
   .details-info--characters {
@@ -21,11 +33,16 @@
     gap: 5px;
     margin-top: 20px;
 
-
     .details-info--character {
       display: flex;
       flex-direction: column;
+      border: 1px solid black;
+      padding: 5px;
     }
   }
 
+  .details-panel-close {
+    margin-top: 10px;
+    width: 100px;
+  }
 }

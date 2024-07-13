@@ -29,7 +29,6 @@ function DetailsCard() {
     }
   }, [uid])
 
-
   const handleClose = () => {
     navigate(-1)
   }
@@ -44,17 +43,19 @@ function DetailsCard() {
         <>
           <h3 className="details-title">{detail?.title}</h3>
           <div className="details-info">
-            <span>Number Pages: {detail?.numberOfPages}</span>
-            {detail?.stardateFrom && (
-              <span>Stardate From: {detail?.stardateFrom}</span>
-            )}
-            {detail?.stardateTo && (
-              <span>Stardate To: {detail?.stardateTo}</span>
-            )}
-            {detail?.yearFrom && <span>Year From: {detail?.yearFrom}</span>}
-            {detail?.yearTo && <span>Year To: {detail?.yearTo}</span>}
-            <span>Photonovel: {detail?.photonovel ? 'Yes' : 'No'}</span>
-            <span>Adaptation: {detail?.adaptation ? 'Yes' : 'No'}</span>
+            <div className="details-info-about">
+              <span>Number Pages: {detail?.numberOfPages}</span>
+              {detail?.stardateFrom && (
+                <span>Stardate From: {detail?.stardateFrom}</span>
+              )}
+              {detail?.stardateTo && (
+                <span>Stardate To: {detail?.stardateTo}</span>
+              )}
+              {detail?.yearFrom && <span>Year From: {detail?.yearFrom}</span>}
+              {detail?.yearTo && <span>Year To: {detail?.yearTo}</span>}
+              <span>Photonovel: {detail?.photonovel ? 'Yes' : 'No'}</span>
+              <span>Adaptation: {detail?.adaptation ? 'Yes' : 'No'}</span>
+            </div>
             {detail?.characters && detail.characters.length > 0 ? (
               <div className="details-info--characters">
                 <span>Characters:</span>
@@ -77,7 +78,12 @@ function DetailsCard() {
               ''
             )}
           </div>
-          <button onClick={() => handleClose()}>close</button>
+          <button
+            className="details-panel-close btn"
+            onClick={() => handleClose()}
+          >
+            close
+          </button>
         </>
       )}
     </div>
