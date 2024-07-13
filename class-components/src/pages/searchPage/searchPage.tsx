@@ -21,15 +21,14 @@ function SearchPage() {
     handleSearch(searchData)
   }, [searchData, handleSearch])
 
-  let dataElemsPerPage = null
-  if (data) {
-    Math.ceil((dataElemsPerPage = data.length / 5))
-  }
   useEffect(() => {
-    if (page < 0 || (dataElemsPerPage && page >= dataElemsPerPage)) {
-      navigate('/?page=1', { replace: true })
+    if (data) {
+      const dataElemsPerPage = Math.ceil(data.length / 5);
+      if (page < 0 || page >= dataElemsPerPage) {
+        navigate('/?page=1', { replace: true });
+      }
     }
-  }, [page, navigate, dataElemsPerPage])
+  }, [page, navigate, data]);
 
   return (
     <>
