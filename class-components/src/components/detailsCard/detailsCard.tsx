@@ -7,14 +7,18 @@ import { useNavigate } from 'react-router-dom'
 
 function DetailsCard() {
   const navigate = useNavigate()
-  const { isLoading, data: detail, handleSearch } = useHandleSearch<CardDetails>({});
+  const {
+    isLoading,
+    data: detail,
+    handleSearch,
+  } = useHandleSearch<CardDetails>({})
   const { page, uid } = useCustomLocation('id')
 
   useEffect(() => {
     if (uid) {
-      handleSearch('', uid.toString());
+      handleSearch(null, uid.toString())
     }
-  }, [uid, handleSearch]);
+  }, [uid, handleSearch])
 
   const handleClose = () => {
     navigate(`/?page=${page}`)

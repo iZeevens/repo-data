@@ -6,7 +6,7 @@ export function useHandleSearch<T>(initialData: T) {
   const [data, setData] = useState(initialData)
 
   const handleSearch = useCallback(
-    async (value: string, detailId: string = '') => {
+    async (value: string | null, detailId: string = '') => {
       setIsLoading(true)
       try {
         const result = await fetchData(value, detailId)

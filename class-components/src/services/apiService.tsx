@@ -1,8 +1,9 @@
-const fetchData = async (searchTerm: string, searchUid?: string) => {
+const fetchData = async (searchTerm: string | null, searchUid?: string) => {
   try {
     const formData = new URLSearchParams()
     let url = 'https://stapi.co/api/v1/rest/comics'
-    if (searchTerm) {
+
+    if (searchTerm || searchTerm !== null) {
       formData.append('title', searchTerm)
       url += '/search'
     } else {
