@@ -1,12 +1,9 @@
 import './cards.scss'
-import { useState } from 'react'
 import { CardsProps } from '../../interfaces/cardsTypes/cardsTypes'
 import Pagination from '../pagination/pagination'
 
-function Cards({ isLoading, elements }: CardsProps) {
-  const [page, setPage] = useState(0)
-
-  const lastIndexElems = 5 * (page + 1)
+function Cards({ isLoading, elements, currentPage }: CardsProps) {
+  const lastIndexElems = 5 * (currentPage + 1)
   const firstIndexElems = lastIndexElems - 5
 
   const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
@@ -35,7 +32,7 @@ function Cards({ isLoading, elements }: CardsProps) {
           })
         )}
       </div>
-      <Pagination elements={elements} page={page} setPage={setPage} />
+      <Pagination elements={elements} currentPage={currentPage} />
     </>
   )
 }

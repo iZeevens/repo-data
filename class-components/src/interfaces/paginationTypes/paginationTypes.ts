@@ -2,8 +2,7 @@ import { Comics } from '../searchTypes/searchTypes'
 
 interface PaginationType {
   elements: Comics[]
-  page: number
-  setPage: (page: number) => void
+  currentPage: number
 }
 
 export type { PaginationType }

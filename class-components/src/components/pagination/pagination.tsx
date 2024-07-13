@@ -1,31 +1,26 @@
 import './pagination.scss'
 import { PaginationType } from '../../interfaces/paginationTypes/paginationTypes'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-function Pagination({ elements, page, setPage }: PaginationType) {
+function Pagination({ elements, currentPage }: PaginationType) {
+  const navigate = useNavigate()
   const elementsPerPage = Math.ceil(elements.length / 5)
 
-  const handlePagination = (e: React.MouseEvent<HTMLSpanElement>) => {
-    const target = e.target as HTMLSpanElement
-
-    if (target.textContent) setPage(Number(target.textContent) - 1)
+  const handlePagination = (page: number) => {
+    navigate(`/?page=${page + 1}`)
   }
 
   return (
     <div className="pagination">
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
-        <Link
-          key={indexPage}
-          className="page-link"
-          to={`/?page=${indexPage + 1}`}
-        >
+
           <span
-            className={`pagination-item ${indexPage === page ? 'active-page' : ''}`}
-            onClick={handlePagination}
+            className={`pagination-item ${indexPage === currentPage ? 'active-page' : ''}`}
+            onClick={() => handlePagination(indexPage)}
           >
             {indexPage + 1}
           </span>
-        </Link>
+
       ))}
     </div>
   )

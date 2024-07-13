@@ -5,11 +5,16 @@ import Cards from '../../components/cards/cards'
 import { fetchData } from '../../services/apiService'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import useLocalStorage from '../../hooks/localStorageHook'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function SearchPage() {
   const [data, setData] = useState<Comics[]>()
   const [isLoading, setIsLoading] = useState(true)
   const [searchData] = useLocalStorage('search', '')
+  const location = useLocation()
+  const navigate = useNavigate()
+  const pageQuery = new URLSearchParams(location.search).get('page') || '1'
+  const page = parseInt(pageQuery, 10) - 1
 
   useEffect(() => {
     const handleSearch = async (value: string) => {
@@ -23,17 +28,17 @@ function SearchPage() {
     handleSearch(searchData)
   }, [searchData])
 
+  useEffect(() => {
+    if (page < 0) {
+      navigate('/?page=1', { replace: true })
+    }
+  }, [page, navigate])
+
   return (
     <>
       <div className="wrapper">
         <Search setData={setData} setIsLoading={setIsLoading} />
-        {/* <Routes>
-          <Route
-            path="/?page=:page"
-            element={data && <Cards isLoading={isLoading} elements={data} />}
-          />
-        </Routes> */}
-        {data && <Cards isLoading={isLoading} elements={data} />}
+        {data && <Cards isLoading={isLoading} elements={data} currentPage={page} />}
       </div>
     </>
   )
