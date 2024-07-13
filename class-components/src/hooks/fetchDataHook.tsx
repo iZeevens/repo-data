@@ -1,33 +1,27 @@
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { fetchData } from '../services/apiService'
-import { Comics } from '../interfaces/searchTypes/searchTypes'
 
-function useFetchDataHook() {
-  const [query, setQuery] = useState<string | null>(null)
-  const [data, setData] = useState<Comics[]>()
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [isUid, setIsUid] = useState<boolean>(false)
+export function useHandleSearch<T>(initialData: T) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [data, setData] = useState(initialData)
 
-  useEffect(() => {
-    const handleSearch = async (value: string) => {
+  const handleSearch = useCallback(
+    async (value: string, detailId: string = '') => {
       setIsLoading(true)
-      const args: [string, string?] = isUid ? ['', value] : [value]
       try {
-        const result = await fetchData(...args)
+        const result = await fetchData(value, detailId)
         setData(result)
-      } catch {
-        console.error('Error fetch Data')
+        return result
+      } catch (error) {
+        console.error('Error fetching data:', error)
       } finally {
         setIsLoading(false)
       }
-    }
+    },
+    []
+  )
 
-    if (query) {
-      handleSearch(query)
-    }
-  }, [query, isUid])
-
-  return { data, setData, isLoading, setIsLoading, setQuery, setIsUid }
+  return { isLoading, data, handleSearch, setData, setIsLoading }
 }
 
-export default useFetchDataHook
+export default useHandleSearch

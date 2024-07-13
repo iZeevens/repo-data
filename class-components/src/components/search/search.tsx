@@ -1,25 +1,14 @@
 import './search.scss'
 import { useState, FormEvent } from 'react'
-import { fetchData } from '../../services/apiService'
-import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
 import useLocalStorage from '../../hooks/localStorageHook'
+import useHandleSearch from '../../hooks/fetchDataHook'
+import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
+import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
 function Search({ setData, setIsLoading }: SearchProps) {
   const [searchData, setSearchData] = useLocalStorage('search', '')
   const [error, setError] = useState<string | null>('')
-
-  const handleSearch = async (value: string) => {
-    setIsLoading(true)
-
-    try {
-      const data = await fetchData(value)
-      setData(data)
-    } catch {
-      setError(error)
-    }
-
-    setIsLoading(false)
-  }
+  const { handleSearch } = useHandleSearch<Comics[]>([])
 
   const validateSearch = (value: string) => {
     return !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(value)
@@ -38,7 +27,10 @@ function Search({ setData, setIsLoading }: SearchProps) {
       return
     }
 
-    await handleSearch(searchValue)
+    setIsLoading(true)
+    const data = await handleSearch(searchValue)
+    setData(data)
+    setIsLoading(false)
   }
 
   return (

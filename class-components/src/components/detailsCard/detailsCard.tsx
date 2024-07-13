@@ -1,41 +1,26 @@
 import './detailsCard.scss'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import useCustomLocation from '../../hooks/navigateHook'
+import useHandleSearch from '../../hooks/fetchDataHook'
 import { CardDetails } from '../../interfaces/cardsTypes/cardsTypes'
-import { fetchData } from '../../services/apiService'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function DetailsCard() {
-  const [detail, setDetail] = useState<CardDetails | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const location = useLocation()
   const navigate = useNavigate()
-  const uid = new URLSearchParams(location.search).get('id') || '1'
-  const pageQuery = new URLSearchParams(location.search).get('page') || '1'
-  const page = parseInt(pageQuery, 10)
+  const { isLoading, data: detail, handleSearch } = useHandleSearch<CardDetails>({});
+  const { page, uid } = useCustomLocation('id')
 
   useEffect(() => {
-    const handleSearch = async (value: string) => {
-      setIsLoading(true)
-
-      try {
-        const data = await fetchData('', value)
-        setDetail(data)
-      } catch (error) {
-        console.error(error)
-      }
-
-      setIsLoading(false)
-    }
     if (uid) {
-      handleSearch(uid)
+      handleSearch('', uid.toString());
     }
-  }, [uid])
+  }, [uid, handleSearch]);
 
   const handleClose = () => {
     navigate(`/?page=${page}`)
   }
 
-  if (!uid) return null
+  if (!page) return null
 
   return (
     <div className="details-panel">
