@@ -14,7 +14,7 @@ interface Characters {
 }
 
 interface CardDetails {
-  titile: string
+  title: string
   numberOfPages: number
   stardateFrom: number
   stardateTo: number

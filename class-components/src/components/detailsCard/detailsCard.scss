@@ -1,0 +1,31 @@
+.details-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid black;
+
+  .details-title {
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid black;
+  }
+
+  .details-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details-info--characters {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 20px;
+
+
+    .details-info--character {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+}
