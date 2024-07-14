@@ -1,6 +1,6 @@
 import DetailsCard from './detailsCard'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import renderTestsComponent from '../../utils/renderTests'
 
 vi.mock('../../hooks/fetchDataHook', () => ({
   __esModule: true,
@@ -30,11 +30,7 @@ vi.mock('../../hooks/fetchDataHook', () => ({
 
 describe('DeatilsCard Component', () => {
   beforeEach(() => {
-    render(
-      <MemoryRouter>
-        <DetailsCard />
-      </MemoryRouter>
-    )
+    render(renderTestsComponent(<DetailsCard />))
   })
 
   it('renders details correctly', async () => {

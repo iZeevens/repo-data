@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
 import Cards from './cards'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
+import renderTestsComponent from '../../utils/renderTests'
 
 export const elements: Comics[] = [
   {
@@ -71,13 +71,13 @@ const currentPage = 0
 describe('Cards Component', () => {
   beforeEach(() => {
     render(
-      <MemoryRouter>
+      renderTestsComponent(
         <Cards
           isLoading={isLoading}
           elements={elements}
           currentPage={currentPage}
         />
-      </MemoryRouter>
+      )
     )
   })
 
