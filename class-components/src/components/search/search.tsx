@@ -18,7 +18,7 @@ function Search({ setData, setIsLoading }: SearchProps) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
     const searchValue = formData.get('search') as string
-    
+
     setSearchData(searchValue)
 
     if (validateSearch(searchValue) && searchValue.length > 0) {
@@ -34,7 +34,11 @@ function Search({ setData, setIsLoading }: SearchProps) {
 
   return (
     <>
-      <form data-testid="search-form" className="search-continer" onSubmit={searchHandler}>
+      <form
+        data-testid="search-form"
+        className="search-continer"
+        onSubmit={searchHandler}
+      >
         <input
           className="search"
           type="text"
