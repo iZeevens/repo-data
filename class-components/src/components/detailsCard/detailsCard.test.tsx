@@ -26,7 +26,7 @@ vi.mock('../../hooks/fetchDataHook', () => ({
     },
     handleSearch: vi.fn(),
   })),
-}));
+}))
 
 describe('DeatilsCard Component', () => {
   beforeEach(() => {
@@ -34,19 +34,17 @@ describe('DeatilsCard Component', () => {
       <MemoryRouter>
         <DetailsCard />
       </MemoryRouter>
-    );
+    )
   })
-
 
   it('renders details correctly', async () => {
     await vi.waitFor(() => {
-      expect(screen.getByText('Mock Title')).toBeInTheDocument();
-    });
-  });
-
-  it ('close correctly', () => {
-    fireEvent.click(screen.getByText('close'))
-    expect(window.location.pathname).toBe('/');
+      expect(screen.getByText('Mock Title')).toBeInTheDocument()
+    })
   })
 
+  it('close correctly', () => {
+    fireEvent.click(screen.getByText('close'))
+    expect(window.location.pathname).toBe('/')
+  })
 })

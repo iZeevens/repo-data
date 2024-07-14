@@ -18,21 +18,21 @@ vi.mock('../../hooks/fetchDataHook', () => ({
 }))
 
 describe('Search component', () => {
+  let input: HTMLInputElement;
+  let form: HTMLFormElement;
+
   beforeEach(() => {
-    vi.clearAllMocks()
+    render(<Search setData={mockSetData} setIsLoading={mockSetIsLoading} />)
+    input = screen.getByPlaceholderText('Search')
+    form = screen.getByTestId('search-form')
   })
 
   test('renders the search form', () => {
-    render(<Search setData={mockSetData} setIsLoading={mockSetIsLoading} />)
-    const input = screen.getByPlaceholderText('Search')
     expect(input).toBeInTheDocument()
   })
 
   it('List renders', async () => {
     mockHandleSearch.mockResolvedValueOnce([{ id: 1, title: 'Test Comic' }])
-    render(<Search setData={mockSetData} setIsLoading={mockSetIsLoading} />)
-    const input = screen.getByPlaceholderText('Search')
-    const form = screen.getByTestId('search-form')
 
     fireEvent.change(input, { target: { value: 'Test' } })
     fireEvent.submit(form)
@@ -48,10 +48,6 @@ describe('Search component', () => {
   })
 
   it('displays error for invalid search input', async () => {
-    render(<Search setData={mockSetData} setIsLoading={mockSetIsLoading} />)
-    const input = screen.getByPlaceholderText('Search')
-    const form = screen.getByTestId('search-form')
-
     fireEvent.change(input, { target: { value: 'Invalid input  ' } })
     fireEvent.submit(form)
 
