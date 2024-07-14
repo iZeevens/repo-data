@@ -13,7 +13,6 @@ function SearchPage() {
   const { isLoading, data, handleSearch, setData, setIsLoading } =
     useHandleSearch<Comics[]>([])
   const [searchData] = useLocalStorage('search', '')
-
   const navigate = useNavigate()
   const { page } = useCustomLocation('page')
 
@@ -23,12 +22,12 @@ function SearchPage() {
 
   useEffect(() => {
     if (data) {
-      const dataElemsPerPage = Math.ceil(data.length / 5);
+      const dataElemsPerPage = Math.ceil(data.length / 5)
       if (page < 0 || page >= dataElemsPerPage) {
-        navigate('/?page=1', { replace: true });
+        navigate('/?page=1', { replace: true })
       }
     }
-  }, [page, navigate, data]);
+  }, [page, navigate, data])
 
   return (
     <>

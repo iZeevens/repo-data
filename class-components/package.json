@@ -10,7 +10,8 @@
     "format:fix": "prettier --write ./src",
     "preview": "vite preview",
     "precommit": "lint-staged",
-    "prepare": "cd .. && husky class-components/.husky"
+    "prepare": "cd .. && husky class-components/.husky",
+    "test": "vitest"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -32,6 +33,7 @@
     "prettier": "^3.3.2",
     "sass": "^1.77.6",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vitest": "^2.0.2"
   }
 }

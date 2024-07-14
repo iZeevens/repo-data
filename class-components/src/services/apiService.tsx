@@ -31,4 +31,4 @@ const fetchData = async (searchTerm: string | null, searchUid?: string) => {
   }
 }
 
-export { fetchData }
+export default fetchData

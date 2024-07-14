@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { fetchData } from '../services/apiService'
+import fetchData from '../services/apiService'
 
 export function useHandleSearch<T>(initialData: T) {
   const [isLoading, setIsLoading] = useState(true)
