@@ -3,68 +3,36 @@ import Cards from './cards'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import renderTestsComponent from '../../utils/renderTests'
 
+const createComics = (
+  title: string,
+  publishedYear: number,
+  publishedMonth: number,
+  publishedDay: number,
+  numberOfPages: number,
+  photonovel: boolean,
+  adaptation: boolean,
+  uid: string
+): Comics => ({
+  title,
+  publishedYear,
+  publishedMonth,
+  publishedDay,
+  numberOfPages,
+  photonovel,
+  adaptation,
+  uid,
+});
+
+
 export const elements: Comics[] = [
-  {
-    title: 'Card 1',
-    publishedYear: 2024,
-    publishedMonth: 5,
-    publishedDay: 15,
-    numberOfPages: 100,
-    photonovel: true,
-    adaptation: false,
-    uid: 'CCMA0000076475',
-  },
-  {
-    title: 'Card 2',
-    publishedYear: 2024,
-    publishedMonth: 6,
-    publishedDay: 20,
-    numberOfPages: 120,
-    photonovel: false,
-    adaptation: true,
-    uid: 'CCMA0000076476',
-  },
-  {
-    title: 'Card 3',
-    publishedYear: 2024,
-    publishedMonth: 6,
-    publishedDay: 20,
-    numberOfPages: 120,
-    photonovel: false,
-    adaptation: true,
-    uid: 'CCMA0000076476',
-  },
-  {
-    title: 'Card 4',
-    publishedYear: 2024,
-    publishedMonth: 6,
-    publishedDay: 20,
-    numberOfPages: 120,
-    photonovel: false,
-    adaptation: true,
-    uid: 'CCMA0000076476',
-  },
-  {
-    title: 'Card 5',
-    publishedYear: 2024,
-    publishedMonth: 6,
-    publishedDay: 20,
-    numberOfPages: 120,
-    photonovel: false,
-    adaptation: true,
-    uid: 'CCMA0000076476',
-  },
-  {
-    title: 'Card 6',
-    publishedYear: 2024,
-    publishedMonth: 6,
-    publishedDay: 20,
-    numberOfPages: 120,
-    photonovel: false,
-    adaptation: true,
-    uid: 'CCMA0000076476',
-  },
-]
+  createComics('Card 1', 2024, 5, 15, 100, true, false, 'CCMA0000076475'),
+  createComics('Card 2', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
+  createComics('Card 3', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
+  createComics('Card 4', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
+  createComics('Card 5', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
+  createComics('Card 6', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
+];
+
 const isLoading = false
 const currentPage = 0
 
