@@ -18,8 +18,8 @@ vi.mock('../../hooks/fetchDataHook', () => ({
 }))
 
 describe('Search component', () => {
-  let input: HTMLInputElement;
-  let form: HTMLFormElement;
+  let input: HTMLInputElement
+  let form: HTMLFormElement
 
   beforeEach(() => {
     render(<Search setData={mockSetData} setIsLoading={mockSetIsLoading} />)

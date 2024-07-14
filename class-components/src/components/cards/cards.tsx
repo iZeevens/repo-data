@@ -10,7 +10,7 @@ function Cards({ isLoading, elements, currentPage }: CardsProps) {
   const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
-    navigate(`/details?page=${currentPage + 1}/&id=${id}`)
+    navigate(`/details?page=${currentPage + 1}&id=${id}`)
   }
 
   return (
