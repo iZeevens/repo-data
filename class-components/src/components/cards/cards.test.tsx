@@ -24,6 +24,46 @@ export const elements: Comics[] = [
     adaptation: true,
     uid: 'CCMA0000076476',
   },
+  {
+    title: 'Card 3',
+    publishedYear: 2024,
+    publishedMonth: 6,
+    publishedDay: 20,
+    numberOfPages: 120,
+    photonovel: false,
+    adaptation: true,
+    uid: 'CCMA0000076476',
+  },
+  {
+    title: 'Card 4',
+    publishedYear: 2024,
+    publishedMonth: 6,
+    publishedDay: 20,
+    numberOfPages: 120,
+    photonovel: false,
+    adaptation: true,
+    uid: 'CCMA0000076476',
+  },
+  {
+    title: 'Card 5',
+    publishedYear: 2024,
+    publishedMonth: 6,
+    publishedDay: 20,
+    numberOfPages: 120,
+    photonovel: false,
+    adaptation: true,
+    uid: 'CCMA0000076476',
+  },
+  {
+    title: 'Card 6',
+    publishedYear: 2024,
+    publishedMonth: 6,
+    publishedDay: 20,
+    numberOfPages: 120,
+    photonovel: false,
+    adaptation: true,
+    uid: 'CCMA0000076476',
+  },
 ]
 const isLoading = false
 const currentPage = 0
@@ -43,6 +83,7 @@ describe('Cards Component', () => {
 
   it('renders cards', async () => {
     const comicTitles = screen.getAllByText(/Card \d/)
-    expect(comicTitles.length).toBe(elements.length)
+
+    expect(comicTitles.length).toBe(elements.length > 5 ? 5 : elements.length)
   })
 })
