@@ -21,8 +21,7 @@ const createComics = (
   photonovel,
   adaptation,
   uid,
-});
-
+})
 
 export const elements: Comics[] = [
   createComics('Card 1', 2024, 5, 15, 100, true, false, 'CCMA0000076475'),
@@ -31,7 +30,7 @@ export const elements: Comics[] = [
   createComics('Card 4', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
   createComics('Card 5', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
   createComics('Card 6', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
-];
+]
 
 const isLoading = false
 const currentPage = 0
