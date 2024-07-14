@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom'
 import Cards from './cards'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
-const elements: Comics[] = [
+export const elements: Comics[] = [
   {
     title: 'Card 1',
     publishedYear: 2024,
