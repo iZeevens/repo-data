@@ -1,5 +1,5 @@
 import './styles/index.scss'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import SearchPage from './pages/searchPage/searchPage'
 import NotFound from './pages/404/404'
 import DetailsCard from './components/detailsCard/detailsCard'
@@ -8,14 +8,14 @@ import DetailsCard from './components/detailsCard/detailsCard'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<SearchPage />}>
           <Route path="/details" element={<DetailsCard />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
