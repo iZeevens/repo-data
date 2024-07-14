@@ -6,7 +6,7 @@ import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
 function Search({ setData, setIsLoading }: SearchProps) {
-  const [searchData, setSearchData] = useLocalStorage('search', '')
+  const [searchData, setSearchData] = useLocalStorage('search')
   const [error, setError] = useState<string | null>('')
   const { handleSearch } = useHandleSearch<Comics[]>([])
 

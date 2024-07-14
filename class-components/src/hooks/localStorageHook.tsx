@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-function useLocalStorage<T>(key: string, initValue: T) {
-  const [state, setState] = useState<T>(() => {
+function useLocalStorage(key: string, initValue: string = '') {
+  const [state, setState] = useState(() => {
     const localStorageSearch = localStorage.getItem(key)
     return localStorageSearch !== null
       ? JSON.parse(localStorageSearch)

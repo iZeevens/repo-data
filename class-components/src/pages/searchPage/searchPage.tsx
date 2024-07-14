@@ -12,7 +12,7 @@ import { useNavigate, Outlet } from 'react-router-dom'
 function SearchPage() {
   const { isLoading, data, handleSearch, setData, setIsLoading } =
     useHandleSearch<Comics[]>([])
-  const [searchData] = useLocalStorage('search', '')
+  const [searchData] = useLocalStorage('search')
   const navigate = useNavigate()
   const { page } = useCustomLocation('page')
 
