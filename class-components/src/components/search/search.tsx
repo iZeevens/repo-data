@@ -16,13 +16,12 @@ function Search({ setData, setIsLoading }: SearchProps) {
 
   const searchHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const target = e.target as typeof e.target & {
-      search: { value: string }
-    }
-    const searchValue = target.search.value
+    const formData = new FormData(e.currentTarget)
+    const searchValue = formData.get('search') as string
+    
     setSearchData(searchValue)
 
-    if (!validateSearch && searchValue.length > 0) {
+    if (validateSearch(searchValue) && searchValue.length > 0) {
       setError('No extra spaces')
       return
     }
@@ -35,7 +34,7 @@ function Search({ setData, setIsLoading }: SearchProps) {
 
   return (
     <>
-      <form className="search-continer" onSubmit={searchHandler}>
+      <form data-testid="search-form" className="search-continer" onSubmit={searchHandler}>
         <input
           className="search"
           type="text"
