@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "precommit": "lint-staged",
     "prepare": "cd .. && husky class-components/.husky",
-    "test": "vitest",
+    "test": "vitest --silent",
     "testUi": "vitest --ui",
     "coverage": "vitest run --coverage"
   },
