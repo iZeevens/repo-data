@@ -1,0 +1,38 @@
+.cards {
+  display: flex;
+  align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.cards-continer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 5px;
+  justify-content: center;
+  align-content: flex-start;
+  margin-top: 20px;
+  margin-right: 10px;
+
+  .card-comics {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 12px;
+    cursor: pointer;
+
+    .comics-title {
+      font-size: 1.2em;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .comics-continer {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
