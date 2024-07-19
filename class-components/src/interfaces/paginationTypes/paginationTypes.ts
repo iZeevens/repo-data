@@ -1,7 +1,7 @@
-import { Comics } from '../searchTypes/searchTypes'
+import { ComicsData } from '../searchTypes/searchTypes'
 
 interface PaginationType {
-  elements: Comics[]
+  elements: ComicsData[]
   currentPage: number
 }
 

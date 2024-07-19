@@ -1,8 +1,8 @@
-import { Comics } from '../searchTypes/searchTypes'
+import { ComicsData } from '../searchTypes/searchTypes'
 
 interface CardsProps {
   isLoading: boolean
-  elements: Comics[]
+  elements: ComicsData[]
   currentPage: number
 }
 
@@ -13,7 +13,7 @@ interface Characters {
   yearOfDeath: number
 }
 
-interface CardDetails {
+interface CardDetailsData {
   title?: string
   numberOfPages?: number
   stardateFrom?: number
@@ -23,6 +23,10 @@ interface CardDetails {
   characters?: Characters[]
   photonovel?: boolean
   adaptation?: boolean
+}
+
+type CardDetails = {
+  comics: CardDetailsData
 }
 
 export type { CardsProps, CardDetails }

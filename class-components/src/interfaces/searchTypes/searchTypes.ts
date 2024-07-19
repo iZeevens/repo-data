@@ -1,4 +1,4 @@
-interface Comics {
+interface ComicsData {
   title: string
   publishedYear: number
   publishedMonth: number
@@ -9,9 +9,11 @@ interface Comics {
   uid: string
 }
 
+type Comics = { comics: ComicsData[] }
+
 interface SearchProps {
   setData: (data: Comics[]) => void
   setIsLoading: (loading: boolean) => void
 }
 
-export type { Comics, SearchProps }
+export type { Comics, ComicsData, SearchProps }

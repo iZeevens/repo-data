@@ -1,14 +1,13 @@
 import './search.scss'
 import { useState, FormEvent } from 'react'
 import useLocalStorage from '../../hooks/localStorageHook'
-import useHandleSearch from '../../hooks/fetchDataHook'
+// import { useSearchComicsMutation } from '../../services/apiSlice'
 import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
-import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
 function Search({ setData, setIsLoading }: SearchProps) {
   const [searchData, setSearchData] = useLocalStorage('search')
   const [error, setError] = useState<string | null>('')
-  const { handleSearch } = useHandleSearch<Comics[]>([])
+  // const [searchComics] = useSearchComicsMutation()
 
   const validateSearch = (value: string) => {
     return !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(value)
@@ -27,8 +26,8 @@ function Search({ setData, setIsLoading }: SearchProps) {
     }
 
     setIsLoading(true)
-    const data = await handleSearch(searchValue)
-    setData(data)
+    // const data = await handleSearch(searchValue)
+    console.log(setData)
     setIsLoading(false)
   }
 
