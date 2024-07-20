@@ -1,8 +1,13 @@
-import { Component, ErrorInfo } from 'react'
-import {
-  BounderyProps,
-  BounderyState,
-} from '../../interfaces/errorBounderyTypes/errorBounderyTypes'
+import { Component, ErrorInfo, ReactNode } from 'react'
+
+
+interface BounderyProps {
+  children: ReactNode
+}
+interface BounderyState {
+  hasError: boolean
+  error: Error | null
+}
 
 class ErrorBoundary extends Component<BounderyProps, BounderyState> {
   constructor(props: BounderyProps) {
