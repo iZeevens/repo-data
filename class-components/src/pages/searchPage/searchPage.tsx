@@ -7,11 +7,14 @@ import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
 import { RootState } from '../../redux/store'
+import { useContext } from 'react'
+import { ThemeContext } from '../../context/ThemeProvider'
 
 function SearchPage() {
   const { data } = useSelector((state: RootState) => state.search)
   const navigate = useNavigate()
   const { page } = useCustomLocation('page')
+  const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
     if (data) {
@@ -25,7 +28,7 @@ function SearchPage() {
   return (
     <>
       <Search />
-      <div className="cards">
+      <div className={`cards ${theme}`}>
         <Cards currentPage={page} />
         <Outlet />
       </div>

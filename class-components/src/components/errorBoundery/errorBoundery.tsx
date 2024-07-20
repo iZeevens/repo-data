@@ -1,6 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
 
-
 interface BounderyProps {
   children: ReactNode
 }
