@@ -2,9 +2,8 @@ import './cards.scss'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
-// import { CardsProps } from '../../interfaces/cardsTypes/cardsTypes'
 
-function Cards({ currentPage }: {currentPage: number}) {
+function Cards({ currentPage }: { currentPage: number }) {
   const navigate = useNavigate()
   const lastIndexElems = 5 * (currentPage + 1)
   const firstIndexElems = lastIndexElems - 5
@@ -21,7 +20,8 @@ function Cards({ currentPage }: {currentPage: number}) {
       <div className="cards-continer">
         {isLoading ? (
           <div>Loading...</div>
-        ) : (elementsPagination && 
+        ) : (
+          elementsPagination &&
           elementsPagination.map((item, index) => {
             return (
               <div
