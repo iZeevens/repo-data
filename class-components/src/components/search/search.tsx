@@ -1,13 +1,15 @@
 import './search.scss'
 import { useState, FormEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSearchComicsMutation } from '../../services/apiSlice'
 import useLocalStorage from '../../hooks/localStorageHook'
-// import { useSearchComicsMutation } from '../../services/apiSlice'
-import { SearchProps } from '../../interfaces/searchTypes/searchTypes'
+import { setData } from '../../redux/reducers/searchSlice'
 
-function Search({ setData, setIsLoading }: SearchProps) {
+function Search() {
   const [searchData, setSearchData] = useLocalStorage('search')
   const [error, setError] = useState<string | null>('')
-  // const [searchComics] = useSearchComicsMutation()
+  const [searchComics] = useSearchComicsMutation()
+  const dispatch = useDispatch()
 
   const validateSearch = (value: string) => {
     return !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(value)
@@ -21,14 +23,20 @@ function Search({ setData, setIsLoading }: SearchProps) {
     setSearchData(searchValue)
 
     if (validateSearch(searchValue) && searchValue.length > 0) {
-      setError('No extra spaces')
-      return
+      return setError('No extra spaces')
     }
 
-    setIsLoading(true)
-    // const data = await handleSearch(searchValue)
-    console.log(setData)
-    setIsLoading(false)
+    // setIsLoading(true)
+    // console.log(searchData)
+
+    try {
+      const result = await searchComics(searchValue).unwrap()
+      dispatch(setData(result))
+    } catch (error) {
+      console.error(error)
+    }
+
+    // setIsLoading(false)
   }
 
   return (

@@ -1,11 +1,3 @@
-import { ComicsData } from '../searchTypes/searchTypes'
-
-interface CardsProps {
-  isLoading: boolean
-  elements: ComicsData[]
-  currentPage: number
-}
-
 interface Characters {
   name: string
   gender: 'M' | 'F'
@@ -29,4 +21,4 @@ type CardDetails = {
   comics: CardDetailsData
 }
 
-export type { CardsProps, CardDetails }
+export type { CardDetails }

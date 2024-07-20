@@ -1,13 +1,16 @@
 import './cards.scss'
-import { CardsProps } from '../../interfaces/cardsTypes/cardsTypes'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
+// import { CardsProps } from '../../interfaces/cardsTypes/cardsTypes'
 
-function Cards({ isLoading, elements, currentPage }: CardsProps) {
+function Cards({ currentPage }: {currentPage: number}) {
   const navigate = useNavigate()
   const lastIndexElems = 5 * (currentPage + 1)
   const firstIndexElems = lastIndexElems - 5
+  const { data, isLoading } = useSelector((state: RootState) => state.search)
 
-  const elementsPagination = elements.slice(firstIndexElems, lastIndexElems)
+  const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
     navigate(`/details?page=${currentPage + 1}&id=${id}`)
@@ -18,7 +21,7 @@ function Cards({ isLoading, elements, currentPage }: CardsProps) {
       <div className="cards-continer">
         {isLoading ? (
           <div>Loading...</div>
-        ) : (
+        ) : (elementsPagination && 
           elementsPagination.map((item, index) => {
             return (
               <div

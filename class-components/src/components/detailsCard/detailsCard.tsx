@@ -6,12 +6,9 @@ import { useNavigate } from 'react-router-dom'
 function DetailsCard() {
   const navigate = useNavigate()
   const { page, uid } = useCustomLocation('id')
-  const { data, isLoading } = useGetComicsByUidQuery(
-    uid || '',
-    {
-      skip: !uid,
-    }
-  )
+  const { data, isLoading } = useGetComicsByUidQuery(uid || '', {
+    skip: !uid,
+  })
 
   const comicsData = data?.comics
 
@@ -34,8 +31,12 @@ function DetailsCard() {
               {comicsData?.stardateFrom && (
                 <span>Stardate From: {comicsData?.stardateFrom}</span>
               )}
-              {comicsData?.stardateTo && <span>Stardate To: {comicsData.stardateTo}</span>}
-              {comicsData?.yearFrom && <span>Year From: {comicsData.yearFrom}</span>}
+              {comicsData?.stardateTo && (
+                <span>Stardate To: {comicsData.stardateTo}</span>
+              )}
+              {comicsData?.yearFrom && (
+                <span>Year From: {comicsData.yearFrom}</span>
+              )}
               {comicsData?.yearTo && <span>Year To: {comicsData.yearTo}</span>}
               <span>Photonovel: {comicsData?.photonovel ? 'Yes' : 'No'}</span>
               <span>Adaptation: {comicsData?.adaptation ? 'Yes' : 'No'}</span>
