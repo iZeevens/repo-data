@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, Outlet } from 'react-router-dom'
 import useCustomLocation from '../../hooks/navigateHook'
-import useTheme from '../../hooks/useTheme'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
@@ -14,7 +13,6 @@ function SearchPage() {
   const { data } = useSelector((state: RootState) => state.search)
   const navigate = useNavigate()
   const { page } = useCustomLocation('page')
-  const [theme] = useTheme()
 
   useEffect(() => {
     if (data) {
@@ -26,7 +24,7 @@ function SearchPage() {
   }, [page, navigate, data])
 
   return (
-    <div className={`wrapper ${theme}`}>
+    <div className='wrapper'>
       <Search />
       <SwitchBtn />
       <div className={`cards`}>
