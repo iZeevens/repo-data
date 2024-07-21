@@ -5,7 +5,9 @@ import { RootState } from '../../redux/store'
 
 function Cards() {
   const navigate = useNavigate()
-  const { data, isLoading, currentPage } = useSelector((state: RootState) => state.search) // Убрать code repeat
+  const { data, isLoading, currentPage } = useSelector(
+    (state: RootState) => state.search
+  ) // Убрать code repeat
   const lastIndexElems = 5 * (currentPage + 1)
   const firstIndexElems = lastIndexElems - 5
 

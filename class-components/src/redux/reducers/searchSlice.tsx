@@ -10,7 +10,7 @@ export interface SearchState {
 const initialState: SearchState = {
   data: null,
   isLoading: false,
-  currentPage: 1
+  currentPage: 1,
 }
 
 const searchSlice = createSlice({
@@ -25,7 +25,7 @@ const searchSlice = createSlice({
     },
     setPage(state, action) {
       state.currentPage = action.payload
-    }
+    },
   },
 })
 

@@ -12,7 +12,6 @@ function Pagination() {
 
   const elementsPerPage = Math.ceil(elements.length / 5)
 
-
   const handlePagination = (page: number) => {
     navigate(`/?page=${page + 1}`)
   }

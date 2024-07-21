@@ -8,6 +8,7 @@ import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
 import SwitchBtn from '../../components/switchTheme/switchTheme'
+import SelectedItemsWindow from '../../components/selectedItemsWindow/selectedItemsWindow'
 import { RootState } from '../../redux/store'
 
 function SearchPage() {
@@ -37,6 +38,7 @@ function SearchPage() {
         <Cards />
         <Outlet />
       </div>
+      <SelectedItemsWindow />
       <Pagination />
     </div>
   )
