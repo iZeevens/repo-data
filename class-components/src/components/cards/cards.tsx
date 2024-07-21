@@ -1,13 +1,21 @@
 import './cards.scss'
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  setCardDetails,
+  removeCardDetails,
+} from '../../redux/reducers/searchSlice'
+import { useGetComicsByUidMutation } from '../../services/apiSlice'
 import { RootState } from '../../redux/store'
 
 function Cards() {
   const navigate = useNavigate()
-  const { data, isLoading, currentPage } = useSelector(
+  const dispatch = useDispatch()
+  const { data, isLoading, currentPage, cardsDetails } = useSelector(
     (state: RootState) => state.search
-  ) // Убрать code repeat
+  )
+  const [searchByUid] = useGetComicsByUidMutation()
+
   const lastIndexElems = 5 * (currentPage + 1)
   const firstIndexElems = lastIndexElems - 5
 
@@ -17,8 +25,29 @@ function Cards() {
     navigate(`/details?page=${currentPage + 1}&id=${id}`)
   }
 
-  const handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handleCheckboxClick = async (
+    event: React.MouseEvent<HTMLInputElement>
+  ) => {
     event.stopPropagation()
+    const target = event.target as HTMLInputElement
+    const targetUid = target.id
+
+    if (target.checked) {
+      if (targetUid) {
+        const comicsData = await searchByUid(targetUid)
+        dispatch(setCardDetails([comicsData]))
+        console.log(comicsData)
+      }
+    } else {
+      console.log(cardsDetails)
+      dispatch(
+        removeCardDetails(
+          cardsDetails?.filter((item) => {
+            return item.data.comics.uid !== targetUid
+          })
+        )
+      )
+    }
   }
 
   return (
@@ -28,11 +57,11 @@ function Cards() {
           <div>Loading...</div>
         ) : (
           elementsPagination &&
-          elementsPagination.map((item, index) => {
+          elementsPagination.map((item) => {
             return (
               <div
                 className="card-comics"
-                key={index}
+                key={item.uid}
                 onClick={() => handleCardClick(item.uid!)}
               >
                 <span className="comics-title">{item.title}</span>

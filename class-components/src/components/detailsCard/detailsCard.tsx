@@ -1,15 +1,19 @@
 import './detailsCard.scss'
 import useCustomLocation from '../../hooks/navigateHook'
-import { useGetComicsByUidQuery } from '../../services/apiSlice'
+import { useGetComicsByUidMutation } from '../../services/apiSlice'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function DetailsCard() {
   const navigate = useNavigate()
   const { page, uid } = useCustomLocation('id')
-  const { data, isLoading } = useGetComicsByUidQuery(uid || '', {
-    skip: !uid,
-  })
+  const [searchByUid, { isLoading, data }] = useGetComicsByUidMutation()
 
+  useEffect(() => {
+    if (uid) {
+      searchByUid(uid)
+    }
+  }, [uid, searchByUid])
   const comicsData = data?.comics
 
   const handleClose = () => {

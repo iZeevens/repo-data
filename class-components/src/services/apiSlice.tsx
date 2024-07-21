@@ -16,10 +16,10 @@ export const comicsApi = createApi({
         },
       }),
     }),
-    getComicsByUid: builder.query<CardDetails, string>({
+    getComicsByUid: builder.mutation<CardDetails, string>({
       query: (uid) => `comics?uid=${uid}`,
     }),
   }),
 })
 
-export const { useGetComicsByUidQuery, useSearchComicsMutation } = comicsApi
+export const { useGetComicsByUidMutation, useSearchComicsMutation } = comicsApi

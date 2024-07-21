@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import { CardDetails } from '../../interfaces/cardsTypes/cardsTypes'
 
-type CardDeatilsUid = { uid: CardDetails }
+type CardDeatilsUid = { data: CardDetails }
 
 export interface SearchState {
   data: Comics | null
   isLoading: boolean
   currentPage: number
-  cardsDetails: CardDeatilsUid | null
+  cardsDetails: CardDeatilsUid[] | null
 }
 
 const initialState: SearchState = {
@@ -32,10 +32,18 @@ const searchSlice = createSlice({
       state.currentPage = action.payload
     },
     setCardDetails(state, action) {
+      if (state.cardsDetails) {
+        state.cardsDetails = [...state.cardsDetails, ...action.payload]
+      } else {
+        state.cardsDetails = action.payload
+      }
+    },
+    removeCardDetails(state, action) {
       state.cardsDetails = action.payload
     }
   },
 })
 
-export const { setData, setIsLoading, setPage, setCardDetails } = searchSlice.actions
+export const { setData, setIsLoading, setPage, setCardDetails, removeCardDetails } =
+  searchSlice.actions
 export default searchSlice.reducer

@@ -15,6 +15,7 @@ interface CardDetailsData {
   characters?: Characters[]
   photonovel?: boolean
   adaptation?: boolean
+  uid?: string
 }
 
 type CardDetails = {
