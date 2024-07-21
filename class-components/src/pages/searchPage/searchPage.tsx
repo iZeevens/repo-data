@@ -1,7 +1,8 @@
 import './searchPage.scss'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, Outlet } from 'react-router-dom'
+import { setPage } from '../../redux/reducers/searchSlice'
 import useCustomLocation from '../../hooks/navigateHook'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
@@ -11,8 +12,13 @@ import { RootState } from '../../redux/store'
 
 function SearchPage() {
   const { data } = useSelector((state: RootState) => state.search)
-  const navigate = useNavigate()
   const { page } = useCustomLocation('page')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setPage(page))
+  }, [page, dispatch])
 
   useEffect(() => {
     if (data) {
@@ -27,11 +33,11 @@ function SearchPage() {
     <div className="wrapper">
       <Search />
       <SwitchBtn />
-      <div className={`cards`}>
-        <Cards currentPage={page} />
+      <div className="cards">
+        <Cards />
         <Outlet />
       </div>
-      {data && <Pagination elements={data.comics} currentPage={page} />}
+      <Pagination />
     </div>
   )
 }

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/store'
 
-function Cards({ currentPage }: { currentPage: number }) {
+function Cards() {
   const navigate = useNavigate()
+  const { data, isLoading, currentPage } = useSelector((state: RootState) => state.search) // Убрать code repeat
   const lastIndexElems = 5 * (currentPage + 1)
   const firstIndexElems = lastIndexElems - 5
-  const { data, isLoading } = useSelector((state: RootState) => state.search)
 
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
@@ -18,7 +18,6 @@ function Cards({ currentPage }: { currentPage: number }) {
   const handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
     event.stopPropagation()
   }
-
 
   return (
     <>
@@ -46,7 +45,10 @@ function Cards({ currentPage }: { currentPage: number }) {
                     <span>Published day: {item.publishedDay}</span>
                   )}
                 </div>
-                <div className='checkbox-container' onClick={handleCheckboxClick}>
+                <div
+                  className="checkbox-container"
+                  onClick={handleCheckboxClick}
+                >
                   <span>select: </span>
                   <input type="checkbox" id={item.uid} />
                 </div>

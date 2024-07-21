@@ -1,10 +1,17 @@
 import './pagination.scss'
-import { PaginationType } from '../../interfaces/paginationTypes/paginationTypes'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { RootState } from '../../redux/store'
 
-function Pagination({ elements, currentPage }: PaginationType) {
+function Pagination() {
   const navigate = useNavigate()
+  const { data, currentPage } = useSelector((state: RootState) => state.search)
+  const elements = data?.comics
+
+  if (!elements) return
+
   const elementsPerPage = Math.ceil(elements.length / 5)
+
 
   const handlePagination = (page: number) => {
     navigate(`/?page=${page + 1}`)
