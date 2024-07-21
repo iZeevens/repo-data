@@ -5,7 +5,6 @@ import NotFound from './pages/404/404'
 import DetailsCard from './components/detailsCard/detailsCard'
 import useTheme from './hooks/useTheme'
 
-
 // Главный компонент внутри которого будут распологаться остальные компоненты
 
 function App() {

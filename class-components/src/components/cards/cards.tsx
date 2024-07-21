@@ -15,6 +15,11 @@ function Cards({ currentPage }: { currentPage: number }) {
     navigate(`/details?page=${currentPage + 1}&id=${id}`)
   }
 
+  const handleCheckboxClick = (event: React.MouseEvent<HTMLInputElement>) => {
+    event.stopPropagation()
+  }
+
+
   return (
     <>
       <div className="cards-continer">
@@ -40,6 +45,10 @@ function Cards({ currentPage }: { currentPage: number }) {
                   {item.publishedDay && (
                     <span>Published day: {item.publishedDay}</span>
                   )}
+                </div>
+                <div className='checkbox-container' onClick={handleCheckboxClick}>
+                  <span>select: </span>
+                  <input type="checkbox" id={item.uid} />
                 </div>
               </div>
             )

@@ -24,7 +24,7 @@ function SearchPage() {
   }, [page, navigate, data])
 
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <Search />
       <SwitchBtn />
       <div className={`cards`}>
