@@ -1,13 +1,13 @@
 import './searchPage.scss'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate, Outlet } from 'react-router-dom'
 import useCustomLocation from '../../hooks/navigateHook'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
+import SwitchBtn from '../../components/switchTheme/switchTheme'
 import { RootState } from '../../redux/store'
-import { useContext } from 'react'
 import { ThemeContext } from '../../context/ThemeProvider'
 
 function SearchPage() {
@@ -28,6 +28,7 @@ function SearchPage() {
   return (
     <>
       <Search />
+      <SwitchBtn />
       <div className={`cards ${theme}`}>
         <Cards currentPage={page} />
         <Outlet />

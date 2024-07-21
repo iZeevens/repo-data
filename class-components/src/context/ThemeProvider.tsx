@@ -13,7 +13,7 @@ export const ThemeContext = React.createContext<ThemeContextType>(
 )
 
 export const ThemeProvider: FC<ChildrenProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useState<Theme>('light')
 
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
@@ -21,9 +21,5 @@ export const ThemeProvider: FC<ChildrenProps> = ({ children }) => {
 
   const value = { theme, toggleTheme }
 
-  return (
-    <ThemeContext.Provider value={value}>
-        {children}
-    </ThemeContext.Provider>
-  )
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
 }
