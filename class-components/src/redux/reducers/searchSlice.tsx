@@ -1,16 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
+import { CardDetails } from '../../interfaces/cardsTypes/cardsTypes'
+
+type CardDeatilsUid = { uid: CardDetails }
 
 export interface SearchState {
   data: Comics | null
   isLoading: boolean
   currentPage: number
+  cardsDetails: CardDeatilsUid | null
 }
 
 const initialState: SearchState = {
   data: null,
   isLoading: false,
   currentPage: 1,
+  cardsDetails: null,
 }
 
 const searchSlice = createSlice({
@@ -26,8 +31,11 @@ const searchSlice = createSlice({
     setPage(state, action) {
       state.currentPage = action.payload
     },
+    setCardDetails(state, action) {
+      state.cardsDetails = action.payload
+    }
   },
 })
 
-export const { setData, setIsLoading, setPage } = searchSlice.actions
+export const { setData, setIsLoading, setPage, setCardDetails } = searchSlice.actions
 export default searchSlice.reducer
