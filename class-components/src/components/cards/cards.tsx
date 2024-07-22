@@ -7,6 +7,7 @@ import {
 } from '../../redux/reducers/searchSlice'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
 import { RootState } from '../../redux/store'
+import { ChangeEvent } from 'react'
 
 function Cards() {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ function Cards() {
   }
 
   const handleCheckboxClick = async (
-    event: React.MouseEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => {
     event.stopPropagation()
     const target = event.target as HTMLInputElement
@@ -58,7 +59,9 @@ function Cards() {
         ) : (
           elementsPagination &&
           elementsPagination.map((item) => {
-            const isChecked = cardsDetails?.some((card) => card.data.comics.uid === item.uid) || false;
+            const isChecked = cardsDetails?.some(
+              (card) => card.data.comics.uid === item.uid
+            ) || false
 
             return (
               <div
@@ -78,12 +81,14 @@ function Cards() {
                     <span>Published day: {item.publishedDay}</span>
                   )}
                 </div>
-                <div
-                  className="checkbox-container"
-                  onClick={handleCheckboxClick}
-                >
+                <div className="checkbox-container">
                   <span>select: </span>
-                  <input type="checkbox" id={item.uid} defaultChecked={isChecked} />
+                  <input
+                    type="checkbox"
+                    id={item.uid}
+                    checked={isChecked}
+                    onChange={handleCheckboxClick}
+                   />
                 </div>
               </div>
             )
