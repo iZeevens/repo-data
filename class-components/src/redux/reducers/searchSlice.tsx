@@ -40,10 +40,15 @@ const searchSlice = createSlice({
     },
     removeCardDetails(state, action) {
       state.cardsDetails = action.payload
-    }
+    },
   },
 })
 
-export const { setData, setIsLoading, setPage, setCardDetails, removeCardDetails } =
-  searchSlice.actions
+export const {
+  setData,
+  setIsLoading,
+  setPage,
+  setCardDetails,
+  removeCardDetails,
+} = searchSlice.actions
 export default searchSlice.reducer
