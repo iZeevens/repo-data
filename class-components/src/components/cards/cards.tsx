@@ -58,6 +58,8 @@ function Cards() {
         ) : (
           elementsPagination &&
           elementsPagination.map((item) => {
+            const isChecked = cardsDetails?.some((card) => card.data.comics.uid === item.uid) || false;
+
             return (
               <div
                 className="card-comics"
@@ -81,7 +83,7 @@ function Cards() {
                   onClick={handleCheckboxClick}
                 >
                   <span>select: </span>
-                  <input type="checkbox" id={item.uid} />
+                  <input type="checkbox" id={item.uid} defaultChecked={isChecked} />
                 </div>
               </div>
             )
