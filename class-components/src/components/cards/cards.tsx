@@ -34,15 +34,13 @@ function Cards() {
     if (target.checked) {
       if (targetUid) {
         const comicsData = await searchByUid(targetUid)
-        dispatch(setCardDetails([comicsData]))
-        console.log(comicsData)
+        dispatch(setCardDetails([comicsData.data?.comics]))
       }
     } else {
-      console.log(cardsDetails)
       dispatch(
         removeCardDetails(
           cardsDetails?.filter((item) => {
-            return item.data.comics.uid !== targetUid
+            return item.uid !== targetUid
           })
         )
       )
@@ -58,14 +56,11 @@ function Cards() {
           elementsPagination &&
           elementsPagination.map((item) => {
             const isChecked =
-              cardsDetails?.some((card) => card.data.comics.uid === item.uid) ||
+              cardsDetails?.some((card) => card.uid === item.uid) ||
               false
 
             return (
-              <div
-                className="card-comics"
-                key={item.uid}
-              >
+              <div className="card-comics" key={item.uid}>
                 <div onClick={() => handleCardClick(item.uid!)}>
                   <span className="comics-title">{item.title}</span>
                   <div className="comics-continer">

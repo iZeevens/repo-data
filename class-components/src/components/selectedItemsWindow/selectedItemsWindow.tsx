@@ -11,7 +11,6 @@ function SelectedItemsWindow() {
     dispatch(removeCardDetails([]))
   }
 
-
   const onDowlandHandler = () => {
     console.log(cardsDetails)
   }
@@ -24,7 +23,12 @@ function SelectedItemsWindow() {
       <button className="selected-items-unselect btn" onClick={unSelectHandler}>
         Unselect all
       </button>
-      <button className="selected-items-download btn" onClick={onDowlandHandler}>Download</button>
+      <button
+        className="selected-items-download btn"
+        onClick={onDowlandHandler}
+      >
+        Download
+      </button>
     </div>
   )
 }

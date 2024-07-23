@@ -1,14 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
-import { CardDetails } from '../../interfaces/cardsTypes/cardsTypes'
+import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 
-type CardDeatilsUid = { data: CardDetails }
 
 export interface SearchState {
   data: Comics | null
   isLoading: boolean
   currentPage: number
-  cardsDetails: CardDeatilsUid[] | null
+  cardsDetails: CardDetailsData[] | null
 }
 
 const initialState: SearchState = {

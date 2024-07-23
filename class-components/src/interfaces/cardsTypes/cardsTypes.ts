@@ -22,4 +22,4 @@ type CardDetails = {
   comics: CardDetailsData
 }
 
-export type { CardDetails }
+export type { CardDetails, CardDetailsData }
