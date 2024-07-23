@@ -15,6 +15,7 @@ function Cards() {
   const { data, isLoading, currentPage, cardsDetails } = useSelector(
     (state: RootState) => state.search
   )
+
   const [searchByUid] = useGetComicsByUidMutation()
 
   const lastIndexElems = 5 * (currentPage + 1)
@@ -32,10 +33,8 @@ function Cards() {
     const targetUid = target.id
 
     if (target.checked) {
-      if (targetUid) {
-        const comicsData = await searchByUid(targetUid)
-        dispatch(setCardDetails([comicsData.data?.comics]))
-      }
+      const comicsData = await searchByUid(targetUid)
+      dispatch(setCardDetails([comicsData.data?.comics]))
     } else {
       dispatch(
         removeCardDetails(
@@ -56,8 +55,7 @@ function Cards() {
           elementsPagination &&
           elementsPagination.map((item) => {
             const isChecked =
-              cardsDetails?.some((card) => card.uid === item.uid) ||
-              false
+              cardsDetails?.some((card) => card.uid === item.uid) || false
 
             return (
               <div className="card-comics" key={item.uid}>
