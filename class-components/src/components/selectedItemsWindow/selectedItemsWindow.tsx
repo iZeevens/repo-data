@@ -38,7 +38,7 @@ function SelectedItemsWindow() {
 
   return (
     <>
-      {cardsDetails ? (
+      {cardsDetails && cardsDetails.length > 0 ? (
         <div className="selected-items-window">
           <span className="selected-items-counter">
             {cardsDetails?.length} items are selected
