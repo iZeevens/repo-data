@@ -13,7 +13,7 @@ function SelectedItemsWindow() {
   }
 
   const convertToCSV = (array: CardDetailsData[]) => {
-    function filterData(data: CardDetailsData): CardDetailsData {
+    function filterData(data: CardDetailsData) {
       return {
         title: data.title,
         numberOfPages: data.numberOfPages,
@@ -21,11 +21,18 @@ function SelectedItemsWindow() {
         stardateTo: data.stardateTo,
         yearFrom: data.yearFrom,
         yearTo: data.yearTo,
-        characters: data.characters,
+        characters:
+          data.characters &&
+          data.characters
+            .map(
+              (character) =>
+                `name: ${character.name} | gender: ${character.gender} | year of birth: ${character.yearOfBirth} | year of death: ${character.yearOfDeath}`
+            )
+            .join(' && '),
         photonovel: data.photonovel,
         adaptation: data.adaptation,
-        uid: data.uid
-      };
+        uid: data.uid,
+      }
     }
 
     let csvContent = ''
