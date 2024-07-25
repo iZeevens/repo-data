@@ -8,23 +8,35 @@ function SelectedItemsWindow() {
   const { cardsDetails } = useSelector((state: RootState) => state.search)
   const dispatch = useDispatch()
 
-
   const unSelectHandler = () => {
     dispatch(removeCardDetails([]))
   }
 
-  const convertToCSV = (obj: CardDetailsData[]) => {
-    if (obj.length === 0) return ''
+  const convertToCSV = (array: CardDetailsData[]) => {
+    function filterData(data: CardDetailsData): CardDetailsData {
+      return {
+        title: data.title,
+        numberOfPages: data.numberOfPages,
+        stardateFrom: data.stardateFrom,
+        stardateTo: data.stardateTo,
+        yearFrom: data.yearFrom,
+        yearTo: data.yearTo,
+        characters: data.characters,
+        photonovel: data.photonovel,
+        adaptation: data.adaptation,
+        uid: data.uid
+      };
+    }
 
     let csvContent = ''
     let titleKeys = null
     const result = []
 
-    titleKeys = Object.keys(obj[0])
+    titleKeys = Object.keys(filterData(array[0]))
     result.push(titleKeys)
 
-    obj.forEach((item) => {
-      result.push(Object.values(item))
+    array.forEach((item) => {
+      result.push(Object.values(filterData(item)))
     })
 
     result.forEach((row) => {
