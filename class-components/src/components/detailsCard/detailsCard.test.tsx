@@ -1,6 +1,6 @@
 import DetailsCard from './detailsCard'
 import { render, screen, fireEvent } from '@testing-library/react'
-import renderTestsComponent from '../../utils/renderTests'
+import renderTestsComponent from '../../utils/customRenderMemory'
 
 vi.mock('../../hooks/fetchDataHook', () => ({
   __esModule: true,

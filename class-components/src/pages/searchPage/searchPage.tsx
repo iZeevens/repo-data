@@ -1,8 +1,9 @@
 import './searchPage.scss'
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch, Provider } from 'react-redux'
 import { useNavigate, Outlet } from 'react-router-dom'
 import { setPage } from '../../redux/reducers/searchSlice'
+import store from '../../redux/store'
 import useCustomLocation from '../../hooks/navigateHook'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
@@ -31,16 +32,18 @@ function SearchPage() {
   }, [page, navigate, data])
 
   return (
-    <div className="wrapper">
-      <Search />
-      <SwitchBtn />
-      <div className="cards">
-        <Cards />
-        <Outlet />
+    <Provider store={store}>
+      <div className="wrapper">
+        <Search />
+        <SwitchBtn />
+        <div className="cards">
+          <Cards />
+          <Outlet />
+        </div>
+        <SelectedItemsWindow />
+        <Pagination />
       </div>
-      <SelectedItemsWindow />
-      <Pagination />
-    </div>
+    </Provider>
   )
 }
 

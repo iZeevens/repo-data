@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import Pagination from './pagination'
 import { elements } from '../cards/cards.test'
 import { MemoryRouter } from 'react-router-dom'
-import renderTestsComponent from '../../utils/renderTests'
+import renderTestsComponent from '../../utils/customRenderMemory'
 
 const currentPage = 0
 

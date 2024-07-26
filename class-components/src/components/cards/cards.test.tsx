@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import Cards from './cards'
-import { Comics } from '../../interfaces/searchTypes/searchTypes'
-import renderTestsComponent from '../../utils/renderTests'
+import { ComicsData } from '../../interfaces/searchTypes/searchTypes'
+import renderWithMemoryRouter from '../../utils/customRenderMemory'
 
 const createComics = (
   title: string,
@@ -12,7 +12,7 @@ const createComics = (
   photonovel: boolean,
   adaptation: boolean,
   uid: string
-): Comics => ({
+): ComicsData => ({
   title,
   publishedYear,
   publishedMonth,
@@ -23,7 +23,7 @@ const createComics = (
   uid,
 })
 
-export const elements: Comics[] = [
+export const elements: ComicsData[] = [
   createComics('Card 1', 2024, 5, 15, 100, true, false, 'CCMA0000076475'),
   createComics('Card 2', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
   createComics('Card 3', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
@@ -32,20 +32,9 @@ export const elements: Comics[] = [
   createComics('Card 6', 2024, 6, 20, 120, false, true, 'CCMA0000076476'),
 ]
 
-const isLoading = false
-const currentPage = 0
-
 describe('Cards Component', () => {
   beforeEach(() => {
-    render(
-      renderTestsComponent(
-        <Cards
-          isLoading={isLoading}
-          elements={elements}
-          currentPage={currentPage}
-        />
-      )
-    )
+    renderWithMemoryRouter(<Cards />)
   })
 
   it('renders cards', async () => {
