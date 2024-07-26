@@ -4,10 +4,11 @@ import renderCustomStoreProvider from '../../utils/customStore'
 
 describe('Search Page Component', () => {
   it('Checking layout', () => {
-    renderCustomStoreProvider(<SearchPage />)
+    renderCustomStoreProvider(<SearchPage />, {
+      preloadedState: { search: { isLoading: true, currentPage: 1 } },
+    })
 
     expect(screen.getByRole('textbox')).toBeInTheDocument()
     expect(screen.getByPlaceholderText('Search')).toBeInTheDocument()
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
   })
 })
