@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import Pagination from './pagination'
-import { elements } from '../cards/cards.test'
+import { comicsData } from '../../__mocks__/data'
 import renderCustomStoreProvider from '../../utils/customStore'
 
 const currentPage = 0
@@ -9,11 +9,11 @@ describe('Pagination Component', () => {
   it('pagination page work correctly', () => {
     renderCustomStoreProvider(<Pagination />, {
       preloadedState: {
-        search: { currentPage, isLoading: false, data: { comics: elements } },
+        search: { currentPage, isLoading: false, data: { comics: comicsData } },
       },
     })
     const paginationItems = screen.getAllByText(/^\d+$/)
-    const expectedPages = Math.ceil(elements.length / 5)
+    const expectedPages = Math.ceil(comicsData.length / 5)
     expect(paginationItems.length).toBe(expectedPages)
   })
 
@@ -21,7 +21,7 @@ describe('Pagination Component', () => {
     const currentPage = 1
     renderCustomStoreProvider(<Pagination />, {
       preloadedState: {
-        search: { currentPage, isLoading: false, data: { comics: elements } },
+        search: { currentPage, isLoading: false, data: { comics: comicsData } },
       },
     })
     const activePage = screen.getByText('2')
