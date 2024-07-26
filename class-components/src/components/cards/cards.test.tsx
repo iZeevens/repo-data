@@ -1,7 +1,7 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import Cards from './cards'
 import { ComicsData } from '../../interfaces/searchTypes/searchTypes'
-import renderWithMemoryRouter from '../../utils/customRenderMemory'
+import renderCustomStoreProvider from '../../utils/customStore'
 
 const createComics = (
   title: string,
@@ -34,12 +34,23 @@ export const elements: ComicsData[] = [
 
 describe('Cards Component', () => {
   beforeEach(() => {
-    renderWithMemoryRouter(<Cards />)
+    renderCustomStoreProvider(<Cards />, {
+      preloadedState: {
+        search: {
+          data: { comics: elements },
+          isLoading: false,
+          currentPage: 1,
+          cardsDetails: null,
+        },
+      },
+    })
   })
 
-  it('renders cards', async () => {
+  it('renders cards', () => {
     const comicTitles = screen.getAllByText(/Card \d/)
 
-    expect(comicTitles.length).toBe(elements.length > 5 ? 5 : elements.length)
+    waitFor(() =>
+      expect(comicTitles.length).toBe(elements.length > 5 ? 5 : elements.length)
+    )
   })
 })

@@ -47,47 +47,45 @@ function Cards() {
   }
 
   return (
-    <>
-      <div className="cards-continer">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          elementsPagination &&
-          elementsPagination.map((item) => {
-            const isChecked =
-              cardsDetails?.some((card) => card.uid === item.uid) || false
+    <div className="cards-continer">
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        elementsPagination &&
+        elementsPagination.map((item) => {
+          const isChecked =
+            cardsDetails?.some((card) => card.uid === item.uid) || false
 
-            return (
-              <div className="card-comics" key={item.uid}>
-                <div onClick={() => handleCardClick(item.uid!)}>
-                  <span className="comics-title">{item.title}</span>
-                  <div className="comics-continer">
-                    {item.publishedYear && (
-                      <span>Published year: {item.publishedYear}</span>
-                    )}
-                    {item.publishedMonth && (
-                      <span>Published month: {item.publishedMonth}</span>
-                    )}
-                    {item.publishedDay && (
-                      <span>Published day: {item.publishedDay}</span>
-                    )}
-                  </div>
-                </div>
-                <div className="checkbox-container">
-                  <span>select: </span>
-                  <input
-                    type="checkbox"
-                    id={item.uid}
-                    checked={isChecked}
-                    onChange={handleCheckboxClick}
-                  />
+          return (
+            <div className="card-comics" key={item.uid}>
+              <div onClick={() => handleCardClick(item.uid!)}>
+                <span className="comics-title">{item.title}</span>
+                <div className="comics-continer">
+                  {item.publishedYear && (
+                    <span>Published year: {item.publishedYear}</span>
+                  )}
+                  {item.publishedMonth && (
+                    <span>Published month: {item.publishedMonth}</span>
+                  )}
+                  {item.publishedDay && (
+                    <span>Published day: {item.publishedDay}</span>
+                  )}
                 </div>
               </div>
-            )
-          })
-        )}
-      </div>
-    </>
+              <div className="checkbox-container">
+                <span>select: </span>
+                <input
+                  type="checkbox"
+                  id={item.uid}
+                  checked={isChecked}
+                  onChange={handleCheckboxClick}
+                />
+              </div>
+            </div>
+          )
+        })
+      )}
+    </div>
   )
 }
 
