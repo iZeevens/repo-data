@@ -1,17 +1,24 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { comicsApi } from '../services/apiSlice'
 import searchReducer from './reducers/searchSlice'
 
-const store = configureStore({
-  reducer: {
-    search: searchReducer,
-    [comicsApi.reducerPath]: comicsApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(comicsApi.middleware),
+const rootReducer = combineReducers({
+  search: searchReducer,
+  [comicsApi.reducerPath]: comicsApi.reducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+function setupStore(preloadedState?: Partial<RootState>) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(comicsApi.middleware),
+  })
+}
 
-export default store
+const store = setupStore()
+
+export type AppStore = ReturnType<typeof setupStore>
+export type RootState = ReturnType<typeof rootReducer>
+
+export { store, setupStore }
