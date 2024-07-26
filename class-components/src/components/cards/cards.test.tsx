@@ -3,7 +3,6 @@ import Cards from './cards'
 import renderCustomStoreProvider from '../../utils/customStore'
 import { comicsData } from '../../__mocks__/data'
 
-
 describe('Cards Component', () => {
   beforeEach(() => {
     renderCustomStoreProvider(<Cards />, {
