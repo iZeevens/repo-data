@@ -3,7 +3,7 @@ import Cards from './cards'
 import { ComicsData } from '../../interfaces/searchTypes/searchTypes'
 import renderCustomStoreProvider from '../../utils/customStore'
 
-const createComics = (
+export const createComics = (
   title: string,
   publishedYear: number,
   publishedMonth: number,
