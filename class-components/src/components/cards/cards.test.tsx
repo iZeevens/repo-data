@@ -22,7 +22,9 @@ describe('Cards Component', () => {
     const comicTitles = screen.getAllByText(/Card \d/)
 
     waitFor(() =>
-      expect(comicTitles.length).toBe(comicsData.length > 5 ? 5 : comicsData.length)
+      expect(comicTitles.length).toBe(
+        comicsData.length > 5 ? 5 : comicsData.length
+      )
     )
   })
 })

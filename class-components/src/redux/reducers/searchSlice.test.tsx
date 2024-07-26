@@ -43,9 +43,9 @@ describe('Search Slice Reducer', () => {
       cardsDetails: detailsCardsData,
     }
 
-    expect(
-      searchReducer(initState, setCardDetails(detailsCardsData))
-    ).toEqual(expectedState)
+    expect(searchReducer(initState, setCardDetails(detailsCardsData))).toEqual(
+      expectedState
+    )
   })
 
   it('setCardDetails todo add comicsDetails to data when already have comicsDetails data', () => {

@@ -1,4 +1,4 @@
-import { ComicsData } from "../interfaces/searchTypes/searchTypes"
+import { ComicsData } from '../interfaces/searchTypes/searchTypes'
 
 const createComics = (
   title: string,
@@ -19,7 +19,6 @@ const createComics = (
   adaptation,
   uid,
 })
-
 
 const detailsCardsData = [
   {
