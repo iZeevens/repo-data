@@ -24,7 +24,7 @@ describe('Search component', () => {
 
   beforeEach(() => {
     renderCustomStoreProvider(<Search />, {
-      preloadedState: { search: { isLoading: false, currentPage: 1  } },
+      preloadedState: { search: { isLoading: false, currentPage: 1 } },
     })
     input = screen.getByPlaceholderText('Search')
     form = screen.getByTestId('search-form')

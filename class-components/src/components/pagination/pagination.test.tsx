@@ -1,18 +1,17 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import Pagination from './pagination'
 import { elements } from '../cards/cards.test'
-import { MemoryRouter } from 'react-router-dom'
-import renderTestsComponent from '../../utils/customRenderMemory'
+import renderCustomStoreProvider from '../../utils/customStore'
 
 const currentPage = 0
 
 describe('Pagination Component', () => {
   it('pagination page work correctly', () => {
-    render(
-      renderTestsComponent(
-        <Pagination elements={elements} currentPage={currentPage} />
-      )
-    )
+    renderCustomStoreProvider(<Pagination />, {
+      preloadedState: {
+        search: { currentPage, isLoading: false, data: { comics: elements } },
+      },
+    })
     const paginationItems = screen.getAllByText(/^\d+$/)
     const expectedPages = Math.ceil(elements.length / 5)
     expect(paginationItems.length).toBe(expectedPages)
@@ -20,11 +19,11 @@ describe('Pagination Component', () => {
 
   it('highlights the current page', () => {
     const currentPage = 1
-    render(
-      <MemoryRouter>
-        <Pagination elements={elements} currentPage={currentPage} />
-      </MemoryRouter>
-    )
+    renderCustomStoreProvider(<Pagination />, {
+      preloadedState: {
+        search: { currentPage, isLoading: false, data: { comics: elements } },
+      },
+    })
     const activePage = screen.getByText('2')
     expect(activePage).toHaveClass('active-page')
   })

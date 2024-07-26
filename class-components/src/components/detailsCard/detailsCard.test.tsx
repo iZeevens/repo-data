@@ -32,7 +32,7 @@ describe('DeatilsCard Component', () => {
 
   it('close correctly', async () => {
     const closeBtn = waitFor(() =>
-      screen.getByRole('button', {name: /close/i})
+      screen.getByRole('button', { name: /close/i })
     )
 
     fireEvent.click(await closeBtn)
