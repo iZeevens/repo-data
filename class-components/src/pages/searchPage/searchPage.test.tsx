@@ -29,5 +29,5 @@ describe('Search Page Component', () => {
     })
 
     waitFor(() => expect(useNavigate).not.toHaveBeenCalled())
-  });
+  })
 })

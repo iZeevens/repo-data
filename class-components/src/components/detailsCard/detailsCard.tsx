@@ -20,8 +20,6 @@ function DetailsCard() {
     navigate(`/?page=${page}`)
   }
 
-  if (!page) return null
-
   return (
     <div className="details-panel">
       {isLoading ? (

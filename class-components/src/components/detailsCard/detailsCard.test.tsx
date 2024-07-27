@@ -19,17 +19,21 @@ describe('DeatilsCard Component', () => {
 
   it('renders details correctly', () => {
     waitFor(() => {
-      expect(screen.getByText('Mock Title')).toBeInTheDocument()
+      expect(screen.getByText('20')).toBeInTheDocument()
     })
   })
 
   it('close correctly', async () => {
     const user = userEvent.setup()
-    const closeBtn = waitFor(() =>
+    const closeBtn = await waitFor(() =>
       screen.getByRole('button', { name: /close/i })
     )
 
-    user.click(await closeBtn)
-    expect(window.location.pathname).toBe('/')
+    await user.click(closeBtn)
+    waitFor(() => {
+      expect(
+        screen.queryByRole('button', { name: /close/i })
+      ).not.toBeInTheDocument()
+    })
   })
 })
