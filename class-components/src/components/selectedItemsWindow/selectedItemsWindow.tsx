@@ -35,6 +35,8 @@ function SelectedItemsWindow() {
       }
     }
 
+    console.log(array)
+
     let csvContent = ''
     let titleKeys = null
     const result = []
@@ -47,7 +49,6 @@ function SelectedItemsWindow() {
     })
 
     result.forEach((row) => {
-      console.log(row)
       csvContent += row?.join(';') + '\n'
     })
 
