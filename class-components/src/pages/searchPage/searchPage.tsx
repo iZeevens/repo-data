@@ -25,7 +25,9 @@ function SearchPage() {
   useEffect(() => {
     if (data) {
       const dataElemsPerPage = Math.ceil(data.comics.length / 5)
+      console.log('DataElemsPerPage:', dataElemsPerPage);
       if (page < 0 || page >= dataElemsPerPage) {
+        console.log('navi')
         navigate('/?page=1', { replace: true })
       }
     }

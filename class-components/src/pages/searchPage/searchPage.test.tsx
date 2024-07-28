@@ -1,37 +1,43 @@
-import { screen } from '@testing-library/react'
-import SearchPage from './searchPage'
-import renderCustomStoreProvider from '../../utils/customStore'
+import { waitFor } from '@testing-library/react';
+import SearchPage from './searchPage';
+import renderCustomStoreProvider from '../../utils/customStore';
+import { vi } from 'vitest';
 
-const navigateMock = vi.fn()
+const navigateMock = vi.fn();
 vi.mock('react-router-dom', async () => {
-  const actualRouter = await vi.importActual('react-router-dom')
-  return { ...actualRouter, useNavigate: () => navigateMock }
-})
+  const actualRouter = await vi.importActual('react-router-dom');
+  return { ...actualRouter, useNavigate: () => navigateMock };
+});
+
+let currentPage = -1
 
 vi.mock('../../hooks/navigateHook', () => ({
   __esModule: true,
-  default: (key: string) => ({
-    page: key === 'page' ? 1 : 0,
+  default: () => ({
+    page: currentPage,
   }),
-}))
+}));
 
 describe('Search Page Component', () => {
-  it('Checking layout', () => {
+  it('navigate correctly', async () => {
+    currentPage = 15
+
     renderCustomStoreProvider(<SearchPage />, {
-      preloadedState: { search: { isLoading: false, currentPage: 2 } },
-    })
+      preloadedState: { search: { isLoading: false, currentPage: 15, data: { comics: new Array(10).fill(null) } } },
+    });
 
-    expect(screen.getByRole('textbox')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Search')).toBeInTheDocument()
-  })
+    await waitFor(() => {
+      expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true });
+    });
+  });
 
-  // it('navigate corretly', async () => {
-  //   renderCustomStoreProvider(<SearchPage />, {
-  //     preloadedState: { search: { isLoading: false, currentPage: 2 } },
-  //   })
+  it('navigate correctly when currentPage < 0', async () => {
+    renderCustomStoreProvider(<SearchPage />, {
+      preloadedState: { search: { isLoading: false, currentPage: -1, data: { comics: new Array(10).fill(null) } } },
+    });
 
-  //   await waitFor(() => {
-  //     expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true })
-  //   })
-  // })
-})
+    await waitFor(() => {
+      expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true });
+    });
+  });
+});
