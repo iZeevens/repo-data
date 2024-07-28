@@ -1,17 +1,55 @@
-import { render, screen } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import SearchPage from './searchPage'
-import { MemoryRouter } from 'react-router-dom'
+import renderCustomStoreProvider from '../../utils/customStore'
+import { vi } from 'vitest'
+
+const navigateMock = vi.fn()
+vi.mock('react-router-dom', async () => {
+  const actualRouter = await vi.importActual('react-router-dom')
+  return { ...actualRouter, useNavigate: () => navigateMock }
+})
+
+let currentPage = -1
+
+vi.mock('../../hooks/navigateHook', () => ({
+  __esModule: true,
+  default: () => ({
+    page: currentPage,
+  }),
+}))
 
 describe('Search Page Component', () => {
-  it('Checking layout', () => {
-    render(
-      <MemoryRouter>
-        <SearchPage />
-      </MemoryRouter>
-    )
+  it('navigate correctly', async () => {
+    currentPage = 15
 
-    expect(screen.getByRole('textbox')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('Search')).toBeInTheDocument()
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    renderCustomStoreProvider(<SearchPage />, {
+      preloadedState: {
+        search: {
+          isLoading: false,
+          currentPage: 15,
+          data: { comics: new Array(10).fill(null) },
+        },
+      },
+    })
+
+    await waitFor(() => {
+      expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true })
+    })
+  })
+
+  it('navigate correctly when currentPage < 0', async () => {
+    renderCustomStoreProvider(<SearchPage />, {
+      preloadedState: {
+        search: {
+          isLoading: false,
+          currentPage: -1,
+          data: { comics: new Array(10).fill(null) },
+        },
+      },
+    })
+
+    await waitFor(() => {
+      expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true })
+    })
   })
 })

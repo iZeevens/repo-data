@@ -24,6 +24,10 @@
     padding: 12px;
     cursor: pointer;
 
+    &-dark {
+      border: 1px solid white;
+    }
+
     .comics-title {
       font-size: 1.2em;
       text-align: center;
@@ -33,6 +37,13 @@
     .comics-continer {
       display: flex;
       flex-direction: column;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 15px;
     }
   }
 }

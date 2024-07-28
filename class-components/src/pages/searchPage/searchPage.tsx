@@ -1,28 +1,30 @@
 import './searchPage.scss'
 import { useEffect } from 'react'
-import useLocalStorage from '../../hooks/localStorageHook'
-import useHandleSearch from '../../hooks/fetchDataHook'
+import { useSelector, useDispatch, Provider } from 'react-redux'
+import { useNavigate, Outlet } from 'react-router-dom'
+import { setPage } from '../../redux/reducers/searchSlice'
+import { store } from '../../redux/store'
 import useCustomLocation from '../../hooks/navigateHook'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
-import { Comics } from '../../interfaces/searchTypes/searchTypes'
-import { useNavigate, Outlet } from 'react-router-dom'
+import SwitchBtn from '../../components/switchTheme/switchTheme'
+import SelectedItemsWindow from '../../components/selectedItemsWindow/selectedItemsWindow'
+import { RootState } from '../../redux/store'
 
 function SearchPage() {
-  const { isLoading, data, handleSearch, setData, setIsLoading } =
-    useHandleSearch<Comics[]>([])
-  const [searchData] = useLocalStorage('search')
-  const navigate = useNavigate()
+  const { data } = useSelector((state: RootState) => state.search)
   const { page } = useCustomLocation('page')
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    handleSearch(searchData)
-  }, [searchData, handleSearch])
+    dispatch(setPage(page))
+  }, [page, dispatch])
 
   useEffect(() => {
     if (data) {
-      const dataElemsPerPage = Math.ceil(data.length / 5)
+      const dataElemsPerPage = Math.ceil(data.comics.length / 5)
       if (page < 0 || page >= dataElemsPerPage) {
         navigate('/?page=1', { replace: true })
       }
@@ -30,16 +32,18 @@ function SearchPage() {
   }, [page, navigate, data])
 
   return (
-    <>
-      <Search setData={setData} setIsLoading={setIsLoading} />
-      <div className="cards">
-        {data && (
-          <Cards isLoading={isLoading} elements={data} currentPage={page} />
-        )}
-        <Outlet />
+    <Provider store={store}>
+      <div className="wrapper">
+        <Search />
+        <SwitchBtn />
+        <div className="cards">
+          <Cards />
+          <Outlet />
+        </div>
+        <SelectedItemsWindow />
+        <Pagination />
       </div>
-      {data && <Pagination elements={data} currentPage={page} />}
-    </>
+    </Provider>
   )
 }
 

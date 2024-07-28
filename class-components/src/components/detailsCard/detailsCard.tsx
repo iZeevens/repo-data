@@ -1,30 +1,24 @@
 import './detailsCard.scss'
-import { useEffect } from 'react'
 import useCustomLocation from '../../hooks/navigateHook'
-import useHandleSearch from '../../hooks/fetchDataHook'
-import { CardDetails } from '../../interfaces/cardsTypes/cardsTypes'
+import { useGetComicsByUidMutation } from '../../services/apiSlice'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 function DetailsCard() {
   const navigate = useNavigate()
-  const {
-    isLoading,
-    data: detail,
-    handleSearch,
-  } = useHandleSearch<CardDetails>({})
   const { page, uid } = useCustomLocation('id')
+  const [searchByUid, { isLoading, data }] = useGetComicsByUidMutation()
 
   useEffect(() => {
     if (uid) {
-      handleSearch(null, uid.toString())
+      searchByUid(uid)
     }
-  }, [uid, handleSearch])
+  }, [uid, searchByUid])
+  const comicsData = data?.comics
 
   const handleClose = () => {
     navigate(`/?page=${page}`)
   }
-
-  if (!page) return null
 
   return (
     <div className="details-panel">
@@ -32,25 +26,27 @@ function DetailsCard() {
         <span>Loading...</span>
       ) : (
         <>
-          <h3 className="details-title">{detail?.title}</h3>
+          <h3 className="details-title">{comicsData?.title}</h3>
           <div className="details-info">
             <div className="details-info-about">
-              <span>Number Pages: {detail?.numberOfPages}</span>
-              {detail?.stardateFrom && (
-                <span>Stardate From: {detail?.stardateFrom}</span>
+              <span>Number Pages: {comicsData?.numberOfPages}</span>
+              {comicsData?.stardateFrom && (
+                <span>Stardate From: {comicsData?.stardateFrom}</span>
               )}
-              {detail?.stardateTo && (
-                <span>Stardate To: {detail?.stardateTo}</span>
+              {comicsData?.stardateTo && (
+                <span>Stardate To: {comicsData.stardateTo}</span>
               )}
-              {detail?.yearFrom && <span>Year From: {detail?.yearFrom}</span>}
-              {detail?.yearTo && <span>Year To: {detail?.yearTo}</span>}
-              <span>Photonovel: {detail?.photonovel ? 'Yes' : 'No'}</span>
-              <span>Adaptation: {detail?.adaptation ? 'Yes' : 'No'}</span>
+              {comicsData?.yearFrom && (
+                <span>Year From: {comicsData.yearFrom}</span>
+              )}
+              {comicsData?.yearTo && <span>Year To: {comicsData.yearTo}</span>}
+              <span>Photonovel: {comicsData?.photonovel ? 'Yes' : 'No'}</span>
+              <span>Adaptation: {comicsData?.adaptation ? 'Yes' : 'No'}</span>
             </div>
-            {detail?.characters && detail.characters.length > 0 ? (
+            {comicsData?.characters && comicsData.characters.length > 0 ? (
               <div className="details-info--characters">
                 <span>Characters:</span>
-                {detail?.characters.map((character, index) => (
+                {comicsData?.characters.map((character, index) => (
                   <div className="details-info--character" key={index}>
                     <span>Name: {character.name}</span>
                     <span>

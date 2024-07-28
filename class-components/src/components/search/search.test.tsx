@@ -1,20 +1,10 @@
 import Search from './search'
-import { screen, render, fireEvent } from '@testing-library/react'
-
-const mockSetData = vi.fn()
-const mockSetIsLoading = vi.fn()
-const mockHandleSearch = vi.fn()
+import renderCustomStoreProvider from '../../utils/customStore'
+import { screen, fireEvent } from '@testing-library/react'
 
 vi.mock('../../hooks/localStorageHook', () => ({
   __esModule: true,
   default: vi.fn(() => ['', vi.fn()]),
-}))
-
-vi.mock('../../hooks/fetchDataHook', () => ({
-  __esModule: true,
-  default: vi.fn(() => ({
-    handleSearch: mockHandleSearch,
-  })),
 }))
 
 describe('Search component', () => {
@@ -22,29 +12,15 @@ describe('Search component', () => {
   let form: HTMLFormElement
 
   beforeEach(() => {
-    render(<Search setData={mockSetData} setIsLoading={mockSetIsLoading} />)
+    renderCustomStoreProvider(<Search />, {
+      preloadedState: { search: { isLoading: false, currentPage: 1 } },
+    })
     input = screen.getByPlaceholderText('Search')
     form = screen.getByTestId('search-form')
   })
 
   test('renders the search form', () => {
     expect(input).toBeInTheDocument()
-  })
-
-  it('List renders', async () => {
-    mockHandleSearch.mockResolvedValueOnce([{ id: 1, title: 'Test Comic' }])
-
-    fireEvent.change(input, { target: { value: 'Test' } })
-    fireEvent.submit(form)
-
-    expect(mockSetIsLoading).toHaveBeenCalledWith(true)
-    await vi.waitFor(() =>
-      expect(mockHandleSearch).toHaveBeenCalledWith('Test')
-    )
-    await vi.waitFor(() =>
-      expect(mockSetData).toHaveBeenCalledWith([{ id: 1, title: 'Test Comic' }])
-    )
-    expect(mockSetIsLoading).toHaveBeenCalledWith(false)
   })
 
   it('displays error for invalid search input', async () => {

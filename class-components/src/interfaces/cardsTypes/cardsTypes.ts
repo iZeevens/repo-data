@@ -1,11 +1,3 @@
-import { Comics } from '../searchTypes/searchTypes'
-
-interface CardsProps {
-  isLoading: boolean
-  elements: Comics[]
-  currentPage: number
-}
-
 interface Characters {
   name: string
   gender: 'M' | 'F'
@@ -13,7 +5,7 @@ interface Characters {
   yearOfDeath: number
 }
 
-interface CardDetails {
+interface CardDetailsData {
   title?: string
   numberOfPages?: number
   stardateFrom?: number
@@ -23,6 +15,11 @@ interface CardDetails {
   characters?: Characters[]
   photonovel?: boolean
   adaptation?: boolean
+  uid?: string
 }
 
-export type { CardsProps, CardDetails }
+type CardDetails = {
+  comics: CardDetailsData
+}
+
+export type { CardDetails, CardDetailsData }
