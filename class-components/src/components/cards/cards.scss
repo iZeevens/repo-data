@@ -24,6 +24,10 @@
     padding: 12px;
     cursor: pointer;
 
+    &-dark {
+      border: 1px solid white;
+    }
+
     .comics-title {
       font-size: 1.2em;
       text-align: center;

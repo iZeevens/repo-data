@@ -1,13 +1,15 @@
 import './pagination.scss'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import useTheme from '../../hooks/useTheme'
 import { RootState } from '../../redux/store'
 
 function Pagination() {
   const navigate = useNavigate()
   const { data, currentPage } = useSelector((state: RootState) => state.search)
-  const elements = data?.comics
+  const [theme] = useTheme()
 
+  const elements = data?.comics
   if (!elements) return
 
   const elementsPerPage = Math.ceil(elements.length / 5)
@@ -21,7 +23,7 @@ function Pagination() {
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
         <span
           key={indexPage}
-          className={`pagination-item ${indexPage === currentPage ? 'active-page' : ''}`}
+          className={`pagination-item pagination-item-${theme} ${indexPage === currentPage ? 'active-page' : ''}`}
           onClick={() => handlePagination(indexPage)}
         >
           {indexPage + 1}

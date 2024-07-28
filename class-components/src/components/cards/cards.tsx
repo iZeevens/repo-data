@@ -8,8 +8,10 @@ import {
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
 import { RootState } from '../../redux/store'
 import { ChangeEvent } from 'react'
+import useTheme from '../../hooks/useTheme'
 
 function Cards() {
+  const [theme] = useTheme()
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { data, isLoading, currentPage, cardsDetails } = useSelector(
@@ -57,7 +59,7 @@ function Cards() {
             cardsDetails?.some((card) => card.uid === item.uid) || false
 
           return (
-            <div className="card-comics" key={item.uid}>
+            <div className={`card-comics card-comics-${theme}`} key={item.uid}>
               <div onClick={() => handleCardClick(item.uid!)}>
                 <span className="comics-title">{item.title}</span>
                 <div className="comics-continer">
