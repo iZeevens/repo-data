@@ -2,7 +2,6 @@ import Search from './search'
 import renderCustomStoreProvider from '../../utils/customStore'
 import { screen, fireEvent } from '@testing-library/react'
 
-
 vi.mock('../../hooks/localStorageHook', () => ({
   __esModule: true,
   default: vi.fn(() => ['', vi.fn()]),
