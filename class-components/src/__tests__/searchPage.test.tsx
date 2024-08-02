@@ -1,15 +1,14 @@
+import SearchPage from '../pages/searchPage/searchPage'
+import renderCustomStoreProvider from '../utils/customStore'
 import { waitFor } from '@testing-library/react'
-import SearchPage from './searchPage'
-import renderCustomStoreProvider from '../../utils/customStore'
-import { vi } from 'vitest'
 
 const navigateMock = vi.fn()
+let currentPage = -1
+
 vi.mock('react-router-dom', async () => {
   const actualRouter = await vi.importActual('react-router-dom')
   return { ...actualRouter, useNavigate: () => navigateMock }
 })
-
-let currentPage = -1
 
 vi.mock('../../hooks/navigateHook', () => ({
   __esModule: true,

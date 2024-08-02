@@ -2,7 +2,7 @@ import './pagination.scss'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import useTheme from '../../hooks/useTheme'
-import { RootState } from '../../redux/store'
+import { RootState } from '../../app/store'
 
 function Pagination() {
   const navigate = useNavigate()

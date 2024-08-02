@@ -1,6 +1,6 @@
-import renderCustomStoreProvider from '../../utils/customStore'
-import SelectedItemsWindow from './selectedItemsWindow'
-import { detailsCardsData } from '../../__mocks__/data'
+import renderCustomStoreProvider from '../utils/customStore'
+import SelectedItemsWindow from '../components/selectedItemsWindow/selectedItemsWindow'
+import { detailsCardsData } from '../__mocks__/data'
 
 describe('Selected Items Window Tests', () => {
   URL.createObjectURL = vi.fn()

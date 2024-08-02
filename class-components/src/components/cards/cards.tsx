@@ -6,7 +6,7 @@ import {
   removeCardDetails,
 } from '../../redux/reducers/searchSlice'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
-import { RootState } from '../../redux/store'
+import { RootState } from '../../app/store'
 import { ChangeEvent } from 'react'
 import useTheme from '../../hooks/useTheme'
 
