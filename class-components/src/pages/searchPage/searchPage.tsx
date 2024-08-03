@@ -2,15 +2,15 @@ import './searchPage.scss'
 import { useEffect } from 'react'
 import { useSelector, useDispatch, Provider } from 'react-redux'
 import { useNavigate, Outlet } from 'react-router-dom'
-import { setPage } from '../../redux/reducers/searchSlice'
-import { store } from '../../redux/store'
+import { setPage } from '../../lib/reducers/searchSlice'
+import { store } from '../../lib/store'
 import useCustomLocation from '../../hooks/navigateHook'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
 import SwitchBtn from '../../components/switchTheme/switchTheme'
 import SelectedItemsWindow from '../../components/selectedItemsWindow/selectedItemsWindow'
-import { RootState } from '../../redux/store'
+import { RootState } from '../../lib/store'
 
 function SearchPage() {
   const { data } = useSelector((state: RootState) => state.search)

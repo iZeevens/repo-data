@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect, FormEvent } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSearchComicsMutation } from '../../services/apiSlice'
 import useLocalStorage from '../../hooks/localStorageHook'
-import { setData, setIsLoading } from '../../redux/reducers/searchSlice'
+import { setData, setIsLoading } from '../../lib/reducers/searchSlice'
 
 function Search() {
   const [searchData, setSearchData] = useLocalStorage('search')

@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   setCardDetails,
   removeCardDetails,
-} from '../../redux/reducers/searchSlice'
+} from '../../lib/reducers/searchSlice'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
-import { RootState } from '../../redux/store'
+import { RootState } from '../../lib/store'
 import { ChangeEvent } from 'react'
 import useTheme from '../../hooks/useTheme'
 
