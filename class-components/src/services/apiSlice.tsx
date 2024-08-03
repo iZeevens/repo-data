@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { Comics } from '../interfaces/searchTypes/searchTypes'
 import { CardDetails } from '../interfaces/cardsTypes/cardsTypes'
 
+
 export const comicsApi = createApi({
   reducerPath: 'comicsApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://stapi.co/api/v1/rest/' }),
@@ -10,7 +11,6 @@ export const comicsApi = createApi({
       query: (searchTerm) => ({
         url: 'comics/search',
         method: 'POST',
-        mode: 'no-cors',
         body: new URLSearchParams({ title: searchTerm }),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
