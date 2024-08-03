@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { comicsApi } from '../services/apiSlice'
-import searchReducer from '../redux/reducers/searchSlice'
+import searchReducer from './reducers/searchSlice'
 
 const rootReducer = combineReducers({
   search: searchReducer,

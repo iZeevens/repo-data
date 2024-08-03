@@ -10,6 +10,7 @@ export const comicsApi = createApi({
       query: (searchTerm) => ({
         url: 'comics/search',
         method: 'POST',
+        mode: 'no-cors',
         body: new URLSearchParams({ title: searchTerm }),
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

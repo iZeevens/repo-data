@@ -1,7 +1,7 @@
 import './selectedItemsWindow.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeCardDetails } from '../../redux/reducers/searchSlice'
-import { RootState } from '../../app/store'
+import { RootState } from '../../redux/store'
 import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 
 function SelectedItemsWindow() {

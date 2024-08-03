@@ -1,9 +1,9 @@
 import './styles/index.scss'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { store } from './app/store'
-import SearchPage from './pages/searchPage/searchPage'
-import NotFound from './pages/404/404'
+import { store } from './redux/store'
+import SearchPage from './pages_/searchPage/searchPage'
+import NotFound from './pages_/404/404'
 import DetailsCard from './components/detailsCard/detailsCard'
 import useTheme from './hooks/useTheme'
 

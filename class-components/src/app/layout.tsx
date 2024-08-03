@@ -1,3 +1,5 @@
+import logo from '../public/favicon.ico'
+
 export default function RootLayout({
   children,
 }: {
@@ -9,6 +11,7 @@ export default function RootLayout({
         <meta />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite + React + TS</title>
+        <link rel="icon" href={logo.src} />
       </head>
       <body>
         <div id="root">{children}</div>

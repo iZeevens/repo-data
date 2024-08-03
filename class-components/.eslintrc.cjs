@@ -16,5 +16,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 'warn',
     'react-compiler/react-compiler': 'error',
-  }
+    'react-refresh/only-export-components': 'off',
+  },
 }

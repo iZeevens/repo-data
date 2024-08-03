@@ -1,7 +1,7 @@
 import '../../styles/index.scss'
 import { ClientOnly } from './client'
 
-export function GenerateStaticParams() {
+export function generateStaticParams() {
   return [{ slug: [''] }]
 }
 
