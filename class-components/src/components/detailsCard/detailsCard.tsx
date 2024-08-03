@@ -1,3 +1,5 @@
+'use client'
+
 import './detailsCard.scss'
 import useCustomLocation from '../../hooks/navigateHook'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'

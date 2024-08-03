@@ -1,3 +1,5 @@
+'use client'
+
 import './pagination.scss'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'

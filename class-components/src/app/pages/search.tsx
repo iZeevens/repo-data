@@ -1,8 +1,7 @@
-'use client'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, Outlet } from 'react-router-dom'
 import { setPage } from '../../lib/reducers/searchSlice'
+import { useRouter } from 'next/navigation'
 import useCustomLocation from '../../hooks/navigateHook'
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
@@ -15,7 +14,7 @@ import StoreProvider from '../StoreProvider'
 function SearchPage() {
   const { data } = useSelector((state: RootState) => state.search)
   const { page } = useCustomLocation('page')
-  const navigate = useNavigate()
+  const router = useRouter()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -26,10 +25,10 @@ function SearchPage() {
     if (data) {
       const dataElemsPerPage = Math.ceil(data.comics.length / 5)
       if (page < 0 || page >= dataElemsPerPage) {
-        navigate('/?page=1', { replace: true })
+        router.replace('/search?page=1')
       }
     }
-  }, [page, navigate, data])
+  }, [page, data, router])
 
   return (
     <StoreProvider>
@@ -38,7 +37,6 @@ function SearchPage() {
         <SwitchBtn />
         <div className="cards">
           <Cards />
-          <Outlet />
         </div>
         <SelectedItemsWindow />
         <Pagination />

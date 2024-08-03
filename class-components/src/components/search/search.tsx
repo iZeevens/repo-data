@@ -1,3 +1,5 @@
+'use client'
+
 import './search.scss'
 import { useState, useCallback, useEffect, FormEvent } from 'react'
 import { useDispatch } from 'react-redux'

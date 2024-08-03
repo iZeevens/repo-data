@@ -1,3 +1,5 @@
+'use client'
+
 import './cards.scss'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'

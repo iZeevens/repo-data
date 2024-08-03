@@ -1,3 +1,5 @@
+'use client'
+
 import './selectedItemsWindow.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeCardDetails } from '../../lib/reducers/searchSlice'
