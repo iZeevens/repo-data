@@ -12,7 +12,7 @@ export interface SearchState {
 const initialState: SearchState = {
   data: null,
   isLoading: false,
-  currentPage: 1,
+  currentPage: 0,
   cardsDetails: null,
 }
 

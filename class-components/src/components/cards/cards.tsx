@@ -1,7 +1,5 @@
-'use client'
-
 import './cards.scss'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setCardDetails,
@@ -12,9 +10,9 @@ import { RootState } from '../../lib/store'
 import { ChangeEvent } from 'react'
 import useTheme from '../../hooks/useTheme'
 
-function Cards() {
+function Cards () {
   const [theme] = useTheme()
-  const navigate = useNavigate()
+  const router = useRouter()
   const dispatch = useDispatch()
   const { data, isLoading, currentPage, cardsDetails } = useSelector(
     (state: RootState) => state.search
@@ -28,7 +26,7 @@ function Cards() {
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
-    navigate(`/details?page=${currentPage + 1}&id=${id}`)
+    router.push(`/details?page=${currentPage + 1}&id=${id}`)
   }
 
   const handleCheckboxClick = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -42,9 +40,7 @@ function Cards() {
     } else {
       dispatch(
         removeCardDetails(
-          cardsDetails?.filter((item) => {
-            return item.uid !== targetUid
-          })
+          cardsDetails?.filter((item) => item.uid !== targetUid)
         )
       )
     }

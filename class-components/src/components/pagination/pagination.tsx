@@ -1,13 +1,15 @@
 'use client'
 
 import './pagination.scss'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useRouter } from 'next/navigation'
+import { useDispatch, useSelector } from 'react-redux'
+import { setPage } from '../../lib/reducers/searchSlice'
 import useTheme from '../../hooks/useTheme'
 import { RootState } from '../../lib/store'
 
 function Pagination() {
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const router = useRouter()
   const { data, currentPage } = useSelector((state: RootState) => state.search)
   const [theme] = useTheme()
 
@@ -17,8 +19,11 @@ function Pagination() {
   const elementsPerPage = Math.ceil(elements.length / 5)
 
   const handlePagination = (page: number) => {
-    navigate(`/?page=${page + 1}`)
+    dispatch(setPage(page))
+    router.push(`/?page=${page + 1}`)
   }
+
+  console.log(currentPage)
 
   return (
     <div className="pagination">

@@ -1,3 +1,5 @@
+'use client'
+
 import Search from '../../components/search/search'
 import Cards from '../../components/cards/cards'
 import Pagination from '../../components/pagination/pagination'
@@ -6,7 +8,6 @@ import SelectedItemsWindow from '../../components/selectedItemsWindow/selectedIt
 import StoreProvider from '../StoreProvider'
 
 function SearchPage() {
-
   return (
     <StoreProvider>
       <div className="wrapper">

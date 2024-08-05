@@ -1,4 +1,4 @@
-import SearchPage from '../app/pages/search'
+import SearchPage from '../app/pages'
 import renderCustomStoreProvider from '../utils/customStore'
 import { waitFor } from '@testing-library/react'
 
