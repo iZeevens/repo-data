@@ -1,18 +1,18 @@
 import '../styles/index.scss'
 import StoreProvider from '../app/StoreProvider'
-import SearchPage from '.'
 import useTheme from '../hooks/useTheme'
+import { AppProps } from 'next/app'
 
-function App() {
+function MyApp({ Component, pageProps }: AppProps) {
   const [theme] = useTheme()
 
   return (
     <StoreProvider>
       <div className={`App ${theme}`}>
-        <SearchPage />
+        <Component {...pageProps} />
       </div>
     </StoreProvider>
   )
 }
 
-export default App
+export default MyApp

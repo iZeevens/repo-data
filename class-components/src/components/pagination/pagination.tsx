@@ -23,8 +23,6 @@ function Pagination() {
     router.push(`/?page=${page + 1}`)
   }
 
-  console.log(currentPage)
-
   return (
     <div className="pagination">
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (

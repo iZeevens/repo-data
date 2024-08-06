@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import DetailsPage from '../pages/details'
+import DetailsPage from '../pages/details/[id]'
 import { detailsCardsData } from '../__mocks__/data'
 import renderCustomStoreProvider from '../utils/customStore'
 
