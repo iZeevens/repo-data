@@ -1,3 +1,5 @@
+'use client'
+
 import './cards.scss'
 import { useRouter } from 'next/navigation'
 import { useSelector, useDispatch } from 'react-redux'
@@ -10,7 +12,7 @@ import { RootState } from '../../lib/store'
 import { ChangeEvent } from 'react'
 import useTheme from '../../hooks/useTheme'
 
-function Cards () {
+function Cards() {
   const [theme] = useTheme()
   const router = useRouter()
   const dispatch = useDispatch()
@@ -88,5 +90,10 @@ function Cards () {
     </div>
   )
 }
+
+// export const getServerSideProps = async () => {
+//   const page = parseInt(context.query.page as string) || 1
+//   const data = await getComicsByPage(page) 
+// }
 
 export default Cards

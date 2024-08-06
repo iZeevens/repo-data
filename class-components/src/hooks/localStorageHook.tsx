@@ -2,21 +2,26 @@ import { useEffect, useState } from 'react'
 
 function useLocalStorage(key: string, initValue: string = '') {
   const [state, setState] = useState(() => {
-    const localStorageSearch = localStorage.getItem(key)
-    return localStorageSearch !== null
-      ? JSON.parse(localStorageSearch)
-      : initValue
+    if (typeof window !== 'undefined') {
+      const localStorageSearch = localStorage.getItem(key)
+      return localStorageSearch !== null
+        ? JSON.parse(localStorageSearch)
+        : initValue
+    }
+    return initValue
   })
 
   useEffect(() => {
-    try {
-      localStorage.setItem(key, JSON.stringify(state))
-    } catch (error) {
-      console.error('Error writing to localStorage:', error)
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem(key, JSON.stringify(state))
+      } catch (error) {
+        console.error('Error writing to localStorage:', error)
+      }
     }
   }, [key, state])
 
-  return [state, setState]
+  return [state, setState] as const
 }
 
 export default useLocalStorage

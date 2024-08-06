@@ -1,8 +1,8 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import DetailsCard from './detailsCard'
-import { detailsCardsData } from '../../__mocks__/data'
-import renderCustomStoreProvider from '../../utils/customStore'
+import DetailsPage from '../pages/details'
+import { detailsCardsData } from '../__mocks__/data'
+import renderCustomStoreProvider from '../utils/customStore'
 
 const mockApiData = {
   isLoading: false,
@@ -45,7 +45,7 @@ vi.mock('../../services/apiSlice', async () => {
 describe('DeatilsCard Component', () => {
   beforeEach(() => {
     mockApiData.isLoading = false
-    renderCustomStoreProvider(<DetailsCard />, {
+    renderCustomStoreProvider(<DetailsPage />, {
       preloadedState: {
         search: {
           isLoading: false,
