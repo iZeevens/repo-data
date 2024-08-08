@@ -1,13 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useSearchParams  } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 type PageType = 'page' | 'id'
 
 function useCustomLocation(pageUrl: PageType) {
   const [page, setPage] = useState<number>(1)
   const [uid, setUid] = useState<string>()
-  const searchParams = useSearchParams ()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     const url = searchParams?.get('page') || '1'

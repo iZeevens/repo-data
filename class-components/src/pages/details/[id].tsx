@@ -1,19 +1,19 @@
-// pages/details/[id].tsx
-
 import { GetServerSideProps } from 'next'
 import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 import CloseBtn from '../../components/closeBtn/closeBtn'
+// import { ReactNode } from 'react'
 
 interface DetailsPageProps {
   comicsData: CardDetailsData | null
 }
 
-export default function DetailsPage({ comicsData }: DetailsPageProps) {
+export default function DetailsPage({
+  comicsData,
+}: DetailsPageProps) {
   if (!comicsData) {
     return <div>Data not found</div>
   }
 
-  console.log('yes')
 
   return (
     <div className="details-panel">
@@ -70,7 +70,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-      comicsData: comicsData || null,
+      comicsData: comicsData.comics || null,
     },
   }
 }
