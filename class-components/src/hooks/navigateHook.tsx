@@ -1,23 +1,24 @@
+'use client'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useSearchParams  } from 'next/navigation'
 
 type PageType = 'page' | 'id'
 
 function useCustomLocation(pageUrl: PageType) {
   const [page, setPage] = useState<number>(1)
   const [uid, setUid] = useState<string>()
-  const location = useLocation()
+  const searchParams = useSearchParams ()
 
   useEffect(() => {
-    const url = new URLSearchParams(location.search).get('page') || '1'
-    const uid = new URLSearchParams(location.search).get('id') || '1'
+    const url = searchParams?.get('page') || '1'
+    const uid = searchParams?.get('id') || '1'
 
     const queryParam = pageUrl === 'page' ? 'page' : 'id'
     const passQuery = parseInt(url, 10)
 
     queryParam === 'page' ? setPage(passQuery - 1) : setPage(passQuery)
     setUid(uid)
-  }, [location.search, pageUrl])
+  }, [searchParams, pageUrl])
 
   return { page, uid }
 }

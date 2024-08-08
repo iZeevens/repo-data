@@ -27,9 +27,7 @@ export default function DetailsPage({ comicsData }: DetailsPageProps) {
           {comicsData.stardateTo && (
             <span>Stardate To: {comicsData.stardateTo}</span>
           )}
-          {comicsData.yearFrom && (
-            <span>Year From: {comicsData.yearFrom}</span>
-          )}
+          {comicsData.yearFrom && <span>Year From: {comicsData.yearFrom}</span>}
           {comicsData.yearTo && <span>Year To: {comicsData.yearTo}</span>}
           <span>Photonovel: {comicsData.photonovel ? 'Yes' : 'No'}</span>
           <span>Adaptation: {comicsData.adaptation ? 'Yes' : 'No'}</span>
@@ -67,12 +65,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return { props: { comicsData: null } }
   }
 
-  const res = await fetch(`http://localhost:3000/api/comics/${id}`)
+  const res = await fetch(`https://stapi.co/api/v1/rest/comics?uid=${id}`)
   const comicsData = await res.json()
 
   return {
     props: {
-      comicsData: comicsData || null
-    }
+      comicsData: comicsData || null,
+    },
   }
 }
