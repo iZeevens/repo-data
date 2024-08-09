@@ -52,7 +52,9 @@ function Cards({ data, currentPage }: CardsProps) {
 
   return (
     <div className="cards-continer">
-      {elementsPagination &&
+      {elementsPagination && elementsPagination.length === 0 ? (
+        <div>Elements Not Found</div>
+      ) : (
         elementsPagination.map((item) => {
           const isChecked =
             cardsDetails?.some((card) => card.uid === item.uid) || false
@@ -84,7 +86,8 @@ function Cards({ data, currentPage }: CardsProps) {
               </div>
             </div>
           )
-        })}
+        })
+      )}
     </div>
   )
 }

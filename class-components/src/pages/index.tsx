@@ -24,7 +24,11 @@ function SearchPage(props: SearchPageProps) {
         <Cards data={props.data} currentPage={props.currentPage} />
       </div>
       <SelectedItemsWindow />
-      <Pagination data={props.data} currentPage={props.currentPage} search={props.search} />
+      <Pagination
+        data={props.data}
+        currentPage={props.currentPage}
+        search={props.search}
+      />
     </div>
   )
 }
@@ -39,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       data: serverData,
       currentPage: currentPage,
-      search: searchQuery
+      search: searchQuery,
     },
   }
 }
