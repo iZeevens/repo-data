@@ -1,5 +1,4 @@
 import Search from '../components/search/search'
-// import Cards from '../components/cards/cards'
 import getServerData from '../services/getServerData'
 import Cards from '../components/cards/cards'
 import Pagination from '../components/pagination/pagination'

@@ -33,8 +33,5 @@ const searchSlice = createSlice({
   },
 })
 
-export const {
-  setCardDetails,
-  removeCardDetails,
-} = searchSlice.actions
+export const { setCardDetails, removeCardDetails } = searchSlice.actions
 export default searchSlice.reducer

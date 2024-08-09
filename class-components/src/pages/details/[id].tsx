@@ -1,7 +1,6 @@
 import { GetServerSideProps } from 'next'
 import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 import CloseBtn from '../../components/closeBtn/closeBtn'
-// import { ReactNode } from 'react'
 
 interface DetailsPageProps {
   comicsData?: CardDetailsData | null

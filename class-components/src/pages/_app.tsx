@@ -1,17 +1,17 @@
 import '../styles/index.scss'
 import StoreProvider from './StoreProvider'
-import useTheme from '../hooks/useTheme'
+import { ThemeProvider } from '../context/ThemeProvider'
 import { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [theme] = useTheme()
-
   return (
-    <StoreProvider>
-      <div className={`App ${theme}`}>
-        <Component {...pageProps} />
-      </div>
-    </StoreProvider>
+    <ThemeProvider>
+      <StoreProvider>
+        <div className={`App`}>
+          <Component {...pageProps} />
+        </div>
+      </StoreProvider>
+    </ThemeProvider>
   )
 }
 
