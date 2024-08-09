@@ -2,7 +2,6 @@ import Search from '../components/search/search'
 import getServerData from '../services/getServerData'
 import Cards from '../components/cards/cards'
 import Pagination from '../components/pagination/pagination'
-import SwitchBtn from '../components/switchTheme/switchTheme'
 import SelectedItemsWindow from '../components/selectedItemsWindow/selectedItemsWindow'
 import { Comics } from '../interfaces/searchTypes/searchTypes'
 import { GetServerSideProps } from 'next'
@@ -17,7 +16,6 @@ function SearchPage(props: SearchPageProps) {
   return (
     <div className="wrapper">
       <Search />
-      <SwitchBtn />
 
       <div className="cards">
         <Cards data={props.data} currentPage={props.currentPage} />

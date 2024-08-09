@@ -2,7 +2,6 @@
 
 import './pagination.scss'
 import { useRouter } from 'next/navigation'
-import useTheme from '../../hooks/useTheme'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
 interface PaginationProps {
@@ -13,7 +12,6 @@ interface PaginationProps {
 
 function Pagination({ data, currentPage, search }: PaginationProps) {
   const router = useRouter()
-  const [theme] = useTheme()
 
   const elements = data?.comics
   if (!elements) return
@@ -29,7 +27,7 @@ function Pagination({ data, currentPage, search }: PaginationProps) {
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
         <span
           key={indexPage}
-          className={`pagination-item pagination-item-${theme} ${indexPage + 1 === Number(currentPage) ? 'active-page' : ''}`}
+          className={`pagination-item pagination-item ${indexPage + 1 === Number(currentPage) ? 'active-page' : ''}`}
           onClick={() => handlePagination(indexPage + 1)}
         >
           {indexPage + 1}

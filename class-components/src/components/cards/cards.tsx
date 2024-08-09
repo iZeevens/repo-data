@@ -8,7 +8,6 @@ import {
   removeCardDetails,
 } from '../../lib/reducers/searchSlice'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
-import useTheme from '../../hooks/useTheme'
 import { RootState } from '../../lib/store'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import { ChangeEvent } from 'react'
@@ -19,7 +18,6 @@ interface CardsProps {
 }
 
 function Cards({ data, currentPage }: CardsProps) {
-  const [theme] = useTheme()
   const router = useRouter()
   const dispatch = useDispatch()
   const { cardsDetails } = useSelector((state: RootState) => state.search)
@@ -60,7 +58,7 @@ function Cards({ data, currentPage }: CardsProps) {
             cardsDetails?.some((card) => card.uid === item.uid) || false
 
           return (
-            <div className={`card-comics card-comics-${theme}`} key={item.uid}>
+            <div className={`card-comics card-comics`} key={item.uid}>
               <div onClick={() => handleCardClick(item.uid!)}>
                 <span className="comics-title">{item.title}</span>
                 <div className="comics-continer">
