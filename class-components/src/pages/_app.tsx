@@ -1,5 +1,5 @@
 import '../styles/index.scss'
-import StoreProvider from '../app/StoreProvider'
+import StoreProvider from './StoreProvider'
 import useTheme from '../hooks/useTheme'
 import { AppProps } from 'next/app'
 

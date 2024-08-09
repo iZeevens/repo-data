@@ -19,7 +19,6 @@ function Cards() {
   const { data, isLoading, currentPage, cardsDetails } = useSelector(
     (state: RootState) => state.search
   )
-
   const [searchByUid] = useGetComicsByUidMutation()
 
   const lastIndexElems = 5 * (currentPage + 1)
@@ -28,7 +27,7 @@ function Cards() {
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
-    router.push(`/details?page=${currentPage + 1}&id=${id}`)
+    router.push(`/details/${id}?page=${currentPage + 1}`)
   }
 
   const handleCheckboxClick = async (event: ChangeEvent<HTMLInputElement>) => {

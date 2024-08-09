@@ -4,7 +4,7 @@ import CloseBtn from '../../components/closeBtn/closeBtn'
 // import { ReactNode } from 'react'
 
 interface DetailsPageProps {
-  comicsData: CardDetailsData | null
+  comicsData?: CardDetailsData | null
 }
 
 export default function DetailsPage({
