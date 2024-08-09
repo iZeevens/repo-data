@@ -1,22 +1,45 @@
 import Search from '../components/search/search'
+// import Cards from '../components/cards/cards'
+import getServerData from '../services/getServerData'
 import Cards from '../components/cards/cards'
 import Pagination from '../components/pagination/pagination'
 import SwitchBtn from '../components/switchTheme/switchTheme'
 import SelectedItemsWindow from '../components/selectedItemsWindow/selectedItemsWindow'
+import { Comics } from '../interfaces/searchTypes/searchTypes'
+import { GetServerSideProps } from 'next'
 
-function SearchPage() {
+interface SearchPageProps {
+  data: Comics
+  currentPage: number
+}
+
+function SearchPage(props: SearchPageProps) {
   return (
     <div className="wrapper">
       <Search />
       <SwitchBtn />
 
       <div className="cards">
-        <Cards />
+        <Cards data={props.data} currentPage={props.currentPage} />
       </div>
       <SelectedItemsWindow />
       <Pagination />
     </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const searchQuery = context.query.search || ''
+  const currentPage = context.query.page || ''
+
+  const serverData = await getServerData(searchQuery.toString())
+
+  return {
+    props: {
+      data: serverData,
+      currentPage: currentPage,
+    },
+  }
 }
 
 export default SearchPage

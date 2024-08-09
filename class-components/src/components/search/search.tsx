@@ -25,7 +25,9 @@ function Search() {
       return setError('No extra spaces')
     }
 
-    router.push(`/?page=${currentPage + 1}&search=${encodeURIComponent(searchValue)}`)
+    router.push(
+      `/?page=${currentPage + 1}&search=${encodeURIComponent(searchValue)}`
+    )
   }
 
   return (

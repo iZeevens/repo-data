@@ -8,26 +8,35 @@ import {
   removeCardDetails,
 } from '../../lib/reducers/searchSlice'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
-import { RootState } from '../../lib/store'
-import { ChangeEvent } from 'react'
 import useTheme from '../../hooks/useTheme'
+import { RootState } from '../../lib/store'
+import { Comics } from '../../interfaces/searchTypes/searchTypes'
+import { ChangeEvent } from 'react'
 
-function Cards() {
+interface CardsProps {
+  data: Comics
+  currentPage: number
+}
+
+function Cards({ data, currentPage }: CardsProps) {
   const [theme] = useTheme()
   const router = useRouter()
   const dispatch = useDispatch()
-  const { data, isLoading, currentPage, cardsDetails } = useSelector(
-    (state: RootState) => state.search
-  )
+  const { cardsDetails } = useSelector((state: RootState) => state.search)
   const [searchByUid] = useGetComicsByUidMutation()
 
-  const lastIndexElems = 5 * (currentPage + 1)
+  const lastIndexElems = 5 * currentPage
+
   const firstIndexElems = lastIndexElems - 5
+
 
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
+  console.log(elementsPagination)
+  console.log(firstIndexElems, lastIndexElems)
+
   const handleCardClick = (id: string) => {
-    router.push(`/details/${id}?page=${currentPage + 1}`)
+    router.push(`/details/${id}?page=${currentPage}`)
   }
 
   const handleCheckboxClick = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,9 +58,7 @@ function Cards() {
 
   return (
     <div className="cards-continer">
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
+      {
         elementsPagination &&
         elementsPagination.map((item) => {
           const isChecked =
@@ -85,7 +92,7 @@ function Cards() {
             </div>
           )
         })
-      )}
+      }
     </div>
   )
 }
