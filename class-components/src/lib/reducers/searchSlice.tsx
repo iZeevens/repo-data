@@ -20,15 +20,6 @@ const searchSlice = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setData(state, action) {
-      state.data = action.payload
-    },
-    setIsLoading(state, action) {
-      state.isLoading = action.payload
-    },
-    setPage(state, action) {
-      state.currentPage = action.payload
-    },
     setCardDetails(state, action) {
       if (state.cardsDetails) {
         state.cardsDetails = [...state.cardsDetails, ...action.payload]
@@ -43,9 +34,6 @@ const searchSlice = createSlice({
 })
 
 export const {
-  setData,
-  setIsLoading,
-  setPage,
   setCardDetails,
   removeCardDetails,
 } = searchSlice.actions
