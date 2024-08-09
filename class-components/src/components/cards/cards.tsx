@@ -15,7 +15,7 @@ import { ChangeEvent } from 'react'
 
 interface CardsProps {
   data: Comics
-  currentPage: number
+  currentPage: string
 }
 
 function Cards({ data, currentPage }: CardsProps) {
@@ -25,15 +25,9 @@ function Cards({ data, currentPage }: CardsProps) {
   const { cardsDetails } = useSelector((state: RootState) => state.search)
   const [searchByUid] = useGetComicsByUidMutation()
 
-  const lastIndexElems = 5 * currentPage
-
+  const lastIndexElems = 5 * Number(currentPage)
   const firstIndexElems = lastIndexElems - 5
-
-
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
-
-  console.log(elementsPagination)
-  console.log(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
     router.push(`/details/${id}?page=${currentPage}`)
@@ -58,8 +52,7 @@ function Cards({ data, currentPage }: CardsProps) {
 
   return (
     <div className="cards-continer">
-      {
-        elementsPagination &&
+      {elementsPagination &&
         elementsPagination.map((item) => {
           const isChecked =
             cardsDetails?.some((card) => card.uid === item.uid) || false
@@ -91,8 +84,7 @@ function Cards({ data, currentPage }: CardsProps) {
               </div>
             </div>
           )
-        })
-      }
+        })}
     </div>
   )
 }

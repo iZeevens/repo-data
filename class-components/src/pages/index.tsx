@@ -10,7 +10,8 @@ import { GetServerSideProps } from 'next'
 
 interface SearchPageProps {
   data: Comics
-  currentPage: number
+  currentPage: string
+  search: string
 }
 
 function SearchPage(props: SearchPageProps) {
@@ -23,7 +24,7 @@ function SearchPage(props: SearchPageProps) {
         <Cards data={props.data} currentPage={props.currentPage} />
       </div>
       <SelectedItemsWindow />
-      <Pagination />
+      <Pagination data={props.data} currentPage={props.currentPage} search={props.search} />
     </div>
   )
 }
@@ -38,6 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       data: serverData,
       currentPage: currentPage,
+      search: searchQuery
     },
   }
 }
