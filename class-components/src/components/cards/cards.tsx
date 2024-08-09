@@ -90,9 +90,4 @@ function Cards() {
   )
 }
 
-// export const getServerSideProps = async () => {
-//   const page = parseInt(context.query.page as string) || 1
-//   const data = await getComicsByPage(page)
-// }
-
 export default Cards

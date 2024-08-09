@@ -37,8 +37,6 @@ function SelectedItemsWindow() {
       }
     }
 
-    console.log(array)
-
     let csvContent = ''
     let titleKeys = null
     const result = []

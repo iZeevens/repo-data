@@ -7,13 +7,10 @@ interface DetailsPageProps {
   comicsData?: CardDetailsData | null
 }
 
-export default function DetailsPage({
-  comicsData,
-}: DetailsPageProps) {
+export default function DetailsPage({ comicsData }: DetailsPageProps) {
   if (!comicsData) {
     return <div>Data not found</div>
   }
-
 
   return (
     <div className="details-panel">
