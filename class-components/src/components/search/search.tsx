@@ -11,7 +11,6 @@ function Search() {
   const searchParams = useSearchParams()
   const searchDefault = searchParams.get('search') || ''
 
-
   const validateSearch = (value: string) => {
     return !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(value)
   }
@@ -25,9 +24,7 @@ function Search() {
       return setError('No extra spaces')
     }
 
-    router.push(
-      `/?page=${'1'}&search=${encodeURIComponent(searchValue)}`
-    )
+    router.push(`/?page=${'1'}&search=${encodeURIComponent(searchValue)}`)
   }
 
   return (

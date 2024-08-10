@@ -15,7 +15,6 @@ const SearchPage = async ({
 
   const serverData = await getServerData(search.toString())
 
-
   return (
     <StoreProvider>
       <div className="wrapper">

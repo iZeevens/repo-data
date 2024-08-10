@@ -12,7 +12,9 @@ export default async function DetailsPage({
   const res = await fetch(
     `https://stapi.co/api/v1/rest/comics?uid=${detailsUid}`
   )
-  const comicsData = await res.json().then((res) => res.comics) as CardDetailsData
+  const comicsData = (await res
+    .json()
+    .then((res) => res.comics)) as CardDetailsData
 
   if (!comicsData) {
     return <div>Data not found</div>

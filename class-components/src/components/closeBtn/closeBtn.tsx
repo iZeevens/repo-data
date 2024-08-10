@@ -1,13 +1,15 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import useCustomLocation from '../../hooks/navigateHook'
+import { useSearchParams } from 'next/navigation'
 
 export default function CloseBtn() {
   const router = useRouter()
-  const { page } = useCustomLocation('id')
+  const searchParams = useSearchParams()
+  const searchDefault = searchParams.get('search') || ''
+  const page = searchParams.get('page') || ''
 
   const handleClose = () => {
-    router.replace(`/?page=${page}`)
+    router.replace(`/?page=${page}&search=${searchDefault}`)
   }
 
   return (
