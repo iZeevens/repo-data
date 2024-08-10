@@ -5,18 +5,18 @@ import renderCustomStoreProvider from '../utils/customStore'
 import { comicsData } from '../__mocks__/data'
 
 // const pushMock = vi.fn()
-vi.mock("next/navigation", () => ({
+vi.mock('next/navigation', () => ({
   useRouter() {
     return {
-      prefetch: () => null
-    };
-  }
-}));
+      prefetch: () => null,
+    }
+  },
+}))
 
 describe('Cards Component', () => {
   beforeEach(() => {
     renderCustomStoreProvider(
-      <Cards currentPage='1' data={{ comics: comicsData }} />,
+      <Cards currentPage="1" data={{ comics: comicsData }} />,
       {
         preloadedState: {
           search: {

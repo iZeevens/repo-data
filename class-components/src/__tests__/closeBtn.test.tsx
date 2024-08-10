@@ -3,15 +3,15 @@ import CloseBtn from '../components/closeBtn/closeBtn'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
 
-const replaceMock = vi.fn();
+const replaceMock = vi.fn()
 
 vi.mock('next/navigation', () => ({
   useSearchParams() {
     return {
       get: (key: string) => {
-        if (key === 'search') return 'someSearch';
-        if (key === 'page') return '2';
-        return null;
+        if (key === 'search') return 'someSearch'
+        if (key === 'page') return '2'
+        return null
       },
     }
   },
