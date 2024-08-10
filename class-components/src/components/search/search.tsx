@@ -2,15 +2,15 @@
 
 import './search.scss'
 import { useState, FormEvent } from 'react'
-import { useSelector } from 'react-redux'
-import { useRouter } from 'next/router'
-import { RootState } from '../../lib/store'
+import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 function Search() {
-  const router = useRouter()
-  const { query } = router
-  const { currentPage } = useSelector((state: RootState) => state.search)
   const [error, setError] = useState<string | null>('')
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const searchDefault = searchParams.get('search') || ''
+
 
   const validateSearch = (value: string) => {
     return !/^([a-zA-Zа-яА-ЯёЁ0-9]+\s)*[a-zA-Zа-яА-ЯёЁ0-9]+$/gm.test(value)
@@ -26,7 +26,7 @@ function Search() {
     }
 
     router.push(
-      `/?page=${currentPage + 1}&search=${encodeURIComponent(searchValue)}`
+      `/?page=${'1'}&search=${encodeURIComponent(searchValue)}`
     )
   }
 
@@ -42,7 +42,7 @@ function Search() {
           type="text"
           placeholder="Search"
           name="search"
-          defaultValue={query.search || ''}
+          defaultValue={searchDefault}
         />
         <button className="btn" type="submit">
           Search

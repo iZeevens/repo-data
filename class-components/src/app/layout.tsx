@@ -2,7 +2,7 @@ import logo from '../public/favicon.ico'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Vite + React + TS'
+  title: 'Vite + React + TS',
 }
 
 export default function RootLayout({

@@ -1,4 +1,4 @@
-import '../../pages/details/detailsPage.scss'
+'use client'
 import { useRouter } from 'next/navigation'
 import useCustomLocation from '../../hooks/navigateHook'
 

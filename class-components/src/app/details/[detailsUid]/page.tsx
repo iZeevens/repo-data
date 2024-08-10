@@ -1,12 +1,19 @@
-import { NextPageContext } from 'next'
-import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
-import CloseBtn from '../../components/closeBtn/closeBtn'
+import './detailsPage.scss'
+import CloseBtn from '../../../components/closeBtn/closeBtn'
+import { CardDetailsData } from '../../../interfaces/cardsTypes/cardsTypes'
 
-interface DetailsPageProps {
-  comicsData?: CardDetailsData | null
-}
+export default async function DetailsPage({
+  params,
+}: {
+  params: { detailsUid: string }
+}) {
+  const { detailsUid = '' } = params
 
-export default function DetailsPage({ comicsData }: DetailsPageProps) {
+  const res = await fetch(
+    `https://stapi.co/api/v1/rest/comics?uid=${detailsUid}`
+  )
+  const comicsData = await res.json().then((res) => res.comics) as CardDetailsData
+
   if (!comicsData) {
     return <div>Data not found</div>
   }
@@ -53,20 +60,4 @@ export default function DetailsPage({ comicsData }: DetailsPageProps) {
       <CloseBtn />
     </div>
   )
-}
-
-export const getServerSideProps = async (context: NextPageContext) => {
-  const { id } = context.query
-  if (typeof id !== 'string') {
-    return { props: { comicsData: null } }
-  }
-
-  const res = await fetch(`https://stapi.co/api/v1/rest/comics?uid=${id}`)
-  const comicsData = await res.json()
-
-  return {
-    props: {
-      comicsData: comicsData.comics || null,
-    },
-  }
 }

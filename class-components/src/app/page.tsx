@@ -1,48 +1,34 @@
+import '../styles/index.scss'
 import Search from '../components/search/search'
 import getServerData from '../services/getServerData'
 import Cards from '../components/cards/cards'
 import Pagination from '../components/pagination/pagination'
 import SelectedItemsWindow from '../components/selectedItemsWindow/selectedItemsWindow'
-import { Comics } from '../interfaces/searchTypes/searchTypes'
-import { NextPageContext } from 'next'
+import StoreProvider from './StoreProvider'
 
-interface SearchPageProps {
-  data: Comics
-  currentPage: string
-  search: string
-}
+const SearchPage = async ({
+  searchParams,
+}: {
+  searchParams: { search: string; page: string }
+}) => {
+  const { search = '', page = '' } = searchParams
 
-function SearchPage(props: SearchPageProps) {
+  const serverData = await getServerData(search.toString())
+
+
   return (
-    <div className="wrapper">
-      <Search />
+    <StoreProvider>
+      <div className="wrapper">
+        <Search />
 
-      <div className="cards">
-        <Cards data={props.data} currentPage={props.currentPage} />
+        <div className="cards">
+          <Cards data={serverData} currentPage={page} />
+        </div>
+        <SelectedItemsWindow />
+        <Pagination data={serverData} currentPage={page} search={search} />
       </div>
-      <SelectedItemsWindow />
-      <Pagination
-        data={props.data}
-        currentPage={props.currentPage}
-        search={props.search}
-      />
-    </div>
+    </StoreProvider>
   )
-}
-
-export const fetchServer = async (context: NextPageContext) => {
-  const searchQuery = context.query.search || ''
-  const currentPage = context.query.page || ''
-
-  const serverData = await getServerData(searchQuery.toString())
-
-  return {
-    props: {
-      data: serverData,
-      currentPage: currentPage,
-      search: searchQuery,
-    },
-  }
 }
 
 export default SearchPage
