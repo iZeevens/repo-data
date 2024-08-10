@@ -11,7 +11,7 @@ const SearchPage = async ({
 }: {
   searchParams: { search: string; page: string }
 }) => {
-  const { search = '', page = '' } = searchParams
+  const { search = '', page = '1' } = searchParams
 
   const serverData = await getServerData(search.toString())
 

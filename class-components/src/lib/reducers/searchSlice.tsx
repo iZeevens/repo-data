@@ -1,18 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 
 export interface SearchState {
-  data?: Comics | null
-  isLoading: boolean
-  currentPage: number
   cardsDetails?: CardDetailsData[] | null
 }
 
 const initialState: SearchState = {
-  data: null,
-  isLoading: false,
-  currentPage: 0,
   cardsDetails: null,
 }
 
