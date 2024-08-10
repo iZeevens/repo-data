@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { NextPageContext } from 'next'
 import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 import CloseBtn from '../../components/closeBtn/closeBtn'
 
@@ -55,7 +55,7 @@ export default function DetailsPage({ comicsData }: DetailsPageProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (context: NextPageContext) => {
   const { id } = context.query
   if (typeof id !== 'string') {
     return { props: { comicsData: null } }

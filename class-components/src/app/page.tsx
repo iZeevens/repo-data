@@ -4,7 +4,7 @@ import Cards from '../components/cards/cards'
 import Pagination from '../components/pagination/pagination'
 import SelectedItemsWindow from '../components/selectedItemsWindow/selectedItemsWindow'
 import { Comics } from '../interfaces/searchTypes/searchTypes'
-import { GetServerSideProps } from 'next'
+import { NextPageContext } from 'next'
 
 interface SearchPageProps {
   data: Comics
@@ -30,7 +30,7 @@ function SearchPage(props: SearchPageProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const fetchServer = async (context: NextPageContext) => {
   const searchQuery = context.query.search || ''
   const currentPage = context.query.page || ''
 
