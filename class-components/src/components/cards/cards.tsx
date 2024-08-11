@@ -23,9 +23,11 @@ function Cards({ data, currentPage }: CardsProps) {
   const { cardsDetails } = useSelector((state: RootState) => state.search)
   const [searchByUid] = useGetComicsByUidMutation()
 
+  if (!data.comics) return
+  
   const lastIndexElems = 5 * Number(currentPage)
   const firstIndexElems = lastIndexElems - 5
-  const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
+  const elementsPagination = data.comics.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
     router.push(`/details/${id}?page=${currentPage}`)
