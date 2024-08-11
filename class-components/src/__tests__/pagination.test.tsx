@@ -16,11 +16,8 @@ vi.mock('next/navigation', () => ({
 
 describe('Pagination Testing', () => {
   it('renders nothing when data is null', () => {
-    render(
-      <Pagination data={{ comics: null }} currentPage="1" search="soda" />
-    )
+    render(<Pagination data={{ comics: null }} currentPage="1" search="soda" />)
 
-    // Проверяем, что компонент не рендерит ничего
     expect(screen.queryByText('1')).toBeNull()
   })
 
