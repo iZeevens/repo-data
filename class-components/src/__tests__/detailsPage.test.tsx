@@ -2,7 +2,6 @@ import DetailsPage from '../pages/details/[id]'
 import { render, screen } from '@testing-library/react'
 import { cardDetails } from '../__mocks__/data'
 
-
 vi.mock('next/navigation', () => ({
   useSearchParams() {
     return {

@@ -9,11 +9,10 @@ vi.mock('next/router', () => ({
   useRouter() {
     return {
       push: pushMock,
-      query: queryMock()
+      query: queryMock(),
     }
   },
 }))
-
 
 describe('Search Testing', () => {
   it('search corrctly', async () => {

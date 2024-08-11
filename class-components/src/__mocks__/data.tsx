@@ -1,5 +1,5 @@
 import { ComicsData } from '../interfaces/searchTypes/searchTypes'
-import { CardDetailsData } from '../interfaces/cardsTypes/cardsTypes';
+import { CardDetailsData } from '../interfaces/cardsTypes/cardsTypes'
 
 const createComics = (
   title: string,
@@ -62,7 +62,7 @@ const cardDetails: CardDetailsData = {
   photonovel: true,
   adaptation: false,
   uid: 'CCMA0000076475',
-};
+}
 
 const comicsData: ComicsData[] = [
   createComics('Card 1', 2024, 5, 15, 100, true, false, 'CCMA0000076475'),

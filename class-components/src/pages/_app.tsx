@@ -3,9 +3,9 @@ import { AppProps } from 'next/app'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-      <div className={`App`}>
-        <Component {...pageProps} />
-      </div>
+    <div className={`App`}>
+      <Component {...pageProps} />
+    </div>
   )
 }
 

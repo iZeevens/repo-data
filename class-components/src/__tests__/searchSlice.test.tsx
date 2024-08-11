@@ -8,7 +8,7 @@ import { SearchState } from '../lib/reducers/searchSlice'
 describe('Search Slice Reducer', () => {
   const initState = {
     cardsDetails: null,
-    data: null
+    data: null,
   } as SearchState
 
   it('should return the initial state', () => {
