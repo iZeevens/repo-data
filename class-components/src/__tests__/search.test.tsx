@@ -22,7 +22,6 @@ describe('Search Testing', () => {
   it('search corrctly', async () => {
     getParam.mockReturnValue('hey')
 
-
     render(<Search />)
 
     const user = userEvent.setup()

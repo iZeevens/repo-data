@@ -2,13 +2,7 @@ import './detailsPage.scss'
 import CloseBtn from '../../../components/closeBtn/closeBtn'
 import { CardDetailsData } from '../../../interfaces/cardsTypes/cardsTypes'
 
-export default async function DetailsPage({
-  params,
-}: {
-  params: { detailsUid: string }
-}) {
-  const { detailsUid = '' } = params
-
+const getDetailsPage = async (detailsUid: string) => {
   const res = await fetch(
     `https://stapi.co/api/v1/rest/comics?uid=${detailsUid}`
   )
@@ -16,6 +10,17 @@ export default async function DetailsPage({
     .json()
     .then((res) => res.comics)) as CardDetailsData
 
+  return comicsData
+}
+
+export default async function DetailsPage({
+  params,
+}: {
+  params: { detailsUid: string }
+}) {
+  const { detailsUid = '' } = params
+
+  const comicsData = await getDetailsPage(detailsUid)
   if (!comicsData) {
     return <div>Data not found</div>
   }
