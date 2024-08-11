@@ -36,14 +36,18 @@ describe('Search Page testing', () => {
       query: { page: '1', search: 's' } as ParsedUrlQuery,
     }
 
-    const value = await getServerSideProps(context as GetServerSidePropsContext);
-    expect(value).toEqual({props: { data: undefined, currentPage: '1', search: 's' }});
+    const value = await getServerSideProps(context as GetServerSidePropsContext)
+    expect(value).toEqual({
+      props: { data: undefined, currentPage: '1', search: 's' },
+    })
   })
 
   it('should return default values if query parameters are not provided', async () => {
-    const context = { query: {} as ParsedUrlQuery };
-    const value = await getServerSideProps(context as GetServerSidePropsContext);
+    const context = { query: {} as ParsedUrlQuery }
+    const value = await getServerSideProps(context as GetServerSidePropsContext)
 
-    expect(value).toEqual({props: { data: undefined, currentPage: '1', search: '' }});
-  });
+    expect(value).toEqual({
+      props: { data: undefined, currentPage: '1', search: '' },
+    })
+  })
 })

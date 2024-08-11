@@ -54,5 +54,9 @@ describe('Cards Component', () => {
 
     const checkBox = checkBoxes[0]
     await user.click(checkBox)
+
+    await waitFor(() => {
+      expect(checkBox).toBeChecked()
+    })
   })
 })
