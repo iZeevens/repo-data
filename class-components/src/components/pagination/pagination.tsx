@@ -1,13 +1,17 @@
-import './pagination.scss'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import useTheme from '../../hooks/useTheme'
-import { RootState } from '../../redux/store'
+'use client'
 
-function Pagination() {
-  const navigate = useNavigate()
-  const { data, currentPage } = useSelector((state: RootState) => state.search)
-  const [theme] = useTheme()
+import style from './pagination.module.scss'
+import { useRouter } from 'next/router'
+import { Comics } from '../../interfaces/searchTypes/searchTypes'
+
+interface PaginationProps {
+  data: Comics
+  currentPage: string
+  search: string
+}
+
+function Pagination({ data, currentPage, search }: PaginationProps) {
+  const router = useRouter()
 
   const elements = data?.comics
   if (!elements) return
@@ -15,16 +19,16 @@ function Pagination() {
   const elementsPerPage = Math.ceil(elements.length / 5)
 
   const handlePagination = (page: number) => {
-    navigate(`/?page=${page + 1}`)
+    router.push(`/?page=${page}&search=${search}`)
   }
 
   return (
-    <div className="pagination">
+    <div className={style.pagination}>
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
         <span
           key={indexPage}
-          className={`pagination-item pagination-item-${theme} ${indexPage === currentPage ? 'active-page' : ''}`}
-          onClick={() => handlePagination(indexPage)}
+          className={`${style['pagination-item']} ${indexPage + 1 === Number(currentPage) ? style.activePage : ''}`}
+          onClick={() => handlePagination(indexPage + 1)}
         >
           {indexPage + 1}
         </span>

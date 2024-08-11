@@ -1,9 +1,8 @@
 import { Provider } from 'react-redux'
 import { PropsWithChildren, ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
-import { setupStore } from '../redux/store'
-import { RootState, AppStore } from '../redux/store'
+import { setupStore } from '../lib/store'
+import { RootState, AppStore } from '../lib/store'
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>
@@ -19,9 +18,7 @@ const renderCustomStoreProvider = (
   }: ExtendedRenderOptions = {}
 ) => {
   const Wrapper = ({ children }: PropsWithChildren) => (
-    <Provider store={store}>
-      <MemoryRouter>{children}</MemoryRouter>
-    </Provider>
+    <Provider store={store}>{children}</Provider>
   )
 
   return {

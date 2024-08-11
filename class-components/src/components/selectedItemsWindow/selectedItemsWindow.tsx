@@ -1,7 +1,9 @@
-import './selectedItemsWindow.scss'
+'use client'
+
+import styles from './selectedItemsWindow.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeCardDetails } from '../../redux/reducers/searchSlice'
-import { RootState } from '../../redux/store'
+import { removeCardDetails } from '../../lib/reducers/searchSlice'
+import { RootState } from '../../lib/store'
 import { CardDetailsData } from '../../interfaces/cardsTypes/cardsTypes'
 
 function SelectedItemsWindow() {
@@ -35,8 +37,6 @@ function SelectedItemsWindow() {
       }
     }
 
-    console.log(array)
-
     let csvContent = ''
     let titleKeys = null
     const result = []
@@ -59,7 +59,7 @@ function SelectedItemsWindow() {
   return (
     <>
       {cardsDetails && cardsDetails.length > 0 ? (
-        <div className="selected-items-window">
+        <div className={styles['selected-items-window']}>
           <span className="selected-items-counter">
             {cardsDetails?.length} items are selected
           </span>

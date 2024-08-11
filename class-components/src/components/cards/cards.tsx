@@ -1,32 +1,37 @@
-import './cards.scss'
-import { useNavigate } from 'react-router-dom'
+'use client'
+
+import styles from './cards.module.scss'
+import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setCardDetails,
   removeCardDetails,
-} from '../../redux/reducers/searchSlice'
+} from '../../lib/reducers/searchSlice'
 import { useGetComicsByUidMutation } from '../../services/apiSlice'
-import { RootState } from '../../redux/store'
+import { RootState } from '../../lib/store'
+import { Comics } from '../../interfaces/searchTypes/searchTypes'
 import { ChangeEvent } from 'react'
-import useTheme from '../../hooks/useTheme'
 
-function Cards() {
-  const [theme] = useTheme()
-  const navigate = useNavigate()
+interface CardsProps {
+  data: Comics
+  currentPage: string
+}
+
+function Cards({ data, currentPage }: CardsProps) {
+  const router = useRouter()
   const dispatch = useDispatch()
-  const { data, isLoading, currentPage, cardsDetails } = useSelector(
-    (state: RootState) => state.search
-  )
-
+  const { cardsDetails } = useSelector((state: RootState) => state.search)
   const [searchByUid] = useGetComicsByUidMutation()
 
-  const lastIndexElems = 5 * (currentPage + 1)
+  const lastIndexElems = 5 * Number(currentPage)
   const firstIndexElems = lastIndexElems - 5
+
+  if (!data.comics) return null
 
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {
-    navigate(`/details?page=${currentPage + 1}&id=${id}`)
+    router.push(`/details/${id}?page=${currentPage}`)
   }
 
   const handleCheckboxClick = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -40,29 +45,26 @@ function Cards() {
     } else {
       dispatch(
         removeCardDetails(
-          cardsDetails?.filter((item) => {
-            return item.uid !== targetUid
-          })
+          cardsDetails?.filter((item) => item.uid !== targetUid)
         )
       )
     }
   }
 
   return (
-    <div className="cards-continer">
-      {isLoading ? (
-        <div>Loading...</div>
+    <div className={styles['cards-continer']}>
+      {elementsPagination && elementsPagination.length === 0 ? (
+        <div>Elements Not Found</div>
       ) : (
-        elementsPagination &&
         elementsPagination.map((item) => {
           const isChecked =
             cardsDetails?.some((card) => card.uid === item.uid) || false
 
           return (
-            <div className={`card-comics card-comics-${theme}`} key={item.uid}>
+            <div className={styles['card-comics']} key={item.uid}>
               <div onClick={() => handleCardClick(item.uid!)}>
-                <span className="comics-title">{item.title}</span>
-                <div className="comics-continer">
+                <span className={styles['comics-title']}>{item.title}</span>
+                <div className={styles['comics-continer']}>
                   {item.publishedYear && (
                     <span>Published year: {item.publishedYear}</span>
                   )}
@@ -74,8 +76,8 @@ function Cards() {
                   )}
                 </div>
               </div>
-              <div className="checkbox-container">
-                <span>select: </span>
+              <div className={styles['checkbox-container']}>
+                <span>Select: </span>
                 <input
                   type="checkbox"
                   id={item.uid}
