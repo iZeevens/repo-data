@@ -1,5 +1,5 @@
-import SearchPage from "../app/page";
-import { render, screen } from "@testing-library/react";
+import SearchPage from '../app/page'
+import { render, screen } from '@testing-library/react'
 
 vi.mock('next/navigation', () => ({
   useSearchParams() {
@@ -14,10 +14,9 @@ vi.mock('next/navigation', () => ({
   },
 }))
 
-
 describe('Search Page testing', () => {
   it('In Dom', async () => {
-    render(await SearchPage({ searchParams: { search: 's', page: '1' }}))
+    render(await SearchPage({ searchParams: { search: 's', page: '1' } }))
 
     expect(screen.getByText(/Search/)).toBeInTheDocument()
   })

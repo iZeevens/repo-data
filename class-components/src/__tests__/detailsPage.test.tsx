@@ -15,9 +15,11 @@ vi.mock('next/navigation', () => ({
 }))
 
 describe('DetailsPage Testing', () => {
-  it('Check Dom', async () => {
-    render(await DetailsPage({ params: { detailsUid: 'CCMA0000086083' } }))
+  it('check DOM', async () => {
+    render(await DetailsPage({ params: { detailsUid: 'CCMA0000076475' } }))
     expect(screen.getByText(/Number Pages:/)).toBeInTheDocument()
+    expect(screen.getByText(/Characters:/)).toBeInTheDocument()
+    expect(screen.getByText(/Nyota Uhura/)).toBeInTheDocument()
   })
 
   it('if data not exist', async () => {
