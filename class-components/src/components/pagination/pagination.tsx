@@ -1,6 +1,6 @@
 'use client'
 
-import './pagination.scss'
+import style from './pagination.module.scss'
 import { useRouter } from 'next/router'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
@@ -23,11 +23,11 @@ function Pagination({ data, currentPage, search }: PaginationProps) {
   }
 
   return (
-    <div className="pagination">
+    <div className={style.pagination}>
       {Array.from({ length: elementsPerPage }, (_, indexPage) => (
         <span
           key={indexPage}
-          className={`pagination-item pagination-item ${indexPage + 1 === Number(currentPage) ? 'active-page' : ''}`}
+          className={`${style['pagination-item']} ${indexPage + 1 === Number(currentPage) ? style.activePage : ''}`}
           onClick={() => handlePagination(indexPage + 1)}
         >
           {indexPage + 1}

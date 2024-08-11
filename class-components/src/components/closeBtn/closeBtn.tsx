@@ -1,4 +1,3 @@
-import '../../pages/details/detailsPage.scss'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function CloseBtn() {

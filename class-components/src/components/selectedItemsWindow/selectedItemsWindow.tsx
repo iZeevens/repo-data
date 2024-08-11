@@ -1,6 +1,6 @@
 'use client'
 
-import './selectedItemsWindow.scss'
+import styles from './selectedItemsWindow.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
 import { removeCardDetails } from '../../lib/reducers/searchSlice'
 import { RootState } from '../../lib/store'
@@ -59,7 +59,7 @@ function SelectedItemsWindow() {
   return (
     <>
       {cardsDetails && cardsDetails.length > 0 ? (
-        <div className="selected-items-window">
+        <div className={styles['selected-items-window']}>
           <span className="selected-items-counter">
             {cardsDetails?.length} items are selected
           </span>

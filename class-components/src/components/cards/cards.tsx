@@ -1,6 +1,6 @@
 'use client'
 
-import './cards.scss'
+import styles from './cards.module.scss'
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -26,7 +26,7 @@ function Cards({ data, currentPage }: CardsProps) {
   const lastIndexElems = 5 * Number(currentPage)
   const firstIndexElems = lastIndexElems - 5
 
-  if (!data.comics) return
+  if (!data.comics) return null
 
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
@@ -52,7 +52,7 @@ function Cards({ data, currentPage }: CardsProps) {
   }
 
   return (
-    <div className="cards-continer">
+    <div className={styles['cards-continer']}>
       {elementsPagination && elementsPagination.length === 0 ? (
         <div>Elements Not Found</div>
       ) : (
@@ -61,10 +61,10 @@ function Cards({ data, currentPage }: CardsProps) {
             cardsDetails?.some((card) => card.uid === item.uid) || false
 
           return (
-            <div className={`card-comics card-comics`} key={item.uid}>
+            <div className={styles['card-comics']} key={item.uid}>
               <div onClick={() => handleCardClick(item.uid!)}>
-                <span className="comics-title">{item.title}</span>
-                <div className="comics-continer">
+                <span className={styles['comics-title']}>{item.title}</span>
+                <div className={styles['comics-continer']}>
                   {item.publishedYear && (
                     <span>Published year: {item.publishedYear}</span>
                   )}
@@ -76,8 +76,8 @@ function Cards({ data, currentPage }: CardsProps) {
                   )}
                 </div>
               </div>
-              <div className="checkbox-container">
-                <span>select: </span>
+              <div className={styles['checkbox-container']}>
+                <span>Select: </span>
                 <input
                   type="checkbox"
                   id={item.uid}

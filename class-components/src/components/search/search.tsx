@@ -1,6 +1,6 @@
 'use client'
 
-import './search.scss'
+import styles from './search.module.scss'
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/router'
 
@@ -29,11 +29,11 @@ function Search() {
     <>
       <form
         data-testid="search-form"
-        className="search-continer"
+        className={styles['search-continer']}
         onSubmit={searchHandler}
       >
         <input
-          className="search"
+          className={styles.search}
           type="text"
           placeholder="Search"
           name="search"
