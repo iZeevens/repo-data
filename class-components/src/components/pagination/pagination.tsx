@@ -1,7 +1,7 @@
 'use client'
 
 import './pagination.scss'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { Comics } from '../../interfaces/searchTypes/searchTypes'
 
 interface PaginationProps {

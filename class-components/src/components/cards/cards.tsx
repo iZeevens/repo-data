@@ -1,7 +1,7 @@
 'use client'
 
 import './cards.scss'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setCardDetails,
@@ -25,6 +25,9 @@ function Cards({ data, currentPage }: CardsProps) {
 
   const lastIndexElems = 5 * Number(currentPage)
   const firstIndexElems = lastIndexElems - 5
+
+  if (!data.comics) return
+
   const elementsPagination = data?.comics.slice(firstIndexElems, lastIndexElems)
 
   const handleCardClick = (id: string) => {

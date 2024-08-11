@@ -1,54 +1,26 @@
 import SearchPage from '../pages'
-import renderCustomStoreProvider from '../utils/customStore'
-import { waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
+import { comicsData } from '../__mocks__/data'
 
-const navigateMock = vi.fn()
-let currentPage = -1
-
-vi.mock('react-router-dom', async () => {
-  const actualRouter = await vi.importActual('react-router-dom')
-  return { ...actualRouter, useNavigate: () => navigateMock }
-})
-
-vi.mock('../../hooks/navigateHook', () => ({
-  __esModule: true,
-  default: () => ({
-    page: currentPage,
-  }),
+vi.mock('next/router', () => ({
+  useSearchParams() {
+    return {
+      get: vi.fn(),
+    }
+  },
+  useRouter() {
+    return {
+      push: vi.fn(),
+      query: {search: 's'},
+      prefetch: () => null
+    }
+  },
 }))
 
-describe('Search Page Component', () => {
-  it('navigate correctly', async () => {
-    currentPage = 15
+describe('Search Page testing', () => {
+  it('In Dom', () => {
+    render(<SearchPage search="s" data={{ comics: comicsData }} currentPage="1" />);
 
-    renderCustomStoreProvider(<SearchPage />, {
-      preloadedState: {
-        search: {
-          isLoading: false,
-          currentPage: 15,
-          data: { comics: new Array(10).fill(null) },
-        },
-      },
-    })
-
-    await waitFor(() => {
-      expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true })
-    })
-  })
-
-  it('navigate correctly when currentPage < 0', async () => {
-    renderCustomStoreProvider(<SearchPage />, {
-      preloadedState: {
-        search: {
-          isLoading: false,
-          currentPage: -1,
-          data: { comics: new Array(10).fill(null) },
-        },
-      },
-    })
-
-    await waitFor(() => {
-      expect(navigateMock).toHaveBeenCalledWith('/?page=1', { replace: true })
-    })
+    expect(screen.getByText(/Search/)).toBeInTheDocument()
   })
 })

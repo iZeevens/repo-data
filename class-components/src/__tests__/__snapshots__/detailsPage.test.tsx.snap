@@ -1,0 +1,231 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DetailsPage Testing > params DetailsPage 1`] = `
+<div>
+  <div
+    class="details-panel"
+  >
+    <h3
+      class="details-title"
+    >
+      ... Like a Woman Scorned!
+    </h3>
+    <div
+      class="details-info"
+    >
+      <div
+        class="details-info-about"
+      >
+        <span>
+          Number Pages: 
+          22
+        </span>
+        <span>
+          Stardate From: 
+          6352.4
+        </span>
+        <span>
+          Stardate To: 
+          7935.6
+        </span>
+        <span>
+          Photonovel: 
+          No
+        </span>
+        <span>
+          Adaptation: 
+          No
+        </span>
+      </div>
+      <div
+        class="details-info--characters"
+      >
+        <span>
+          Characters:
+        </span>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Nyota Uhura
+          </span>
+          <span>
+            Gender: 
+            Female
+          </span>
+          <span>
+            Year of birth: 
+            2239
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Hikaru Sulu
+          </span>
+          <span>
+            Gender: 
+            Male
+          </span>
+          <span>
+            Year of birth: 
+            2237
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Spock
+          </span>
+          <span>
+            Gender: 
+            Male
+          </span>
+          <span>
+            Year of birth: 
+            2230
+          </span>
+          <span>
+            Year of death: 
+            2285
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Janice Rand
+          </span>
+          <span>
+            Gender: 
+            Female
+          </span>
+          <span>
+            Year of birth: 
+            2242
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Montgomery Scott
+          </span>
+          <span>
+            Gender: 
+            Male
+          </span>
+          <span>
+            Year of birth: 
+            2222
+          </span>
+          <span>
+            Year of death: 
+            2267
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Pavel Chekov
+          </span>
+          <span>
+            Gender: 
+            Male
+          </span>
+          <span>
+            Year of birth: 
+            2245
+          </span>
+          <span>
+            Year of death: 
+            2401
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Christine Chapel
+          </span>
+          <span>
+            Gender: 
+            Female
+          </span>
+          <span>
+            Year of birth: 
+            2237
+          </span>
+          <span>
+            Year of death: 
+            2298
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            James T. Kirk
+          </span>
+          <span>
+            Gender: 
+            Male
+          </span>
+          <span>
+            Year of birth: 
+            2233
+          </span>
+          <span>
+            Year of death: 
+            2293
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            Leonard McCoy
+          </span>
+          <span>
+            Gender: 
+            Male
+          </span>
+          <span>
+            Year of birth: 
+            2227
+          </span>
+        </div>
+        <div
+          class="details-info--character"
+        >
+          <span>
+            Name: 
+            DiFalco
+          </span>
+          <span>
+            Gender: 
+            Female
+          </span>
+        </div>
+      </div>
+    </div>
+    <button
+      class="details-panel-close btn"
+    >
+      close
+    </button>
+  </div>
+</div>
+`;

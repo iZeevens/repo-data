@@ -9,8 +9,6 @@ describe('Selected Items Window Tests', () => {
     renderCustomStoreProvider(<SelectedItemsWindow />, {
       preloadedState: {
         search: {
-          isLoading: false,
-          currentPage: 1,
           cardsDetails: detailsCardsData,
         },
       },

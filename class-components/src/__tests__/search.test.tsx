@@ -1,32 +1,45 @@
-import Search from './search'
-import renderCustomStoreProvider from '../../utils/customStore'
-import { screen, fireEvent } from '@testing-library/react'
+import Search from '../components/search/search'
+import userEvent from '@testing-library/user-event'
+import { render, screen, waitFor } from '@testing-library/react'
 
-vi.mock('../../hooks/localStorageHook', () => ({
-  __esModule: true,
-  default: vi.fn(() => ['', vi.fn()]),
+const pushMock = vi.fn()
+const queryMock = vi.fn()
+
+vi.mock('next/router', () => ({
+  useRouter() {
+    return {
+      push: pushMock,
+      query: queryMock()
+    }
+  },
 }))
 
-describe('Search component', () => {
-  let input: HTMLInputElement
-  let form: HTMLFormElement
 
-  beforeEach(() => {
-    renderCustomStoreProvider(<Search />, {
-      preloadedState: { search: { isLoading: false, currentPage: 1 } },
-    })
-    input = screen.getByPlaceholderText('Search')
-    form = screen.getByTestId('search-form')
+describe('Search Testing', () => {
+  it('search corrctly', async () => {
+    queryMock.mockReturnValue({ search: 'hey' })
+    render(<Search />)
+
+    const user = userEvent.setup()
+    const searchBtn = screen.getByText('Search')
+    userEvent.type(screen.getByPlaceholderText('Search'), 'hey')
+
+    await user.click(searchBtn)
+    expect(pushMock).toHaveBeenCalledWith(`/?page=1&search=hey`)
   })
 
-  test('renders the search form', () => {
-    expect(input).toBeInTheDocument()
-  })
+  it('search error', async () => {
+    queryMock.mockReturnValue({ search: '     hey' })
+    render(<Search />)
 
-  it('displays error for invalid search input', async () => {
-    fireEvent.change(input, { target: { value: 'Invalid input  ' } })
-    fireEvent.submit(form)
+    const user = userEvent.setup()
+    const searchBtn = screen.getByText('Search')
+    userEvent.type(screen.getByPlaceholderText('Search'), '     hey')
 
-    expect(screen.getByText('No extra spaces')).toBeInTheDocument()
+    await user.click(searchBtn)
+
+    expect(
+      await waitFor(() => screen.getByText('No extra spaces'))
+    ).toBeInTheDocument()
   })
 })

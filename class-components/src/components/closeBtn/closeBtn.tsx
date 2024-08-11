@@ -1,13 +1,14 @@
 import '../../pages/details/detailsPage.scss'
-import { useRouter } from 'next/navigation'
-import useCustomLocation from '../../hooks/navigateHook'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 export default function CloseBtn() {
   const router = useRouter()
-  const { page } = useCustomLocation('id')
+  const searchParams = useSearchParams()
+  const page = searchParams.get('page')
+  const search = searchParams.get('search')
 
   const handleClose = () => {
-    router.replace(`/?page=${page}`)
+    router.replace(`/?page=${page}&search=${search}`)
   }
 
   return (

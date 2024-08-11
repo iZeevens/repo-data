@@ -9,7 +9,7 @@ interface ComicsData {
   uid: string
 }
 
-type Comics = { comics: ComicsData[] }
+type Comics = { comics: ComicsData[] | null }
 
 interface SearchProps {
   setData: (data: Comics[]) => void

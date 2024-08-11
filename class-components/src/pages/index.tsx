@@ -3,6 +3,7 @@ import getServerData from '../services/getServerData'
 import Cards from '../components/cards/cards'
 import Pagination from '../components/pagination/pagination'
 import SelectedItemsWindow from '../components/selectedItemsWindow/selectedItemsWindow'
+import StoreProvider from './StoreProvider'
 import { Comics } from '../interfaces/searchTypes/searchTypes'
 import { GetServerSideProps } from 'next'
 
@@ -14,25 +15,27 @@ interface SearchPageProps {
 
 function SearchPage(props: SearchPageProps) {
   return (
-    <div className="wrapper">
-      <Search />
+    <StoreProvider>
+      <div className="wrapper">
+        <Search />
 
-      <div className="cards">
-        <Cards data={props.data} currentPage={props.currentPage} />
+        <div className="cards">
+          <Cards data={props.data} currentPage={props.currentPage} />
+        </div>
+        <SelectedItemsWindow />
+        <Pagination
+          data={props.data}
+          currentPage={props.currentPage}
+          search={props.search}
+        />
       </div>
-      <SelectedItemsWindow />
-      <Pagination
-        data={props.data}
-        currentPage={props.currentPage}
-        search={props.search}
-      />
-    </div>
+    </StoreProvider>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const searchQuery = context.query.search || ''
-  const currentPage = context.query.page || ''
+  const currentPage = context.query.page || '1'
 
   const serverData = await getServerData(searchQuery.toString())
 

@@ -1,30 +1,36 @@
-import { screen } from '@testing-library/react'
-import Pagination from './pagination'
-import { comicsData } from '../../__mocks__/data'
-import renderCustomStoreProvider from '../../utils/customStore'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 
-const currentPage = 0
+import Pagination from '../components/pagination/pagination'
+import { comicsData } from '../__mocks__/data'
 
-describe('Pagination Component', () => {
-  it('pagination page work correctly', () => {
-    renderCustomStoreProvider(<Pagination />, {
-      preloadedState: {
-        search: { currentPage, isLoading: false, data: { comics: comicsData } },
-      },
-    })
-    const paginationItems = screen.getAllByText(/^\d+$/)
-    const expectedPages = Math.ceil(comicsData.length / 5)
-    expect(paginationItems.length).toBe(expectedPages)
+const replaceMock = vi.fn()
+
+vi.mock('next/router', () => ({
+  useRouter() {
+    return {
+      push: replaceMock,
+    }
+  },
+}))
+
+describe('Pagination Testing', () => {
+  it('renders nothing when data is null', () => {
+    render(<Pagination data={{ comics: null }} currentPage="1" search="soda" />)
+
+    expect(screen.queryByText('1')).toBeNull()
   })
 
-  it('highlights the current page', () => {
-    const currentPage = 1
-    renderCustomStoreProvider(<Pagination />, {
-      preloadedState: {
-        search: { currentPage, isLoading: false, data: { comics: comicsData } },
-      },
-    })
-    const activePage = screen.getByText('2')
-    expect(activePage).toHaveClass('active-page')
+  it('correctly routing', async () => {
+    render(
+      <Pagination currentPage="1" data={{ comics: comicsData }} search="soda" />
+    )
+
+    const user = userEvent.setup()
+    const firstElem = screen.getByText('1')
+
+    await user.click(firstElem)
+
+    expect(replaceMock).toHaveBeenCalledWith('/?page=1&search=soda')
   })
 })

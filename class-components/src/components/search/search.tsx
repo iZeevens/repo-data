@@ -2,14 +2,11 @@
 
 import './search.scss'
 import { useState, FormEvent } from 'react'
-import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-import { RootState } from '../../lib/store'
 
 function Search() {
   const router = useRouter()
   const { query } = router
-  const { currentPage } = useSelector((state: RootState) => state.search)
   const [error, setError] = useState<string | null>('')
 
   const validateSearch = (value: string) => {
@@ -26,7 +23,7 @@ function Search() {
     }
 
     router.push(
-      `/?page=${currentPage + 1}&search=${encodeURIComponent(searchValue)}`
+      `/?page=1&search=${encodeURIComponent(searchValue)}`
     )
   }
 
