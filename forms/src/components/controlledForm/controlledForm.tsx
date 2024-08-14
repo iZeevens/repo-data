@@ -1,68 +1,101 @@
 import './controlledForm.scss';
+import formInput from '../../types/formType';
+import { useForm } from 'react-hook-form';
 
 function ControlledForm() {
+  const { register } = useForm<formInput>();
+
   return (
     <div className="controlled-contaier">
       <form className="form">
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input className="select" type="text" name="name" />
+          <input
+            {...register('name')}
+            className="select"
+            type="text"
+            name="name"
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="age">Age</label>
-          <input className="select" type="number" name="age" />
+          <input
+            {...register('age')}
+            className="select"
+            type="number"
+            name="age"
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input className="select" type="email" name="email" />
+          <input
+            {...register('email')}
+            className="select"
+            type="email"
+            name="email"
+          />
         </div>
 
         <div className="form-group form-passwords">
           <label htmlFor="password">Password</label>
-          <input className="select" type="password" name="password" />
+          <input
+            {...register('password')}
+            className="select"
+            type="password"
+            name="password"
+          />
 
           <label htmlFor="confirmPassword">Confirm Password</label>
-          <input className="select" type="password" name="confirmPassword" />
+          <input
+            {...register('confirmPassword')}
+            className="select"
+            type="password"
+            name="confirmPassword"
+          />
         </div>
 
-        <div className="form-group form-gender">
-          <div>
-            <label htmlFor="male">Male</label>
-            <input className="select" type="radio" name="gender" value="male" />
-          </div>
-          <div>
-            <label htmlFor="female">Female</label>
-            <input className="select" type="radio" name="gender" value="female" />
-          </div>
+        <div className="form-group">
+          <select {...register('gender')} className="form-gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
         </div>
 
         <div className="form-group">
           <label htmlFor="acceptTerms">
             Accept Terms and Conditions agreement
           </label>
-          <input className="select" type="checkbox" name="acceptTerms" />
+          <input
+            {...register('acceptTerms')}
+            className="select"
+            type="checkbox"
+            name="acceptTerms"
+          />
         </div>
 
         <div className="form-group">
-          <label htmlFor="avatar">Choose a profile picture:</label>
+          <label htmlFor="img">Choose a picture:</label>
           <input
-          className='form-avatar'
+            {...register('avatar')}
+            className="form-img"
             type="file"
-            name="avatar"
+            name="img"
             accept="image/png, image/jpeg"
           />
         </div>
 
         <div className="form-group">
           <label htmlFor="country">Country</label>
-          <select name="country" className="select">
+          <select {...register('country')} name="country" className="select">
             <option value="KZ">KZ</option>
             <option value="RU">RU</option>
           </select>
         </div>
-        <button className='form-submit' type='submit'>Submit</button>
+        <button className="form-submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
