@@ -1,6 +1,11 @@
 import './controlledForm.scss';
 import formInput from '../../types/formType';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup'
+
+const schema = yup.object({
+
+})
 
 function ControlledForm() {
   const {
