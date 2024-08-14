@@ -5,14 +5,37 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 const schema = yup.object({
-  name: yup.string().required('Name is required'),
-  age: yup.number().required('Age is required'),
-  email: yup.string().required('Email is required'),
+  name: yup
+    .string()
+    .required('Name is required')
+    .matches(/^[A-Z]/, 'Name should have first uppercased letter'),
+  age: yup
+    .number()
+    .required('Age is required')
+    .positive('Age should be positive'),
+  email: yup
+    .string()
+    .required('Email is required')
+    .email('Email should be write correctly'),
   password: yup.string().required('Password is required'),
   confirmPassword: yup.string().required('Confirm Password is required'),
   gender: yup.string().oneOf(['male', 'female']).required('Gender is required'),
   acceptTerms: yup.boolean().required('Accept Terms is required'),
-  img: yup.mixed<File>().required('Img is required'),
+  img: yup
+    .mixed<File>()
+    .required('Img is required')
+    .test('fileSize', 'File size must be less than 3MB', value => {
+      return value && value.size <= 3145728;
+    })
+    .test(
+      'type',
+      'Only the following formats are accepted: .png, .jpeg',
+      value => {
+        return (
+          value && (value.type === 'image/jpeg' || value.type === 'image/png')
+        );
+      },
+    ),
   country: yup.string().required('Country is required'),
 });
 
