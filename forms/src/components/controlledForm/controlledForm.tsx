@@ -3,11 +3,21 @@ import formInput from '../../types/formType';
 import { useForm } from 'react-hook-form';
 
 function ControlledForm() {
-  const { register } = useForm<formInput>();
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+    reset,
+  } = useForm<formInput>();
+
+  const onSumbitHandler = (data: formInput) => {
+    console.log(data);
+    reset();
+  };
 
   return (
     <div className="controlled-contaier">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit(onSumbitHandler)}>
         <div className="form-group">
           <label htmlFor="name">Name</label>
           <input
@@ -57,7 +67,7 @@ function ControlledForm() {
         </div>
 
         <div className="form-group">
-          <select {...register('gender')} className="form-gender">
+          <select {...register('gender')} className="form-gender select">
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
