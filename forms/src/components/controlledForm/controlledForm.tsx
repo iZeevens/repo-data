@@ -2,58 +2,67 @@ import './controlledForm.scss';
 
 function ControlledForm() {
   return (
-    <div className="controlledForm-contaier">
+    <div className="controlled-contaier">
       <form className="form">
         <div className="form-group">
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" />
+          <input className="select" type="text" name="name" />
         </div>
 
         <div className="form-group">
           <label htmlFor="age">Age</label>
-          <input type="number" name="age" />
+          <input className="select" type="number" name="age" />
         </div>
 
         <div className="form-group">
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" />
+          <input className="select" type="email" name="email" />
         </div>
 
-        <div className="form-group passwords">
+        <div className="form-group form-passwords">
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" />
+          <input className="select" type="password" name="password" />
 
           <label htmlFor="confirmPassword">Confirm Password</label>
-          <input type="password" name="confirmPassword" />
+          <input className="select" type="password" name="confirmPassword" />
         </div>
 
         <div className="form-group form-gender">
-          <label htmlFor="male">Male</label>
-          <input type="radio" name="gender" value="male" />
-
-          <label htmlFor="female">Female</label>
-          <input type="radio" name="gender" value="female" />
+          <div>
+            <label htmlFor="male">Male</label>
+            <input className="select" type="radio" name="gender" value="male" />
+          </div>
+          <div>
+            <label htmlFor="female">Female</label>
+            <input className="select" type="radio" name="gender" value="female" />
+          </div>
         </div>
 
         <div className="form-group">
           <label htmlFor="acceptTerms">
             Accept Terms and Conditions agreement
           </label>
-          <input type="checkbox" name="acceptTerms" />
+          <input className="select" type="checkbox" name="acceptTerms" />
         </div>
 
         <div className="form-group">
           <label htmlFor="avatar">Choose a profile picture:</label>
-          <input type="file" name="avatar" accept="image/png, image/jpeg" />
+          <input
+          className='form-avatar'
+            type="file"
+            name="avatar"
+            accept="image/png, image/jpeg"
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="country">Country</label>
-          <select name="country">
+          <select name="country" className="select">
             <option value="KZ">KZ</option>
             <option value="RU">RU</option>
           </select>
         </div>
+        <button className='form-submit' type='submit'>Submit</button>
       </form>
     </div>
   );
