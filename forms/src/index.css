@@ -5,3 +5,8 @@
     sans-serif !important;
   font-weight: 400
 }
+
+.link {
+  color: inherit;
+  text-decoration: inherit;
+}

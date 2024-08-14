@@ -1,12 +1,17 @@
 import './App.scss';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
     <main className="main">
-      <section className="forms-container">
-        <button className="form first-form">First Form</button>
-        <button className="form second-form">Second Form</button>
-      </section>
+      <nav className="forms-container">
+        <Link to={'/controlled'} className='link'>
+          <button className="form first-form">Controlled Form</button>
+        </Link>
+        <Link to={'/uncontrolled'} className='link'>
+          <button className="form second-form">Uncontrolled Form</button>
+        </Link>
+      </nav>
     </main>
   );
 }
