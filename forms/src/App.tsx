@@ -4,8 +4,8 @@ function App() {
   return (
     <main className="main">
       <section className="forms-container">
-        <span className="form first-form">First Form</span>
-        <span className="form second-form">Second Form</span>
+        <button className="form first-form">First Form</button>
+        <button className="form second-form">Second Form</button>
       </section>
     </main>
   );
