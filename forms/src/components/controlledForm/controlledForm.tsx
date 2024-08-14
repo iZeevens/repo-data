@@ -1,11 +1,20 @@
 import './controlledForm.scss';
-import formInput from '../../types/formType';
+import { IFormInput } from '../../types/formType';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 const schema = yup.object({
-
-})
+  name: yup.string().required('Name is required'),
+  age: yup.number().required('Age is required'),
+  email: yup.string().required('Email is required'),
+  password: yup.string().required('Password is required'),
+  confirmPassword: yup.string().required('Confirm Password is required'),
+  gender: yup.string().oneOf(['male', 'female']).required('Gender is required'),
+  acceptTerms: yup.boolean().required('Accept Terms is required'),
+  img: yup.mixed<File>().required('Img is required'),
+  country: yup.string().required('Country is required'),
+});
 
 function ControlledForm() {
   const {
@@ -13,9 +22,9 @@ function ControlledForm() {
     handleSubmit,
     // formState: { errors },
     reset,
-  } = useForm<formInput>();
+  } = useForm<IFormInput>({ mode: 'onChange', resolver: yupResolver(schema) });
 
-  const onSumbitHandler = (data: formInput) => {
+  const onSumbitHandler = (data: IFormInput) => {
     console.log(data);
     reset();
   };
@@ -93,7 +102,7 @@ function ControlledForm() {
         <div className="form-group">
           <label htmlFor="img">Choose a picture:</label>
           <input
-            {...register('avatar')}
+            {...register('img')}
             className="form-img"
             type="file"
             name="img"
