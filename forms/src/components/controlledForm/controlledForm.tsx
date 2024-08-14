@@ -22,18 +22,22 @@ const schema = yup.object({
   gender: yup.string().oneOf(['male', 'female']).required('Gender is required'),
   acceptTerms: yup.boolean().required('Accept Terms is required'),
   img: yup
-    .mixed<File>()
+    .mixed<FileList>()
+    .nullable()
     .required('Img is required')
-    .test('fileSize', 'File size must be less than 3MB', value => {
-      return value && value.size <= 3145728;
-    })
     .test(
       'type',
       'Only the following formats are accepted: .png, .jpeg',
+      value =>
+        !value ||
+        (value && ['image/jpeg', 'image/png'].includes(value[0].type)),
+    )
+    .test(
+      'fileSize',
+      'File size must be less than 1MB',
       value => {
-        return (
-          value && (value.type === 'image/jpeg' || value.type === 'image/png')
-        );
+        console.log(value[0])
+        return !value[0] || (value[0] && value[0].size / 1024 <= 1024);
       },
     ),
   country: yup.string().required('Country is required'),
@@ -43,7 +47,7 @@ function ControlledForm() {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
     reset,
   } = useForm<IFormInput>({ mode: 'onChange', resolver: yupResolver(schema) });
 
@@ -63,6 +67,7 @@ function ControlledForm() {
             type="text"
             name="name"
           />
+          <p className="error">{errors.name?.message}</p>
         </div>
 
         <div className="form-group">
@@ -73,6 +78,7 @@ function ControlledForm() {
             type="number"
             name="age"
           />
+          <p className="error">{errors.age?.message}</p>
         </div>
 
         <div className="form-group">
@@ -83,6 +89,7 @@ function ControlledForm() {
             type="email"
             name="email"
           />
+          <p className="error">{errors.email?.message}</p>
         </div>
 
         <div className="form-group form-passwords">
@@ -93,6 +100,7 @@ function ControlledForm() {
             type="password"
             name="password"
           />
+          <p className="error">{errors.password?.message}</p>
 
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -101,6 +109,7 @@ function ControlledForm() {
             type="password"
             name="confirmPassword"
           />
+          <p className="error">{errors.confirmPassword?.message}</p>
         </div>
 
         <div className="form-group">
@@ -108,6 +117,7 @@ function ControlledForm() {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+          <p className="error">{errors.gender?.message}</p>
         </div>
 
         <div className="form-group">
@@ -120,6 +130,7 @@ function ControlledForm() {
             type="checkbox"
             name="acceptTerms"
           />
+          <p className="error">{errors.acceptTerms?.message}</p>
         </div>
 
         <div className="form-group">
@@ -131,6 +142,7 @@ function ControlledForm() {
             name="img"
             accept="image/png, image/jpeg"
           />
+          <p className="error">{errors.img?.message}</p>
         </div>
 
         <div className="form-group">
@@ -139,6 +151,7 @@ function ControlledForm() {
             <option value="KZ">KZ</option>
             <option value="RU">RU</option>
           </select>
+          <p className="error">{errors.country?.message}</p>
         </div>
         <button className="form-submit" type="submit">
           Submit
