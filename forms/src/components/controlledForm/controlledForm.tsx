@@ -7,12 +7,12 @@ import { addDataToForm } from '../../store/slice/dataFormsSlice';
 import { RootState } from '../../store/store';
 import * as yup from 'yup';
 
-const getBase64 = async (file: File) => {
-  return new Promise((resolve, reject) => {
+const getBase64 = (file: File) => {
+  return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = function () {
-      resolve(reader.result);
+      resolve(reader.result as string);
     };
     reader.onerror = function (error) {
       reject(error);
@@ -42,24 +42,25 @@ const schema = yup.object({
     .required('The terms and conditions must be accepted.')
     .oneOf([true], 'The terms and conditions must be accepted'),
   img: yup
-    .mixed<FileList>()
+    .mixed<FileList | string>()
     .nonNullable()
     .required('Img is required')
     .test(
       'type',
       'Only the following formats are accepted: .png, .jpeg',
-      value =>
-        !value[0] ||
-        (value && ['image/jpeg', 'image/png'].includes(value[0].type)),
+      value => {
+        if (typeof value === 'string') return true;
+
+        return (
+          !value[0] ||
+          (value && ['image/jpeg', 'image/png'].includes(value[0].type))
+        );
+      },
     )
-    .test(
-      'fileSize',
-      'File size must be less than 1MB',
-      value => !value[0] || (value[0] && value[0].size / 1024 <= 1024),
-    )
-    .transform(async (value) => {
-      const result = await getBase64(value[0]);
-      return result
+    .test('fileSize', 'File size must be less than 1MB', value => {
+      if (typeof value === 'string') return true;
+
+      return !value[0] || (value[0] && value[0].size / 1024 <= 1024);
     }),
   country: yup.string().required('Country is required'),
 });
@@ -74,8 +75,10 @@ function ControlledForm() {
   const countrys = useSelector((state: RootState) => state.countryList);
   const dispatch = useDispatch();
 
-  const onSumbitHandler = (data: IFormInput) => {
-    console.log(data)
+  const onSumbitHandler = async (data: IFormInput) => {
+    const imgBase64 = await getBase64(data.img[0] as File);
+    data.img = imgBase64 as string;
+
     dispatch(addDataToForm({ ...data }));
     reset();
   };

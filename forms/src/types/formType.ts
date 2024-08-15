@@ -6,7 +6,7 @@ interface IFormInput {
   confirmPassword: string;
   gender: 'male' | 'female';
   acceptTerms: boolean;
-  img: FileList;
+  img: FileList | string;
   country: string;
 }
 
