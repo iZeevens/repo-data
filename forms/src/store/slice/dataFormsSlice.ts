@@ -26,7 +26,7 @@ const formDataSlice = createSlice({
   name: 'formData',
   initialState,
   reducers: {
-    updateControlledForm(state, action: PayloadAction<FormDataState>) {
+    updateForm(state, action: PayloadAction<FormDataState>) {
       const { name, age, email, password, gender, acceptTerms, img, country } =
         action.payload;
 
@@ -43,4 +43,4 @@ const formDataSlice = createSlice({
 });
 
 export default formDataSlice.reducer;
-export const { updateControlledForm } = formDataSlice.actions;
+export const { updateForm } = formDataSlice.actions;

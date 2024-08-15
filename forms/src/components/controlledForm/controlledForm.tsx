@@ -148,10 +148,22 @@ function ControlledForm() {
 
         <div className="form-group">
           <label htmlFor="country">Country</label>
-          <select {...register('country')} name="country" className="select">
-            <option value="KZ">KZ</option>
-            <option value="RU">RU</option>
-          </select>
+          <input
+            {...register('country')}
+            type="country"
+            name="country"
+            className="select"
+            autoComplete="country"
+            list="country-list"
+          />
+          <datalist id="country-list">
+            <option value="United States" />
+            <option value="Canada" />
+            <option value="United Kingdom" />
+            <option value="Australia" />
+            <option value="Germany" />
+            <option value="France" />
+          </datalist>
           <p className="error">{errors.country?.message}</p>
         </div>
         <button className="form-submit" type="submit">
