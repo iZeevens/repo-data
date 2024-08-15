@@ -1,25 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface FormDataState {
+interface IFormData {
   name: string;
   age: number;
   email: string;
   password: string;
   gender: string;
   acceptTerms: boolean;
-  img: File | null;
-  country: string[];
+  img: FileList | null;
+  country: string;
+}
+interface IFormDataState {
+  data: IFormData[];
+
+  countryList: string[];
 }
 
-const initialState: FormDataState = {
-  name: '',
-  age: 0,
-  email: '',
-  password: '',
-  gender: '',
-  acceptTerms: false,
-  img: null,
-  country: [
+const initialState: IFormDataState = {
+  data: [],
+  countryList: [
     'Russia',
     'Ukraine',
     'Belarus',
@@ -47,21 +46,14 @@ const formDataSlice = createSlice({
   name: 'formData',
   initialState,
   reducers: {
-    updateForm(state, action: PayloadAction<FormDataState>) {
-      const { name, age, email, password, gender, acceptTerms, img, country } =
-        action.payload;
-
-      state.name = name;
-      state.age = age;
-      state.email = email;
-      state.password = password;
-      state.gender = gender;
-      state.acceptTerms = acceptTerms;
-      state.img = img;
-      state.country = country;
+    addDataToForm(state, action: PayloadAction<IFormData>) {
+        return {
+          ...state,
+          data: [...initialState.data, {...action.payload}]
+        }
     },
   },
 });
 
 export default formDataSlice.reducer;
-export const { updateForm } = formDataSlice.actions;
+export const { addDataToForm } = formDataSlice.actions;

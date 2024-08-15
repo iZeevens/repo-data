@@ -2,7 +2,8 @@ import './controlledForm.scss';
 import { IFormInput } from '../../types/formType';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { addDataToForm } from '../../store/slice/dataFormsSlice';
 import { RootState } from '../../store/store';
 import * as yup from 'yup';
 
@@ -38,10 +39,11 @@ const schema = yup.object({
         !value[0] ||
         (value && ['image/jpeg', 'image/png'].includes(value[0].type)),
     )
-    .test('fileSize', 'File size must be less than 1MB', value => {
-      console.log(value[0]);
-      return !value[0] || (value[0] && value[0].size / 1024 <= 1024);
-    }),
+    .test(
+      'fileSize',
+      'File size must be less than 1MB',
+      value => !value[0] || (value[0] && value[0].size / 1024 <= 1024),
+    ),
   country: yup.string().required('Country is required'),
 });
 
@@ -52,10 +54,11 @@ function ControlledForm() {
     formState: { errors },
     reset,
   } = useForm<IFormInput>({ mode: 'onChange', resolver: yupResolver(schema) });
-  const countrys = useSelector((state: RootState) => state.country);
+  const countrys = useSelector((state: RootState) => state.countryList);
+  const dispatch = useDispatch();
 
   const onSumbitHandler = (data: IFormInput) => {
-    console.log(data);
+    dispatch(addDataToForm({ ...data }));
     reset();
   };
 
