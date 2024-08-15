@@ -2,6 +2,8 @@ import './controlledForm.scss';
 import { IFormInput } from '../../types/formType';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import * as yup from 'yup';
 
 const schema = yup.object({
@@ -50,6 +52,7 @@ function ControlledForm() {
     formState: { errors },
     reset,
   } = useForm<IFormInput>({ mode: 'onChange', resolver: yupResolver(schema) });
+  const countrys = useSelector((state: RootState) => state.country);
 
   const onSumbitHandler = (data: IFormInput) => {
     console.log(data);
@@ -157,12 +160,9 @@ function ControlledForm() {
             list="country-list"
           />
           <datalist id="country-list">
-            <option value="United States" />
-            <option value="Canada" />
-            <option value="United Kingdom" />
-            <option value="Australia" />
-            <option value="Germany" />
-            <option value="France" />
+            {countrys.map((country, index) => (
+              <option key={index} value={country} />
+            ))}
           </datalist>
           <p className="error">{errors.country?.message}</p>
         </div>

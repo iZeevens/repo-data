@@ -8,7 +8,7 @@ interface FormDataState {
   gender: string;
   acceptTerms: boolean;
   img: File | null;
-  country: string;
+  country: string[];
 }
 
 const initialState: FormDataState = {
@@ -19,7 +19,28 @@ const initialState: FormDataState = {
   gender: '',
   acceptTerms: false,
   img: null,
-  country: '',
+  country: [
+    'Russia',
+    'Ukraine',
+    'Belarus',
+    'Kazakhstan',
+    'Uzbekistan',
+    'Turkmenistan',
+    'Kyrgyzstan',
+    'Tajikistan',
+    'Armenia',
+    'Azerbaijan',
+    'Moldova',
+    'Georgia',
+    'Lithuania',
+    'Latvia',
+    'Estonia',
+    'Turkmenistan',
+    'Tajikistan',
+    'Armenia',
+    'Azerbaijan',
+    'Moldova',
+  ],
 };
 
 const formDataSlice = createSlice({
