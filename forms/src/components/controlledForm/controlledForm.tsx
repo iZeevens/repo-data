@@ -7,6 +7,19 @@ import { addDataToForm } from '../../store/slice/dataFormsSlice';
 import { RootState } from '../../store/store';
 import * as yup from 'yup';
 
+const getBase64 = async (file: File) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      resolve(reader.result);
+    };
+    reader.onerror = function (error) {
+      reject(error);
+    };
+  });
+};
+
 const schema = yup.object({
   name: yup
     .string()
@@ -43,7 +56,11 @@ const schema = yup.object({
       'fileSize',
       'File size must be less than 1MB',
       value => !value[0] || (value[0] && value[0].size / 1024 <= 1024),
-    ),
+    )
+    .transform(async (value) => {
+      const result = await getBase64(value[0]);
+      return result
+    }),
   country: yup.string().required('Country is required'),
 });
 
@@ -58,6 +75,7 @@ function ControlledForm() {
   const dispatch = useDispatch();
 
   const onSumbitHandler = (data: IFormInput) => {
+    console.log(data)
     dispatch(addDataToForm({ ...data }));
     reset();
   };
@@ -147,7 +165,6 @@ function ControlledForm() {
             className="form-img"
             type="file"
             name="img"
-            accept="image/png, image/jpeg"
           />
           <p className="error">{errors.img?.message}</p>
         </div>

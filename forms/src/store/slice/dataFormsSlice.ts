@@ -7,7 +7,7 @@ interface IFormData {
   password: string;
   gender: string;
   acceptTerms: boolean;
-  img: FileList | null;
+  img: FileList | string;
   country: string;
 }
 interface IFormDataState {
