@@ -17,7 +17,7 @@ const schema = yup.object({
   email: yup
     .string()
     .required('Email is required')
-    .email('Email should be write correctly'),
+    .email('Invalid Email format'),
   password: yup.string().required('Password is required'),
   confirmPassword: yup.string().required('Confirm Password is required'),
   gender: yup.string().oneOf(['male', 'female']).required('Gender is required'),
