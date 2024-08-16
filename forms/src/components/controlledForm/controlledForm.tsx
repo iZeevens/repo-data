@@ -1,10 +1,12 @@
 import './controlledForm.scss';
+import { useState } from 'react';
 import { IFormInput } from '../../types/formType';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { addDataToForm } from '../../store/slice/dataFormsSlice';
 import { RootState } from '../../store/store';
+import PasswordStrength from '../passwordStrength/passwordStrength';
 import * as yup from 'yup';
 
 const getBase64 = (file: File) => {
@@ -69,9 +71,10 @@ function ControlledForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty, isValid },
     reset,
   } = useForm<IFormInput>({ mode: 'onChange', resolver: yupResolver(schema) });
+  const [password, setPassword] = useState<string>('');
   const countrys = useSelector((state: RootState) => state.countryList);
   const dispatch = useDispatch();
 
@@ -127,7 +130,11 @@ function ControlledForm() {
             className="select"
             type="password"
             name="password"
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
           />
+          <PasswordStrength password={password} />
           <p className="error">{errors.password?.message}</p>
 
           <label htmlFor="confirmPassword">Confirm Password</label>
@@ -168,6 +175,7 @@ function ControlledForm() {
             className="form-img"
             type="file"
             name="img"
+            required
           />
           <p className="error">{errors.img?.message}</p>
         </div>
@@ -189,7 +197,11 @@ function ControlledForm() {
           </datalist>
           <p className="error">{errors.country?.message}</p>
         </div>
-        <button className="form-submit" type="submit">
+        <button
+          className="form-submit"
+          type="submit"
+          disabled={!isDirty || !isValid}
+        >
           Submit
         </button>
       </form>
