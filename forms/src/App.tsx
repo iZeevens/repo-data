@@ -10,6 +10,9 @@ function App() {
   return (
     <main className="main">
       <nav className="forms-container">
+        <Link to={'/'} className="link">
+          <button className="form first-form">Main</button>
+        </Link>
         <Link to={'/controlled'} className="link">
           <button className="form first-form">Controlled Form</button>
         </Link>
