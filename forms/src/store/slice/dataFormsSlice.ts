@@ -49,7 +49,7 @@ const formDataSlice = createSlice({
     addDataToForm(state, action: PayloadAction<IFormData>) {
         return {
           ...state,
-          data: [...initialState.data, {...action.payload}]
+          data: [...state.data, {...action.payload}]
         }
     },
   },
