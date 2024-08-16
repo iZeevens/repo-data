@@ -10,7 +10,7 @@ import PasswordStrength from '../passwordStrength/passwordStrength';
 import { getBase64 } from '../../utils/convertBase64';
 import * as yup from 'yup';
 
-const schema = yup.object({
+const schema = yup.object().shape({
   name: yup
     .string()
     .required('Name is required')
@@ -25,7 +25,7 @@ const schema = yup.object({
     .required('Email is required')
     .email('Invalid Email format'),
   password: yup.string().required('Password is required'),
-  confirmPassword: yup.string().required('Confirm Password is required'),
+  confirmPassword: yup.string().required('Confirm Password is required').oneOf([yup.ref('password')], "Passwords don't match"),
   gender: yup.string().oneOf(['male', 'female']).required('Gender is required'),
   acceptTerms: yup
     .boolean()
@@ -52,7 +52,9 @@ const schema = yup.object({
 
       return !value[0] || (value[0] && value[0].size / 1024 <= 1024);
     }),
-  country: yup.string().required('Country is required'),
+  country: yup
+    .string()
+    .required('Country is required')
 });
 
 function ControlledForm() {
