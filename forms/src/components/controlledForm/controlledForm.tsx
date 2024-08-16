@@ -8,6 +8,7 @@ import { addDataToForm } from '../../store/slice/dataFormsSlice';
 import { RootState } from '../../store/store';
 import PasswordStrength from '../passwordStrength/passwordStrength';
 import { getBase64 } from '../../utils/convertBase64';
+import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
 const schema = yup.object().shape({
@@ -65,6 +66,7 @@ function ControlledForm() {
     reset,
   } = useForm<IFormInput>({ mode: 'onChange', resolver: yupResolver(schema) });
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate()
   const countrys = useSelector((state: RootState) => state.countryList);
   const dispatch = useDispatch();
 
@@ -74,6 +76,7 @@ function ControlledForm() {
 
     dispatch(addDataToForm({ ...data }));
     reset();
+    navigate('/')
   };
 
   return (
