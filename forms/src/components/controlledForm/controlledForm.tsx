@@ -7,20 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addDataToForm } from '../../store/slice/dataFormsSlice';
 import { RootState } from '../../store/store';
 import PasswordStrength from '../passwordStrength/passwordStrength';
+import { getBase64 } from '../../utils/convertBase64';
 import * as yup from 'yup';
-
-const getBase64 = (file: File) => {
-  return new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      resolve(reader.result as string);
-    };
-    reader.onerror = function (error) {
-      reject(error);
-    };
-  });
-};
 
 const schema = yup.object({
   name: yup
