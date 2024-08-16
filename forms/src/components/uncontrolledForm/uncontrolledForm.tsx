@@ -87,7 +87,7 @@ function UncontrolledForm() {
             className="select"
             type="number"
             name="age"
-            defaultValue={0}
+            defaultValue={15}
             ref={ageRef}
           />
           <p className="error">{errors.age}</p>

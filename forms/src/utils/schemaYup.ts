@@ -9,7 +9,8 @@ const schema = yup.object().shape({
     .number()
     .nullable()
     .required('Age is required')
-    .positive('Age should be positive'),
+    .positive('Age should be positive')
+    .min(15, 'Minimum age requirement 15'),
   email: yup
     .string()
     .required('Email is required')

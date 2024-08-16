@@ -54,7 +54,7 @@ function ControlledForm() {
             className="select"
             type="number"
             name="age"
-            defaultValue={0}
+            defaultValue={15}
           />
           <p className="error">{errors.age?.message}</p>
         </div>
