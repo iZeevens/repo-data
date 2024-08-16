@@ -1,4 +1,3 @@
-import './uncontrolledForm.scss';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
