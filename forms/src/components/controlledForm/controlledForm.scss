@@ -1,0 +1,27 @@
+.controlled-contaier {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+
+    input:not(input[type='file']) {
+      padding: 5px 10px;
+      border-radius: 10px;
+      border: 1px solid #CCCCCC
+    }
+
+    .select {
+      border: 1px solid #CCCCCC
+    }
+  }
+}
